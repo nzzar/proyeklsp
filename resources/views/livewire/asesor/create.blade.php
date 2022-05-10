@@ -71,8 +71,6 @@
                                 <input id="birt-date-input-mask" type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric">
                             </div>
                             @error('birthDate') <span class="text-danger">{{ $message }}</span>@enderror
-                            <!-- /.input group -->
-                            <span>{{$birthDate}}</span>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Alamat</label>

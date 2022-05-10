@@ -1,7 +1,7 @@
 <div class="table-responsive p-2 p-md-5">
     <div class="row mb-2">
         <div class="col">
-            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#create-asesor-modal"> + Tambah Asesor</button>
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#create-prodi"> + Tambah Prodi</button>
         </div>
         <div class="col-12 col-md-3">
             <div class="d-flex align-items-center small">
@@ -14,25 +14,20 @@
         <thead>
             <tr>
                 <th style="width: 10px">#</th>
-                <th>NIK</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Telepon</th>
-                <th>Action</th>
+                <th>Name</th>
+                <th style="width: 300px">Action</th>
             </tr>
         </thead>
         <tbody>
             <?php $no = 0 ?>
-            @foreach($data as $asesor)
+            @foreach($data as $prodi)
             <?php $no++ ?>
             <tr>
                 <td>{{$no}}.</td>
-                <td>{{$asesor->nik}}</td>
-                <td>{{$asesor->name}}</td>
-                <td>{{$asesor->user->email}}</td>
-                <td>{{$asesor->phone}}</td>
+                <td>{{$prodi->name}}</td>
                 <td>
-                    <button wire:click.prevent="update('{{$asesor->id}}')" class="btn btn-xs btn-warning mr-2 btn-reset" >Edit</button>
+                    <button wire:click.prevent="update('{{$prodi->id}}')" class="btn btn-xs btn-warning mr-2 btn-reset">Update</button>
+                    <button wire:click.prevent="delete('{{$prodi->id}}')" class="btn btn-outline-danger btn-xs">Delete</button>
                 </td>
             </tr>
             @endforeach

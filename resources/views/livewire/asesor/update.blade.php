@@ -1,8 +1,8 @@
-<div wire:ignore.self class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="create-asesor-modal" aria-hidden="true" id="create-asesor-modal">
+<div wire:ignore.self class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="edit-asesor-modal" aria-hidden="true" id="edit-asesor-modal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content p-2 p-md-3">
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Asesi</h4>
+                <h4 class="modal-title">Tambah Asesor</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -42,15 +42,15 @@
                         </div>
                         <label for="exampleInputEmail1">Jenis Kelamin</label>
                         <div class="form-group clearfix">
-                            <div class="icheck-primary d-inline">
-                                <input type="radio" wire:click="toggleGender('l')" id="radioPrimary1" name="gender" checked="">
-                                <label for="radioPrimary1">
+                            <div class="icheck-primary d-inline mr-2">
+                                <input type="radio" wire:click="toggleGender('l')" id="updateGender1" name="gender">
+                                <label for="updateGender1">
                                     Laki - Laki
                                 </label>
                             </div>
                             <div class="icheck-primary d-inline">
-                                <input type="radio" wire:click="toggleGender('p')" id="radioPrimary2" name="gender">
-                                <label for="radioPrimary2">
+                                <input type="radio" wire:click="toggleGender('p')" id="updateGender2" name="gender">
+                                <label for="updateGender2">
                                     Perempuan
                                 </label>
                             </div>
@@ -68,11 +68,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                 </div>
-                                <input id="birt-date-input-mask" type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric">
+                                <input id="update-birth-date-input-mask" type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric">
                             </div>
                             @error('birthDate') <span class="text-danger">{{ $message }}</span>@enderror
-                            <!-- /.input group -->
-                            <span>{{$birthDate}}</span>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Alamat</label>
