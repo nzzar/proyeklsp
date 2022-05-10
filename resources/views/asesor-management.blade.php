@@ -37,6 +37,7 @@ Asesor Management
 </div>
 
 @livewire('asesor.create')
+@livewire('asesor.update')
 @endsection
 
 @section('script') 
@@ -48,6 +49,8 @@ Asesor Management
             timer: 3000
         });
 
+
+        // create new asesor from create component success
         window.livewire.on('successAsesorCreated', () => {
             $('#create-asesor-modal').modal('hide')
             Toast.fire({
@@ -57,6 +60,8 @@ Asesor Management
 
         })
 
+
+        // craete new asesor from create component failed
         window.livewire.on('errorAsesorCreated', () => {
             Toast.fire({
                 icon: 'error',
@@ -65,10 +70,56 @@ Asesor Management
 
         })
         
+        // get data asesor by id from update componet success
+        window.livewire.on('foundDataAsesor', asesor => {
+            $('#updateGender1').removeAttr('checked')
+            $('#updateGender2').removeAttr('checked')
+            
+            // manual set birth date (problem with wire model)
+            $('#update-birth-date-input-mask').val(asesor.birthDate)
+            
+            // manual set gender
+            asesor.gender == 'l' ? $('#updateGender1').attr('checked', 'checked') : $('#updateGender2').attr('checked', 'checked')
+            $('#edit-asesor-modal').modal('show')
+        })
+        
+        // get data asesor by id from update component failed
+        window.livewire.on('asesorDataNotFound', () => {
+            Toast.fire({
+                icon: 'error',
+                title: `Data asesor tidak ditemukan`
+            })
+
+        })
+
+        // update data asesor by id from update component success
+        window.livewire.on('updateAsesorSuccess', () => {
+            $('#edit-asesor-modal').modal('hide')
+            Toast.fire({
+                icon: 'success',
+                title: `Data asesor berhasil diperbarui`
+            })
+
+        })
+
+        // update data asesor by id from update component failed
+        window.livewire.on('updateAsesorFailed', () => {
+            Toast.fire({
+                icon: 'error',
+                title: `Gagal memperbarui data asesor`
+            })
+
+        })
+
+
         
         $('#birt-date-input-mask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-        
+        $('#update-birth-date-input-mask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+
         $('#birt-date-input-mask').on('input', function() {
+            Livewire.emit('birthDateInputHandle', $(this).val())
+        })
+        $('#update-birth-date-input-mask').on('input', function() {
             Livewire.emit('birthDateInputHandle', $(this).val())
         })
     </script>

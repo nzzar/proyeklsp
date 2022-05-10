@@ -32,3 +32,24 @@
     </div>
 </div>
 @endsection
+
+@section('script')
+
+<script>
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    window.livewire.on('passwordReseted', email => {
+        $('#reset-password-form').modal('hide')
+        console.log(email);
+        Toast.fire({
+            icon: 'success',
+            title: `Success reset password user with email ${email}`
+        })
+
+    })
+</script>
+@endsection

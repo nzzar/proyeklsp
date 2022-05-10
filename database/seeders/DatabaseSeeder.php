@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Exception;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
         try {
             $this->call([
+                ProdiSeeder::class,
                 UsersSeeder::class,
                 AssesorSeeder::class,
             ]);
