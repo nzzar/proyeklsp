@@ -18,4 +18,8 @@ class Prodi extends Model
     ];
 
     protected $keyType = 'string';
+
+    public function asesi() {
+        return $this->hasMany(Asesi::class);
+    }
 }

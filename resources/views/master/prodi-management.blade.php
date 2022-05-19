@@ -84,6 +84,7 @@ Data Prodi
     window.livewire.on('successSetProdiDeleted', name => {
         console.log(name)
         Swal.fire({
+            icon: 'question',
             title: `Yakin ingin menghapus prodi ${name}`,
             showCancelButton: true,
             cancelButtonText: 'TidaK',
