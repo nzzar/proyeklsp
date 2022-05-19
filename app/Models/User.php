@@ -52,5 +52,9 @@ class User extends Authenticatable
         return $this->hasOne(Asesor::class);
     }
 
+    public function asesi() {
+        return $this->hasOne(Asesi::class);
+    }
+
     
 }

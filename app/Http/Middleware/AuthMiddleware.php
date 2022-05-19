@@ -23,6 +23,11 @@ class AuthMiddleware
             return redirect('/login')->withErrors(['auth' => 'You are unauthenticated']);
         } 
 
+
+        if($request->user()->role == 'asesi' && !$request->user()->asesi->is_filled && $request->path() != 'asesi/profile') {
+            return redirect('/asesi/profile');
+        }
+
         $userRole = $request->user()->role;
         $isValidatedRoles = $roles === 'all' || (is_array($roles) ? in_array($roles, $userRole) : $roles == $userRole);
 

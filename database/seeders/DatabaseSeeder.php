@@ -21,8 +21,10 @@ class DatabaseSeeder extends Seeder
         try {
             $this->call([
                 ProdiSeeder::class,
+                SkemaSeeder::class,
                 UsersSeeder::class,
                 AssesorSeeder::class,
+                AsesiSeeder::class,
             ]);
 
             DB::commit();
