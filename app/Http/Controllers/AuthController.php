@@ -47,6 +47,7 @@ class AuthController extends Controller
     public function signOut(Request $request)
     {
         $request->session()->invalidate();
+        Artisan::call('view:clear');
         return redirect('/login');
     }
 
