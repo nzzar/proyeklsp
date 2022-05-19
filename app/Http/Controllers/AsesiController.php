@@ -16,7 +16,9 @@ class AsesiController extends Controller
     public function profile(Request $request)
     {
         $asesi = $request->user()->asesi;
-        $asesi->birth_date = DateTime::createFromFormat('Y-m-d', $asesi->birth_date)->format('d/m/Y');
+        if($asesi->birth_date) {
+            $asesi->birth_date = DateTime::createFromFormat('Y-m-d', $asesi->birth_date)->format('d/m/Y');
+        }
 
         if ($request->method() == 'POST') {
 
