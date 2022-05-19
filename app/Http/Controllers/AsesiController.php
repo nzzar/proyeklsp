@@ -7,6 +7,7 @@ use App\Models\Prodi;
 use DateTime;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -94,7 +95,7 @@ class AsesiController extends Controller
                 $data->save();
                 
                 DB::commit();
-
+                Artisan::call('view:clear');
                 return redirect('/asesi/profile')->with('success', 'Berhasil update data profile');
                 
             } catch (Exception $e) {
