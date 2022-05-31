@@ -100,7 +100,6 @@ class AsesiController extends Controller
                 
             } catch (Exception $e) {
                 DB::rollBack();
-                dd($e);
                 return redirect('/asesi/profile')->with('Gagal', 'Gagal melakukan update data profile');
 
 

@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSkemas extends Migration
+class CreateUnjukKerja extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,14 @@ class CreateSkemas extends Migration
      */
     public function up()
     {
-        Schema::create('skemas', function (Blueprint $table) {
+        Schema::create('unjuk_kerja', function (Blueprint $table) {
             $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->string('name');
-            $table->string('nomor')->unique();
-            $table->boolean('active')->default(true);
+            $table->uuid('element_id')->index();
+            $table->string('description');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('element_id')->references('id')->on('element');
         });
     }
 
@@ -31,6 +32,6 @@ class CreateSkemas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skemas');
+        Schema::dropIfExists('unjuk_kerja');
     }
 }

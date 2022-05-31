@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSkemas extends Migration
+class CreateEvent extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,19 @@ class CreateSkemas extends Migration
      */
     public function up()
     {
-        Schema::create('skemas', function (Blueprint $table) {
+        Schema::create('event', function (Blueprint $table) {
             $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->string('name');
-            $table->string('nomor')->unique();
-            $table->boolean('active')->default(true);
+            $table->uuid('skema_id')->index();
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->boolean('active');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('skema_id')->references('id')->on('skemas');
         });
+
+
     }
 
     /**
@@ -31,6 +36,6 @@ class CreateSkemas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skemas');
+        Schema::dropIfExists('event');
     }
 }

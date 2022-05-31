@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSkemas extends Migration
+class CreateElement extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,14 @@ class CreateSkemas extends Migration
      */
     public function up()
     {
-        Schema::create('skemas', function (Blueprint $table) {
+        Schema::create('element', function (Blueprint $table) {
             $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('unit_kompetensi_id')->index();
             $table->string('name');
-            $table->string('nomor')->unique();
-            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('unit_kompetensi_id')->references('id')->on('unit_kompetensi');
         });
     }
 
@@ -31,6 +32,6 @@ class CreateSkemas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skemas');
+        Schema::dropIfExists('element');
     }
 }
