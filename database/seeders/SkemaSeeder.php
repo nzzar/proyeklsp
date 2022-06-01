@@ -22,8 +22,6 @@ class SkemaSeeder extends Seeder
             'name' => 'Pemrograman Aplikasi Dasar',
             'nomor' => 'SSK.01 TI/2018',
             'active' => true,
-            'start_date' => $startDate,
-            'end_date' => $endDate,
         ]);
     }
 }

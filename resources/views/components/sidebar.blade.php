@@ -37,6 +37,16 @@
         @endUserRole
         @userRole(admin)
         <li class="nav-item">
+          <a href="{{url('/event-management')}}" class="nav-link">
+            <i class="nav-icon fas fa-calendar"></i>
+            <p>
+              Event
+            </p>
+          </a>
+        </li>
+        @endUserRole
+        @userRole(admin)
+        <li class="nav-item">
           <a href="{{url('/asesor-management')}}" class="nav-link">
             <i class="nav-icon fas fa-id-card"></i>
             <p>

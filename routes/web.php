@@ -4,6 +4,7 @@ use App\Http\Controllers\AsesiController;
 use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\SkemaManagementController;
 use App\Http\Controllers\UserManagementController;
@@ -36,6 +37,7 @@ Route::group(['middleware' => 'role:admin'], function() {
     Route::get('/user-management', [UserManagementController::class, 'index']);
     Route::get('/asesor-management', [AsesorController::class, 'index']);
     Route::get('/prodi-management', [MasterDataController::class, 'prodiManagement']);
+    Route::get('/event-management', [EventController::class, 'index']);
 
 });
 
