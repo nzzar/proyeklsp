@@ -79,7 +79,6 @@ Data Skema
             $('#statusRadio1').removeAttr('checked')
             $('#statusRadio2').removeAttr('checked')
             data.active ? $('#statusRadio1').attr('checked', 'checked') : $('#statusRadio2').attr('checked', 'checked')
-            $('#daterange-update').val(`${data.startDate} - ${data.endDate}`)
             $('#update-skema-modal').modal('show')
         })
 
