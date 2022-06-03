@@ -33,19 +33,6 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Waktu pelaksanaan:</label>
-
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="far fa-calendar-alt"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control float-right" id="daterange-update" readonly  autocomplete="off" >
-                    </div>
-                    <!-- /.input group -->
-                </div>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

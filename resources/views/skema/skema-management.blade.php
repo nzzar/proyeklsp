@@ -57,15 +57,6 @@ Data Skema
     });
 
     $(document).ready(function() {
-        $('#daterange').daterangepicker({})
-        $('#daterange-update').daterangepicker({})
-
-
-        $('#daterange').on('change', function() {
-            Livewire.emit('updateDateRangePicker', $(this).val())
-        })
-
-        Livewire.emit('updateDateRangePicker', $('#daterange').val())
 
         // crud action result
 

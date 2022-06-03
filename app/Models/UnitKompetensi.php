@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use phpDocumentor\Reflection\Element;
 
-class Skema extends Model
+class UnitKompetensi extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-
-    protected $keyType = 'string';
-    protected $casts = [
+    protected $cast  = [
         'id' => 'string',
+        'skema_id' => 'string'
     ];
 
-    public function unitKompetensi() {
-        $this->belongsTo(UnitKompetensi::class);
+    public function elemet() {
+        $this->belongsTo(Element::class);
     }
 
+    
 }

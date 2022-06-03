@@ -15,20 +15,10 @@ class Create extends Component
     public $endDate;
     public $active = true;
 
-    protected $listeners = [
-        'updateDateRangePicker'
-    ];
 
     public function render()
     {
         return view('livewire.skema.create');
-    }
-
-    public function updateDateRangePicker($value)
-    {
-        $daterange = explode('-', $value);
-        $this->startDate = $daterange[0];
-        $this->endDate = $daterange[1];
     }
 
     public function toggleStatus($value)
@@ -49,8 +39,6 @@ class Create extends Component
                 'nomor' => $this->nomor,
                 'name' => $this->name,
                 'active' => $this->active,
-                'start_date' => DateTime::createFromFormat('d/m/Y', trim($this->startDate))->format('Y-m-d'),
-                'end_date' => DateTime::createFromFormat('d/m/Y', trim($this->endDate))->format('Y-m-d')
             ]);
             
             $this->resetProperty();
@@ -64,8 +52,6 @@ class Create extends Component
     {
         $this->nomor = null;
         $this->name = null;
-        $this->startDate = null;
-        $this->endDate = null;
         $this->active = true;
     }
 }

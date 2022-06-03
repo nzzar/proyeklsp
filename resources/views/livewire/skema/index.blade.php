@@ -19,8 +19,6 @@
                 <th>Nomor</th>
                 <th>Skema</th>
                 <th>Status</th>
-                <th>Waktu Pembukaan</th>
-                <th>Waktu Penutupan</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -33,11 +31,9 @@
                 <td>{{$skema->nomor}}</td>
                 <td>{{$skema->name}}</td>
                 <td>{{$skema->active ? 'Aktif' : 'Nonaktif'}}</td>
-                <td>{{date_format(date_create($skema->start_date), 'd F y')}}</td>
-                <td>{{date_format(date_create($skema->end_date), 'd F y')}}</td>
                 <td>
                     @userRole(admin)
-                    <button wire:click.prevent="update('{{$skema->id}}')" class="btn btn-xs btn-warning mr-2 btn-reset" >Edit</button>
+                    <a href="{{url('skema/'.$skema->id)}}" class="btn btn-xs btn-info mr-2 btn-reset" >Detail</a>
                     <button wire:click.prevent="delete('{{$skema->id}}')" class="btn btn-xs btn-outline-danger mr-2 btn-reset" >Delete</button>
                     @endUserRole
                 </td>

@@ -39,8 +39,9 @@
                     <button class="btn btn-sm btn-warning" wire:click.prevent="update('{{$data->id}}')"><i class="fas fa-pen-square"></i> Update Event</button>
                     <button class="btn btn-sm btn-info"><i class="fas fa-pen-square"></i> Update asesor</button>
                     <button class="btn btn-sm btn-primary"><i class="fas fa-pen-square"></i> Update asesi</button>
+                    @if($data->asesi_count == 0 && $data->asesor_count == 0)
                     <button class="btn btn-sm btn-danger" wire:click.prevent="deleteEvent('{{$data->id}}')"> <i class="fas fa-trash-alt"></i> Delete Event</button>
-
+                    @endif
                 </td>
             </tr>
             @endforeach
