@@ -6,23 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Skema extends Model
+class PersyaratanSkema extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-
+    protected $table = 'persyaratan_skema';
     protected $keyType = 'string';
     protected $casts = [
         'id' => 'string',
+        'skema_id' => 'string',
     ];
-
-    public function unitKompetensi() {
-        $this->belongsTo(UnitKompetensi::class);
-    }
-
-    public function persyaratan() {
-        return $this->hasMany(PersyaratanSkema::class, 'skema_id', 'id');
-    }
-
 }
