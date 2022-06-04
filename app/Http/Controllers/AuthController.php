@@ -22,7 +22,7 @@ class AuthController extends Controller
         if ($request->method() == 'POST') {
 
             $request->validate([
-                'email' => 'required|email:rfc,dns',
+                // 'email' => 'required|email:rfc,dns',
                 'password' => 'required'
             ]);
 

@@ -78,4 +78,5 @@
 </div>
 
 @livewire('skema-detail.persyaratan.create',['skemaId' => $skema->id])
+@livewire('skema-detail.persyaratan.update')
 @endsection
