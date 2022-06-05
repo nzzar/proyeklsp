@@ -17,6 +17,7 @@
                 <td>{{$requirment->name}}</td>
                 <td>
                     <button wire:click.prevent="update('{{$requirment->id}}')" class="btn btn-xs btn-warning mr-2 btn-reset" data-toggle="modal" data-target="#update-persyaratan"> Edit</button>
+                    <button wire:click.prevent="delete('{{$requirment->id}}')" class="btn btn-xs btn-danger mr-2 btn-reset"> Hapus</button>
                 </td>
             </tr>
             @endforeach

@@ -9,7 +9,8 @@ class Index extends Component
 {
     protected $listeners = [
         'create-success' => 'refress',
-        'update-success' => 'refress'
+        'update-success' => 'refress',
+        'persyaratan-deleted' => 'refress'
     ];
 
     public $persyaratan;
@@ -32,6 +33,10 @@ class Index extends Component
     public function update($persyaratanId)
     {
         $this->emit('set-persyaratan-id', $persyaratanId);
+    }
+
+    public function delete($persyaratanId) {
+        $this->emit('delete-set-id-persyaratan', $persyaratanId);
     }
 
 }

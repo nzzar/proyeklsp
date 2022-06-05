@@ -12,6 +12,10 @@ class UnitKompetensi extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $keyType = 'string';
+
+    protected $table = 'unit_kompetensi';
+
     protected $cast  = [
         'id' => 'string',
         'skema_id' => 'string'
