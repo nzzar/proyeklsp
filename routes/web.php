@@ -46,6 +46,9 @@ Route::group(['prefix' => '/skema', 'middleware' => 'role:all'], function() {
     Route::get('/', [SkemaManagementController::class, 'index']);
     Route::get('/{id}', [SkemaManagementController::class, 'datail']);
     Route::post('/{id}/update', [SkemaManagementController::class, 'update']);
+
+    Route::get('/{id}/unit-kompetensi', [SkemaManagementController::class, 'unitKompetensi']);
+    Route::post('/{id}/unit-kompetensi/update', [SkemaManagementController::class, 'updateUnitKompetensi']);
     
 });
 
