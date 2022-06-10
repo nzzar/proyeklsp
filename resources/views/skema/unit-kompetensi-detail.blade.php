@@ -30,7 +30,7 @@
                             <form action="{{url('/skema/'.$data->id.'/unit-kompetensi/update')}}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Kode</label>
+                                    <label for="exampleInputEmail1">Kode Unit</label>
                                     <input name="kode" value="{{$data->kode}}" type="text" class="form-control" placeholder="Masukan kode unit">
                                     @error('kode') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
@@ -57,6 +57,49 @@
 
 @section('script')
 <script>
+
+    function deleteElement(id) {
+        Livewire.emit('get-element-id', id, true)
+    }
+    
+    function deleteUnjukKerja(id) {
+        Livewire.emit( 'get-unjuk-kerja-id', id, true)
+
+    }
+
+    window.livewire.on('success-set-element', (data, isDelete) => {
+        if(isDelete) {
+            Swal.fire({
+            icon: 'question',
+            title: `Yakin ingin menghapus element ${data.name} ?`,
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                Livewire.emit('delete-element')
+            }
+        })
+        }
+    })
+
+    window.livewire.on('success-set-unjuk-kerja', (data, isDelete) => {
+        if(isDelete) {
+            Swal.fire({
+            icon: 'question',
+            title: `Yakin ingin menghapus unjuk kerja`,
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                Livewire.emit('delete-unjuk-kerja')
+            }
+        })
+        }
+    })
     // window.livewire.on('delete-set-persyaratan-success', name => {
     //     Swal.fire({
     //         icon: 'question',
