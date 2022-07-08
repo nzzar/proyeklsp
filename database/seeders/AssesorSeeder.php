@@ -28,7 +28,13 @@ class AssesorSeeder extends Seeder
             'birth_date' => '1999-05-20',
             'phone' => '0871232323',
             'gender' => 'p',
-            'address' => 'not empty ok !'
+            'address' => 'not empty ok !',
+            'reg_number' => 'REG-12345678',
+            'blanko_number' => 'BLANKO-12345',
+            'education' => 'S1 Management',
+            'profession' => 'Profession Copywriter',
+            'start_date' => '2020-05-20',
+            'expired_date' => '2023-05-20',
         ]);
 
     }
