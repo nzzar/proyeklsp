@@ -8,10 +8,13 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Form extends Component
 {
+    use WithFileUploads;
 
     public $asesorId;
     public $userId;
@@ -24,6 +27,7 @@ class Form extends Component
     public $profession;
     public $educational;
     public $address;
+    public $profile;
 
     public $blanko;
     public $reg_number;
@@ -34,6 +38,7 @@ class Form extends Component
     public $email;
     public $password;
     public $c_password;
+
 
 
     public function mount($asesorId = null)
@@ -56,6 +61,9 @@ class Form extends Component
                 $this->reg_number = $data->reg_number;
                 $this->start_date = $data->start_date;
                 $this->expired_date = $data->expired_date;
+                $this->image = $data->sertificate;
+                $this->profile = $data->profile;
+
 
                 $this->email = $data->user->email;
                 $this->asesorId = $asesorId;
@@ -89,7 +97,6 @@ class Form extends Component
             'reg_number' => 'required',
             'start_date' =>  'required|date_format:d/m/Y',
             'expired_date' =>  'required|date_format:d/m/Y',
-            // 'image' =>  'required|max:10000|mimes:jpg,jpeg,png',
         ];
         
         
@@ -98,13 +105,15 @@ class Form extends Component
            $role = array_merge($role, [
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|min:6',
-                'c_password' => 'same:password'
+                'c_password' => 'same:password',
+                'image' => 'required|max:10000|mimes:jpg,jpeg,png',
+                'profile' => 'required|max:10000|mimes:jpg,jpeg,png'
             ]);
         } else {
            $role = array_merge($role, [
                 'email' => 'required|email|unique:users,email,'.$this->userId,
                 'password' => 'min:6|nullable',
-                'c_password' => 'same:password'
+                'c_password' => 'same:password',
             ]);
         }
 
@@ -141,6 +150,32 @@ class Form extends Component
 
             $this->asesorId ? null : $data->user_id = $user->id;
 
+            if($this->image && !is_string($this->image)) {
+
+                if($data->sertificate) {
+                    Storage::delete($data->sertificate);
+                }
+                
+                
+                $file_name = 'sertificate_'.time().'_'.$this->userId.'.'.$this->image->getClientOriginalExtension();
+                $path = $this->image->storeAs("public/".$this->userId.'/', $file_name);
+
+                $data->sertificate = $path;
+            }
+
+            if($this->profile && !is_string($this->profile)) {
+
+                if($data->profile) {
+                    Storage::delete($data->profile);
+                }
+                
+                
+                $file_name = 'profile_'.time().'_'.$this->userId.'.'.$this->profile->getClientOriginalExtension();
+                $profile_path = $this->profile->storeAs("public/".$this->userId.'/', $file_name);
+
+                $data->profile = $profile_path;
+            }
+            
             $data->nik = $this->nik;
             $data->name = $this->name;
             $data->gender = $this->gender;
