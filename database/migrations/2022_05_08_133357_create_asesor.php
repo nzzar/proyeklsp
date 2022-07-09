@@ -24,6 +24,13 @@ class CreateAsesor extends Migration
             $table->string('profile')->nullable();
             $table->enum('gender', ['p', 'l']);
             $table->string('address');
+            $table->string('reg_number');
+            $table->string('blanko_number');
+            $table->string('education');
+            $table->string('profession');
+            $table->string('sertificate')->nullable();
+            $table->date('start_date');
+            $table->date('expired_date');
             $table->timestamps();
             $table->softDeletes();
 

@@ -27,8 +27,7 @@
                             @error('cPassword') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="col"></div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-4">
                         <h6>Informasi Profil</h6>
                         <div class="form-group">
                             <label for="exampleInputEmail1">NIK</label>
@@ -78,6 +77,35 @@
                             @error('address') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
+                    <div class="col-12 col-md-4">
+                        <h6>Sertifikat</h6>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nomor Blanko</label>
+                            <input wire:model="no_blanko" type="text" class="form-control @error('no_blanko') is-invalid @enderror" placeholder="Masukan Nomor Blanko">
+                            @error('no_blangko') <span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nomor Registrasi</label>
+                            <input wire:model="no_blanko" type="text" class="form-control @error('no_blanko') is-invalid @enderror" placeholder="Masukan Nomor Blanko">
+                            @error('no_blangko') <span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                        <label for="exampleInputEmail1">Masa Berlaku</label>
+                        <div class="row">
+                            <div class="col-12 col-md-5">
+                                <div class="form-group">
+                                    <input readonly type="email" class="form-control" id="start-date">
+                                    @error('startDate') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">Sampai</div>
+                            <div class="col-12 col-md-5">
+                                <div class="form-group">
+                                    <input readonly type="email" class="form-control" id="end-date">
+                                    @error('endDate') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
@@ -87,5 +115,3 @@
         </div>
     </div>
 </div>
-
-

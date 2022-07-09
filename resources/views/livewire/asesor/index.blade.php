@@ -1,7 +1,7 @@
 <div class="table-responsive p-2 p-md-5">
     <div class="row mb-2">
         <div class="col">
-            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#create-asesor-modal"> + Tambah Asesor</button>
+            <a href="{{url('/asesor/create')}}" class="btn btn-primary btn-sm"> + Tambah Asesor</a>
         </div>
         <div class="col-12 col-md-3">
             <div class="d-flex align-items-center small">
@@ -32,7 +32,7 @@
                 <td>{{$asesor->user->email}}</td>
                 <td>{{$asesor->phone}}</td>
                 <td>
-                    <button wire:click.prevent="update('{{$asesor->id}}')" class="btn btn-xs btn-warning mr-2 btn-reset" >Edit</button>
+                    <a href="{{url('/asesor/update/'.$asesor->id)}}" class="btn btn-xs btn-warning mr-2 btn-reset" >Edit</a>
                 </td>
             </tr>
             @endforeach

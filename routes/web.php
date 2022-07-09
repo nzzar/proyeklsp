@@ -34,8 +34,15 @@ Route::get('/logout', [AuthController::class, 'signOut']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('role:all');
 
 Route::group(['middleware' => 'role:admin'], function() {
+
+    Route::group(['prefix' => '/asesor'], function(){
+        Route::get('/', [AsesorController::class, 'index']);
+        Route::get('/create', [AsesorController::class, 'create']);
+        Route::get('/update/{id}', [AsesorController::class, 'create']);
+    });
+    
+    
     Route::get('/user-management', [UserManagementController::class, 'index']);
-    Route::get('/asesor-management', [AsesorController::class, 'index']);
     Route::get('/prodi-management', [MasterDataController::class, 'prodiManagement']);
     Route::get('/event-management', [EventController::class, 'index']);
 

@@ -47,7 +47,7 @@
         @endUserRole
         @userRole(admin)
         <li class="nav-item">
-          <a href="{{url('/asesor-management')}}" class="nav-link">
+          <a href="{{url('/asesor')}}" class="nav-link">
             <i class="nav-icon fas fa-id-card"></i>
             <p>
               Asesor Management
