@@ -14,12 +14,14 @@
         <thead>
             <tr>
                 <th style="width: 10px">#</th>
-                <th>Nomor</th>
+                <th>Judul Event</th>
                 <th>Skema</th>
                 <th>Waktu pelaksanaan</th>
-                <th style="width: 5%;">Asesi terdaftar</th>
-                <th style="width: 5%;">Asesor terdafatr</th>
-                <th>Status</th>
+                <th>TUK</th>
+                <th style="width: 5%;">Quota Peserta </th>
+                <th style="width: 5%;">Jumlah Asesi</th>
+                <th style="width: 5%;">Jumlah Asesor</th>
+                <th style="width: 8%;"> Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -29,18 +31,34 @@
             <?php $no++ ?>
             <tr>
                 <td>{{$no}}.</td>
-                <td>{{$data->skema->nomor}}</td>
-                <td>{{$data->skema->name}}</td>
+                <td>{{$data->title}}</td>
+                <td>{{$data->skema->nomor}} | {{$data->skema->name}}</td>
                 <td>{{$data->start_date}} - {{$data->end_date}}</td>
+                <td>{{$data->tuk}}</td>
+                <td>{{$data->qty}}</td>
                 <td>{{$data->asesi_count}}</td>
                 <td>{{$data->asesor_count}}</td>
-                <td> <span class="badge {{$data->active ? 'badge-success' : 'badge-danger'}} badge-info"> {{$data->active ? 'Aktif' : 'Tidak aktif'}} </span></td>
                 <td>
-                    <button class="btn btn-sm btn-warning" wire:click.prevent="update('{{$data->id}}')"><i class="fas fa-pen-square"></i> Update Event</button>
-                    <button class="btn btn-sm btn-info"><i class="fas fa-pen-square"></i> Update asesor</button>
-                    <button class="btn btn-sm btn-primary"><i class="fas fa-pen-square"></i> Update asesi</button>
-                    @if($data->asesi_count == 0 && $data->asesor_count == 0)
+                    @switch($data->status)
+                        @case('Waiting')
+                        <span class="badge badge-warning"> Menunggu Persetujuan </span>
+                        @break
+                        @case('Approved')
+                        <span class="badge badge-success"> Disetujui </span>
+                        @break
+                        @case('Unapproved')
+                        <span class="badge badge-danger"> Tidak Disetujui </span>
+                        @break
+                        @default
+                        <span class="badge badge-secondary"> Draft </span>
+                    @endswitch
+                    <span class="badge {{$data->active ? 'badge-success' : 'badge-danger'}} badge-info"> {{$data->active ? 'Aktif' : 'Tidak aktif'}} </span>
+                </td>
+                <td>
+                    <a href="{{url('/event/'.$data->id)}}" class="btn btn-sm btn-primary mb-1"><i class="fas fa-folder-open"></i> Detail Event</a>
+                    @if($data->status == 'Draft')
                     <button class="btn btn-sm btn-danger" wire:click.prevent="deleteEvent('{{$data->id}}')"> <i class="fas fa-trash-alt"></i> Delete Event</button>
+                    <button class="btn btn-sm btn-info" wire:click.prevent="deleteEvent('{{$data->id}}')"><i class="fas fa-file-alt"></i> Ajukan Event</button>
                     @endif
                 </td>
             </tr>

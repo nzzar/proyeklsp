@@ -18,4 +18,8 @@ class Element extends Model
         'id' => 'string',
         'skema_id' => 'string'
     ];
+
+    public function unjukKerja() {
+        return $this->hasMany(UnjukKerja::class);
+    }
 }
