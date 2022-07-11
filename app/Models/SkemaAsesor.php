@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SkemaAsesor extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $table = 'skema_asesor';
 
@@ -19,4 +18,9 @@ class SkemaAsesor extends Model
         'event_id' => 'string',
         'asesor_id' => 'string',
     ];
+
+    public function asesor() {
+        return $this->belongsTo(Asesor::class);
+    }
+
 }

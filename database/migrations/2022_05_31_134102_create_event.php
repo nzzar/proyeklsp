@@ -17,8 +17,13 @@ class CreateEvent extends Migration
         Schema::create('event', function (Blueprint $table) {
             $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
             $table->uuid('skema_id')->index();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('title');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->enum('status', ['Draft','Waiting', 'Approved', 'Unapproved']);
+            $table->integer('qty');
+            $table->string('tuk');
+            $table->string('desc')->nullable();
             $table->boolean('active');
             $table->timestamps();
             $table->softDeletes();

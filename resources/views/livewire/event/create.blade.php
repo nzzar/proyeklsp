@@ -9,8 +9,24 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
+                    <label for="exampleInputEmail1">Judul Event</label>
+                    <input wire:model="title" type="text" class="form-control  @error('title') is-invalid @enderror" placeholder="Masukanm judul Event">
+                    @error('title') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Quota Peserta</label>
+                    <input wire:model="qty" type="number" class="form-control  @error('qty') is-invalid @enderror" placeholder="Masukanm Quota Peserta">
+                    @error('qty') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tempat Uji Kompetensi (TUK)</label>
+                    <input wire:model="tuk" type="text" class="form-control  @error('nik') is-invalid @enderror" placeholder="Masukanm TUK">
+                    @error('tuk') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
+
+                <div class="form-group">
                     <label>Pilih Skema</label>
-                    <select class="form-control select-skema" style="width: 100%;" name="skemaId">
+                    <select class="form-control select-skema  @error('skemaId') is-invalid @enderror" style="width: 100%;" name="skemaId">
                         <option></option>
                         @foreach ($skemas as $skema)
                         <option value="{{$skema->id}}" {{$skema->id == $skemaId ? 'selected' : ''}}>{{$skema->nomor}} | {{$skema->name}}</option>
@@ -24,14 +40,14 @@
                 <div class="row">
                     <div class="col-12 col-md-5">
                         <div class="form-group">
-                            <input readonly type="email" class="form-control" id="start-date">
+                            <input readonly type="email" class="form-control  @error('startDate') is-invalid @enderror" id="start-date">
                             @error('startDate') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
                     <div class="col-2 text-center">Sampai</div>
                     <div class="col-12 col-md-5">
                         <div class="form-group">
-                            <input readonly type="email" class="form-control" id="end-date">
+                            <input readonly type="email" class="form-control  @error('endDate') is-invalid @enderror" id="end-date">
                             @error('endDate') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -52,6 +68,7 @@
                             Tidak Aktif
                         </label>
                     </div>
+                    <small  class="form-text text-muted">* Jika Status aktif calon perseta dapat langsung melakukan registrasi event setelah event disetujui oleh manajer sertifikasi</small>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">

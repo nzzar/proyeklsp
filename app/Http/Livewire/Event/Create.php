@@ -16,6 +16,9 @@ class Create extends Component
     public $startDate;
     public $endDate;
     public $status = true;
+    public $qty;
+    public $tuk;
+    public $title;
 
 
     protected $listeners = [
@@ -25,7 +28,7 @@ class Create extends Component
     ];
 
     public function render()
-    {   
+    {
 
         $this->skemas =  Skema::all();
 
@@ -36,21 +39,27 @@ class Create extends Component
     {
         try {
             $this->validate(
-                 [
-                     'skemaId' => 'required|exists:skemas,id',
-                     'startDate' => 'required|date_format:d/m/Y|after_or_equal:'. date('d/m/Y'),
-                     'endDate' => 'required|date_format:d/m/Y|after:startDate',
-                     'status' => 'required'
-                 ],
-                 [],
-                 [
-                     'skemaId' => 'Skema',
-                     'startDate' => 'Tgl. Mulai',
-                     'endDate' => 'Tgl. Selesai'
-                 ]
-             );
+                [
+                    'skemaId' => 'required|exists:skemas,id',
+                    'startDate' => 'required|date_format:d/m/Y|after_or_equal:' . date('d/m/Y'),
+                    'endDate' => 'required|date_format:d/m/Y|after:startDate',
+                    'status' => 'required',
+                    'title' => 'required',
+                    'qty' => 'required|integer',
+                    'tuk' => 'required'
 
-        } catch(Exception $e) {
+                ],
+                [],
+                [
+                    'skemaId' => 'Skema',
+                    'startDate' => 'Tgl. Mulai',
+                    'endDate' => 'Tgl. Selesai',
+                    'title' => 'Judul Event',
+                    'qty' => 'Quata Peserta',
+                    'tuk' => 'Tempat Uji Kompentensi'
+                ]
+            );
+        } catch (Exception $e) {
             $this->emit('error-validation');
             throw $e;
         }
@@ -62,6 +71,10 @@ class Create extends Component
         $event->start_date =  Carbon::createFromFormat('d/m/Y', $this->startDate)->format('Y-m-d');
         $event->end_date = Carbon::createFromFormat('d/m/Y', $this->endDate)->format('Y-m-d');
         $event->active = $this->status;
+        $event->status = 'Draft';
+        $event->qty = $this->qty;
+        $event->title = $this->title;
+        $event->tuk = $this->tuk;
         $event->save();
 
 

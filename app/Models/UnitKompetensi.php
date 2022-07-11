@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use phpDocumentor\Reflection\Element;
 
 class UnitKompetensi extends Model
 {
@@ -21,8 +20,8 @@ class UnitKompetensi extends Model
         'skema_id' => 'string'
     ];
 
-    public function elemet() {
-      return  $this->belongsTo(Element::class);
+    public function element() {
+      return  $this->hasMany(Element::class);
     }
 
     public function skema() {

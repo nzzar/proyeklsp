@@ -18,7 +18,7 @@ class Skema extends Model
     ];
 
     public function unitKompetensi() {
-        $this->belongsTo(UnitKompetensi::class);
+      return  $this->hasMany(UnitKompetensi::class);
     }
 
     public function persyaratan() {

@@ -37,7 +37,7 @@
         @endUserRole
         @userRole(admin)
         <li class="nav-item">
-          <a href="{{url('/event-management')}}" class="nav-link">
+          <a href="{{url('/event')}}" class="nav-link">
             <i class="nav-icon fas fa-calendar"></i>
             <p>
               Event

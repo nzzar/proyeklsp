@@ -33,22 +33,25 @@ Route::post('/signup', [AuthController::class, 'register']);
 Route::get('/logout', [AuthController::class, 'signOut']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('role:all');
 
-Route::group(['middleware' => 'role:admin'], function() {
+Route::group(['middleware' => 'role:admin'], function () {
 
-    Route::group(['prefix' => '/asesor'], function(){
+    Route::group(['prefix' => '/asesor'], function () {
         Route::get('/', [AsesorController::class, 'index']);
         Route::get('/create', [AsesorController::class, 'create']);
         Route::get('/update/{id}', [AsesorController::class, 'create']);
     });
-    
-    
+
+
     Route::get('/user-management', [UserManagementController::class, 'index']);
     Route::get('/prodi-management', [MasterDataController::class, 'prodiManagement']);
-    Route::get('/event-management', [EventController::class, 'index']);
 
+    Route::prefix('/event')->group(function () {
+        Route::get('/', [EventController::class, 'index']);
+        Route::get('/{id}', [EventController::class, 'detail']);
+    });
 });
 
-Route::group(['prefix' => '/skema', 'middleware' => 'role:all'], function() {
+Route::group(['prefix' => '/skema', 'middleware' => 'role:all'], function () {
 
     Route::get('/', [SkemaManagementController::class, 'index']);
     Route::get('/{id}', [SkemaManagementController::class, 'datail']);
@@ -56,10 +59,9 @@ Route::group(['prefix' => '/skema', 'middleware' => 'role:all'], function() {
 
     Route::get('/{id}/unit-kompetensi', [SkemaManagementController::class, 'unitKompetensi']);
     Route::post('/{id}/unit-kompetensi/update', [SkemaManagementController::class, 'updateUnitKompetensi']);
-    
 });
 
-Route::group(['middleware' => 'role:asesi', 'prefix' => 'asesi'], function() {
+Route::group(['middleware' => 'role:asesi', 'prefix' => 'asesi'], function () {
     Route::get('/profile', [AsesiController::class, 'profile']);
     Route::post('/profile', [AsesiController::class, 'profile']);
 });
