@@ -35,7 +35,7 @@
           </a>
         </li>
         @endUserRole
-        @userRole(admin)
+        @if(in_array(Auth::user()->role, ['admin', 'ms']))
         <li class="nav-item">
           <a href="{{url('/event')}}" class="nav-link">
             <i class="nav-icon fas fa-calendar"></i>
