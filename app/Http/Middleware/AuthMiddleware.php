@@ -16,9 +16,8 @@ class AuthMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $roles)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-
         if(!$request->user()) {
             return redirect('/login')->withErrors(['auth' => 'You are unauthenticated']);
         } 
@@ -29,8 +28,8 @@ class AuthMiddleware
         }
 
         $userRole = $request->user()->role;
-        $isValidatedRoles = $roles === 'all' || (is_array($roles) ? in_array($roles, $userRole) : $roles == $userRole);
-
+        $isValidatedRoles = $roles[0] == 'all' || (is_array($roles) ? in_array($userRole, $roles) : $roles == $userRole);
+        
         if($isValidatedRoles) {
             return $next($request);
         }

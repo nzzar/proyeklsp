@@ -1,12 +1,18 @@
 @extends('layout')
 
 @section('page-title')
-Event Sertifikasi 
+Event Sertifikasi
 @endsection
 
 
 @section('main-content')
-
-    @livewire('event.detail', ['id' => $id])
-
+    @switch(Auth::User()->role)
+        @case('admin')
+            @livewire('event.detail', ['id' => $id])
+            @break
+        @case('ms')
+            @livewire('ms.event.detail', ['id' => $id])
+            @break
+        @default
+    @endswitch
 @endsection

@@ -45,10 +45,11 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/user-management', [UserManagementController::class, 'index']);
     Route::get('/prodi-management', [MasterDataController::class, 'prodiManagement']);
 
-    Route::prefix('/event')->group(function () {
-        Route::get('/', [EventController::class, 'index']);
-        Route::get('/{id}', [EventController::class, 'detail']);
-    });
+});
+
+Route::group(['prefix' => '/event', 'middleware' => 'role:admin,ms'], function() {
+    Route::get('/', [EventController::class, 'index']);
+    Route::get('/{id}', [EventController::class, 'detail']);
 });
 
 Route::group(['prefix' => '/skema', 'middleware' => 'role:all'], function () {

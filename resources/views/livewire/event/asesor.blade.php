@@ -5,7 +5,9 @@
                 <h6 class="card-title">Data Asesor</h6>
             </div>
             <div class="card-body">
-                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-asesor-modal">Tambah Asesor</button>
+                @if(Auth::user()->role == 'admin')
+                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-asesor-modal">Tambah Asesor</button>
+                @endif
                 <table class="table">
                     <thead>
                         <tr>
@@ -13,7 +15,9 @@
                             <th>No. Registrasi</th>
                             <th>Nama Lengkap</th>
                             <th>Masa Berlaku Sertifikat</th>
+                            @if(Auth::user()->role == 'admin')
                             <th>Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -25,7 +29,9 @@
                             <td>{{$asesorItem->asesor->reg_number}}</td>
                             <td>{{$asesorItem->asesor->name}}</td>
                             <td>{{$asesorItem->asesor->start_date}} - {{$asesorItem->asesor->expired_date}}</td>
+                            @if(Auth::user()->role == 'admin')
                             <td><button class="btn btn-danger btn-sm" wire:click.prevent="deleteAsesor('{{$asesorItem->id}}')"><i class="fas fa-trash-alt"></i> delete</button></td>
+                            @endif
                         </tr>
                         @empty
                         <tr>

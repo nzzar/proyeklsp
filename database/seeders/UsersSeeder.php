@@ -34,6 +34,12 @@ class UsersSeeder extends Seeder
                 'role' => 'admin',
                 'active' => true,
             ],
+            [
+                'email' => 'lspms@gmail.com',
+                'password' => Hash::make('lspms1234'),
+                'role' => 'ms',
+                'active' => true,
+            ],
         ];
 
         User::insert($userData);
