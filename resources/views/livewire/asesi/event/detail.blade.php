@@ -231,7 +231,7 @@ Registrasi Skema
                                             :
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio">
+                                            <div class="custom-control custom-radio" wire:click="$set('tujuan', 'Sertifikasi')">
                                                 <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck1">
                                                 <label class="custom-control-label" for="customCheck1">Sertifikasi</label>
                                             </div>
@@ -241,7 +241,7 @@ Registrasi Skema
                                         <td>
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio">
+                                            <div class="custom-control custom-radio" wire:click="$set('tujuan', 'Sertifikasi Ulang')">
                                                 <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck2">
                                                 <label class="custom-control-label" for="customCheck2">Sertifikasi Ulang</label>
                                             </div>
@@ -251,7 +251,7 @@ Registrasi Skema
                                         <td>
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio">
+                                            <div class="custom-control custom-radio" wire:click="$set('tujuan', 'Pengakuan Kompetensi Terkini (PKT)')">
                                                 <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck3">
                                                 <label class="custom-control-label" for="customCheck3">Pengakuan Kompetensi Terkini (PKT)</label>
                                             </div>
@@ -261,7 +261,7 @@ Registrasi Skema
                                         <td>
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio">
+                                            <div class="custom-control custom-radio" wire:click="$set('tujuan', 'Rekognisi Pembelaran Lampau')">
                                                 <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck4">
                                                 <label class="custom-control-label" for="customCheck4">Rekognisi Pembelaran Lampau</label>
                                             </div>
@@ -271,7 +271,7 @@ Registrasi Skema
                                         <td>
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio">
+                                            <div class="custom-control custom-radio" wire:click="$set('tujuan', 'Lain nya')">
                                                 <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck5">
                                                 <label class="custom-control-label" for="customCheck5">Lain nya</label>
                                             </div>
@@ -304,8 +304,31 @@ Registrasi Skema
                                     <tr>
                                         <td> {{$no}} </td>
                                         <td> {{$syarat->name}} </td>
-                                        <td> belum upload </td>
-                                        <td> <button class="btn btn-primary btn-sm">Upload</button> </td>
+                                        <td>
+                                            @if($syarat->asesi)
+                                            @switch($syarat->asesi->status)
+                                            @case('Sedang diperiksa')
+                                            <span class="badge badge-warning">{{$syarat->asesi->status}}</span>
+                                            @break
+                                            @case('Memenuhi Syarat')
+                                            <span class="badge badge-success">{{$syarat->asesi->status}}</span>
+                                            @break
+                                            @default
+                                            <span class="badge badge-warning">{{$syarat->asesi->status}}</span>
+                                            @endswitch
+
+                                            @else
+                                            <span class="badge badge-secondary">Belum Upload Persyaratan</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if(($syarat->asesi->status ?? null) != 'Memenuhi Syarat' )
+                                            <button class="btn btn-primary btn-sm" wire:click.prevent="getPeryaratan('{{$syarat->id}}')" data-toggle="modal" data-target="#upload-modal">Upload</button>
+                                            @endif
+                                            @if($syarat->asesi)
+                                            <button class="btn btn-primary btn-sm btn-info" wire:click="$set('view_file', '{{$syarat->asesi->file}}')" data-toggle="modal" data-target="#view-file-modal">Lihat File</button>
+                                            @endif
+                                        </td>
                                     </tr>
 
                                     @empty
@@ -342,8 +365,8 @@ Registrasi Skema
                                     </tr>
                                     <tr>
                                         <td>Tanda Tangan</td>
-                                        <td style="width: 50%; height:150px;">
-                                            <div class="w-100 h-100" id="signature-pad"></div>
+                                        <td  style="width: 50%; height:150px;">
+                                            <div wire:ignore class="w-100 h-100" id="signature-pad"></div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -358,25 +381,46 @@ Registrasi Skema
             </div>
         </div>
     </div>
-    <div wire:ignore.self class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="create-unit" aria-hidden="true" id="unapprove-event-modal">
+    <div wire:ignore.self class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="create-unit" aria-hidden="true" id="upload-modal">
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Upload persyaratan</h4>
+                    <h4 class="modal-title">Upload {{$persyaratan_name}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Keterangan</label>
-                        <input wire:model="desc" type="text" class="form-control  @error('desc') is-invalid @enderror" placeholder="Masukan Keterangan">
-                        @error('desc') <span class="text-danger">{{ $message }}</span>@enderror
+                    @if($file)
+                    @if(is_string($file))
+                    <div class="text-center"><img src="{{Storage::url($file)}}" alt="" class="rounded w-25 mb-2"></div>
+                    @else
+                    <div class="text-center"><img src="{{$file->temporaryUrl()}}" alt="" class="rounded w-25 mb-2"></div>
+                    @endif
+                    @endif
+
+                    <div class="custom-file mb-3">
+                        <input type="file" wire:model="file" class="custom-file-input @error('file') is-invalid @enderror" id="customFile" name="file">
+                        <label class="custom-file-label" for="customFile">Upload {{$persyaratan_name}}</label>
+                        @error('file') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" wire:click="$set('eventId', null)">Cancel</button>
-                    <button type="button" class="btn btn-primary" wire:click.prevent="unApproved()" data-dismiss="modal">Unapprove</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="uploadPersyaratan()" data-dismiss="modal">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div wire:ignore.self class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="create-unit" aria-hidden="true" id="view-file-modal">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        @if($view_file)
+                        <img src="{{Storage::url($view_file)}}" alt="" class="rounded w-100 mb-2">
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -395,5 +439,9 @@ Registrasi Skema
     $(document).ready(function() {
         $('#signature-pad').signature()
     })
+
+    Livewire.on('get-persyaratan-success', (data) => {
+        console.log(data);
+    });
 </script>
 @endsection

@@ -19,6 +19,6 @@ class PersyaratanSkema extends Model
     ];
 
     public function asesi() {
-        return $this->hasMany(PersyaratanAsesi::class, 'persyaratan_id');
+        return $this->hasOne(PersyaratanAsesi::class, 'persyaratan_id');
     }
 }
