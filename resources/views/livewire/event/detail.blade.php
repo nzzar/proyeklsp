@@ -83,7 +83,7 @@
                         <div>
                             <button class="btn btn-primary btn-sm" wire:click.prevent="$set('tabActive', 'skema')"><i class="fas fa-clipboard-list"></i> Data Skema</button>
                             <button class="btn btn-primary btn-sm" wire:click.prevent="$set('tabActive', 'asesor')"><i class="fas fa-user-tie"></i> Data Asesor</button>
-                            <button class="btn btn-primary btn-sm"><i class="fas fa-users"></i> Data Asesi</button>
+                            <button class="btn btn-primary btn-sm" wire:click.prevent="$set('tabActive', 'asesi')"><i class="fas fa-users"></i> Data Asesi</button>
                         </div>
                         <div>
                             @if(in_array($status, ['Draft', 'Unapproved']))
@@ -106,6 +106,10 @@
 
     @if($tabActive == 'asesor')
     @livewire('event.asesor', ['id' => $eventId])
+    @endif
+
+    @if($tabActive == 'asesi')
+    @livewire('event.asesi', ['id' => $eventId])
     @endif
 </div>
 

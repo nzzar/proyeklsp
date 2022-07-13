@@ -42,6 +42,9 @@ class Event extends Model
     }
 
     public function asesi() {
+        return $this->hasOne(SkemaAsesi::class);
+    }
+    public function asesis() {
         return $this->hasMany(SkemaAsesi::class);
     }
 

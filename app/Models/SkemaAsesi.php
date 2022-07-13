@@ -19,4 +19,8 @@ class SkemaAsesi extends Model
         'asesor_id' => 'string',
     ];
 
+    public function asesi() {
+        return $this->belongsTo(Asesi::class);
+    }
+
 }

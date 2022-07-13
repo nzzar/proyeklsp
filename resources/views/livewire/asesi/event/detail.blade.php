@@ -31,7 +31,14 @@ Registrasi Skema
                             <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$event->skema->name}}">
                         </div>
                     </div>
-
+                    @if($event->asesi)
+                    <div class="form-group row mb-3">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Status Registrasi</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$event->asesi->status}}">
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -231,8 +238,9 @@ Registrasi Skema
                                             :
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio" wire:click="$set('tujuan', 'Sertifikasi')">
-                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck1">
+                                            {{$tujuan}}
+                                            <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Sertifikasi')" @endif >
+                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck1" @if($tujuan == 'Sertifikasi') checked @endif  @if($event->asesi) disabled @endif>
                                                 <label class="custom-control-label" for="customCheck1">Sertifikasi</label>
                                             </div>
                                         </td>
@@ -241,8 +249,8 @@ Registrasi Skema
                                         <td>
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio" wire:click="$set('tujuan', 'Sertifikasi Ulang')">
-                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck2">
+                                            <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Sertifikasi Ulang')" @endif >
+                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck2" @if($tujuan == 'Sertifikasi Ulang') checked @endif @if($event->asesi) disabled @endif>
                                                 <label class="custom-control-label" for="customCheck2">Sertifikasi Ulang</label>
                                             </div>
                                         </td>
@@ -251,8 +259,8 @@ Registrasi Skema
                                         <td>
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio" wire:click="$set('tujuan', 'Pengakuan Kompetensi Terkini (PKT)')">
-                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck3">
+                                            <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Pengakuan Kompetensi Terkini (PKT)')" @endif   >
+                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck3" @if($tujuan == 'Pengakuan Kompetensi Terkini (PKT)') checked @endif @if($event->asesi) disabled @endif>
                                                 <label class="custom-control-label" for="customCheck3">Pengakuan Kompetensi Terkini (PKT)</label>
                                             </div>
                                         </td>
@@ -261,8 +269,8 @@ Registrasi Skema
                                         <td>
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio" wire:click="$set('tujuan', 'Rekognisi Pembelaran Lampau')">
-                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck4">
+                                            <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Rekognisi Pembelaran Lampau')" @endif  >
+                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck4" @if($tujuan == 'Rekognisi Pembelaran Lampau') checked @endif @if($event->asesi) disabled @endif>
                                                 <label class="custom-control-label" for="customCheck4">Rekognisi Pembelaran Lampau</label>
                                             </div>
                                         </td>
@@ -271,8 +279,8 @@ Registrasi Skema
                                         <td>
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio" wire:click="$set('tujuan', 'Lain nya')">
-                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck5">
+                                            <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Lain nya')" @endif >
+                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck5" @if($tujuan == 'Lain nya') checked @endif @if($event->asesi) disabled @endif>
                                                 <label class="custom-control-label" for="customCheck5">Lain nya</label>
                                             </div>
                                         </td>
@@ -365,8 +373,26 @@ Registrasi Skema
                                     </tr>
                                     <tr>
                                         <td>Tanda Tangan</td>
-                                        <td  style="width: 50%; height:150px;">
-                                            <div wire:ignore class="w-100 h-100" id="signature-pad"></div>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div style="width: 200px; height: 150px;">
+                                                    @if($signature)
+                                                        @if(is_string($signature))
+                                                            <img src="{{Storage::url($signature)}}" alt="" class="rounded w-100 mb-2">
+                                                        @else
+                                                            <img src="{{$signature->temporaryUrl()}}" alt="" class="rounded w-100 mb-2">
+                                                        @endif
+                                                    @else
+                                                        <div wire:ignore class="w-100 h-100" id="signature-pad"></div>
+                                                    @endif
+                                                </div>
+                                                @if(!$signature)
+                                                <div class="mx-3">
+                                                    <button class="btn btn-sm btn-primary btn-block mb-3" id="save-signature">Save Signature</button>
+                                                    <button class="btn btn-sm btn-danger btn-block mb-3" id="clear-signature">Clear Signature</button>
+                                                </div>
+                                                @endif
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -377,6 +403,10 @@ Registrasi Skema
                             </table>
                         </div>
                     </div>
+                    @if(!$event->asesi)
+                    <div class="text-danger">{{$errorMessage}}</div>
+                    <button class="btn btn-primary btn-block" id="btn-register" wire:click="registerSkema()">Register Skema</button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -443,5 +473,26 @@ Registrasi Skema
     Livewire.on('get-persyaratan-success', (data) => {
         console.log(data);
     });
+
+    $('#save-signature').click(async function() {
+        let invalidSignate = $('#signature-pad').signature('isEmpty')
+
+        if (invalidSignate) {
+            Swal.fire({
+                title: 'Gagal!',
+                text: 'Tanda tangan tidak boleh kosong',
+                icon: 'warning',
+                timer: 2000,
+                showConfirmButton: false,
+            })
+
+            return
+        }
+
+        let base64 = $('#signature-pad').signature('toDataURL', 'image/png');
+        let resImg = await fetch(base64)
+        let blobImg = await resImg.blob()
+        @this.upload('signature', blobImg)
+    })
 </script>
 @endsection

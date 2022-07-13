@@ -22,6 +22,7 @@ class CreatePersyaratanAsesi extends Migration
             $table->uuid('persyaratan_id')->index();
             $table->string('file');
             $table->enum('status', ['Sedang diperiksa', 'Memenuhi Syarat', 'Tidak Memenuhi Syarat'])->default('Sedang diperiksa');
+            $table->string('desc')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

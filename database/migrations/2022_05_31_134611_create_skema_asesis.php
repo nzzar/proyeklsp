@@ -20,7 +20,11 @@ class CreateSkemaAsesis extends Migration
             $table->uuid('asesi_id')->index();
             $table->uuid('asesor_id')->index()->nullable();
             $table->string('tujuan_asesmen');
-            $table->enum('status', ['Menungu Keputusan', 'Diterima', 'Tidak Diterima'])->default('Menunggu Keputusan');
+            $table->string('ttd_asesi');
+            $table->date('tgl_ttd_asesi');
+            $table->string('ttd_admin')->nullable();
+            $table->date('tgl_ttd_admin')->nullable();
+            $table->enum('status', ['Menunggu Keputusan', 'Lulus', 'Tidak Lulus'])->default('Menunggu Keputusan');
             $table->enum('skema_status', ['Kompeten', 'Belum Kompeten'])->nullable();
             $table->timestamps();
             $table->softDeletes();
