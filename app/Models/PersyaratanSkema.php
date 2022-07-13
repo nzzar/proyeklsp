@@ -17,4 +17,8 @@ class PersyaratanSkema extends Model
         'id' => 'string',
         'skema_id' => 'string',
     ];
+
+    public function asesi() {
+        return $this->hasMany(PersyaratanAsesi::class, 'persyaratan_id');
+    }
 }

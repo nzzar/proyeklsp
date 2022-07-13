@@ -11,26 +11,29 @@ Event Sertifikasi Management
     <div class="row">
         <div class="col">
             <div class="card">
-            @if(Auth::user()->role == 'admin')
-                @livewire('event.index')
-            @endif
-                
-            @if(Auth::user()->role == 'ms')
-                @livewire('ms.event.index')
-            @endif
+            @switch(Auth::user()->role)
+                @case('admin')
+                    @livewire('event.index')
+                    @break
+                @case('ms')
+                    @livewire('ms.event.index')
+                    @break
+                @default
+                    @livewire('asesi.event.index')
+            @endswitch
             </div>
         </div>
     </div>
 </div>
-
 @if(Auth::user()->role == 'admin')
     @livewire('event.create')
     @livewire('event.update')
     @livewire('event.delete')
 @endif
-
-
 @endsection
+
+@if(Auth::user()->role == 'admin')
+
 
 @section('script')
 
@@ -194,3 +197,5 @@ Event Sertifikasi Management
     })
 </script>
 @endsection
+
+@endif

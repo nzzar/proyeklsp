@@ -47,9 +47,10 @@ Route::group(['middleware' => 'role:admin'], function () {
 
 });
 
-Route::group(['prefix' => '/event', 'middleware' => 'role:admin,ms'], function() {
+Route::group(['prefix' => '/event', 'middleware' => 'role:all'], function() {
     Route::get('/', [EventController::class, 'index']);
     Route::get('/{id}', [EventController::class, 'detail']);
+    Route::get('/{id}/register', [EventController::class, 'registerEvent']);
 });
 
 Route::group(['prefix' => '/skema', 'middleware' => 'role:all'], function () {
