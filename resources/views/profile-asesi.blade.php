@@ -6,7 +6,8 @@ Profile
 
 
 @section('main-content')
-<div class="container-fluid card p-sm-3">
+ @livewire('asesi.profile.form')
+<!-- <div class="container-fluid card p-sm-3">
     <form action="{{url('/asesi/profile')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
@@ -140,5 +141,5 @@ Profile
             </div>
         </div>
     </form>
-</div>
+</div> -->
 @endsection

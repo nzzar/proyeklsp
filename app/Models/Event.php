@@ -48,4 +48,5 @@ class Event extends Model
     public function asesor() {
         return $this->hasMany(SkemaAsesor::class);
     }
+
 }

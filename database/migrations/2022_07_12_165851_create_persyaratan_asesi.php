@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSkemaAsesis extends Migration
+class CreatePersyaratanAsesi extends Migration
 {
     /**
      * Run the migrations.
@@ -14,20 +14,21 @@ class CreateSkemaAsesis extends Migration
      */
     public function up()
     {
-        Schema::create('skema_asesis', function (Blueprint $table) {
+        Schema::create('persyaratan_asesi', function (Blueprint $table) {
             $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
             $table->uuid('event_id')->index();
+            $table->uuid('skema_id')->index();
             $table->uuid('asesi_id')->index();
-            $table->uuid('asesor_id')->index()->nullable();
-            $table->string('tujuan_asesmen');
-            $table->enum('status', ['Menungu Keputusan', 'Diterima', 'Tidak Diterima'])->default('Menunggu Keputusan');
-            $table->enum('skema_status', ['Kompeten', 'Belum Kompeten'])->nullable();
+            $table->uuid('persyaratan_id')->index();
+            $table->string('file');
+            $table->enum('status', ['Sedang diperiksa', 'Memenuhi Syarat', 'Tidak Memenuhi Syarat'])->default('Sedang diperiksa');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('event_id')->references('id')->on('event');
+            $table->foreign('skema_id')->references('id')->on('skemas');
+            $table->foreign('persyaratan_id')->references('id')->on('persyaratan_skema');
             $table->foreign('asesi_id')->references('id')->on('asesis');
-            $table->foreign('asesor_id')->references('id')->on('asesors');
+            $table->foreign('event_id')->references('id')->on('event');
         });
     }
 
@@ -38,6 +39,6 @@ class CreateSkemaAsesis extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skema_asesis');
+        Schema::dropIfExists('persyaratan_asesi');
     }
 }

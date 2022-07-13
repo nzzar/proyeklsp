@@ -13,4 +13,8 @@ class EventController extends Controller
     public function detail(Request $request, $id){
         return view('event.event-detail', compact('id'));
     }
+    
+    public function registerEvent(Request $request, $id) {
+        return view('event.event-detail', compact('id'));
+    }
 }

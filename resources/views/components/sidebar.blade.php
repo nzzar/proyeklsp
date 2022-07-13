@@ -7,7 +7,7 @@
   </a>
 
   <!-- Sidebar -->
-  <div class="sidebar">
+  <div class="sidebar d-flex flex-column">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
@@ -21,11 +21,11 @@
     <!-- SidebarSearch Form -->
 
     <!-- Sidebar Menu -->
-    <nav class="mt-2">
+    <nav class="mt-2 flex-fill">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-        @userRole(all)
+        @userRole(admin)
         <li class="nav-item">
           <a href="{{url('/skema')}}" class="nav-link">
             <i class="nav-icon fas fa-id-card"></i>
@@ -35,7 +35,7 @@
           </a>
         </li>
         @endUserRole
-        @if(in_array(Auth::user()->role, ['admin', 'ms']))
+        @if(in_array(Auth::user()->role, ['admin', 'ms']) || isValidAsesi())
         <li class="nav-item">
           <a href="{{url('/event')}}" class="nav-link">
             <i class="nav-icon fas fa-calendar"></i>
@@ -65,7 +65,7 @@
           </a>
         </li>
         @endUserRole
-        @userRole(asesi)
+        @if(isValidAsesi())
         <li class="nav-item">
           <a href="{{url('/asesi/profile')}}" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
@@ -74,7 +74,7 @@
             </p>
           </a>
         </li>
-        @endUserRole
+        @endif
         @userRole(admin)
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -95,6 +95,9 @@
         @endUserRole
       </ul>
     </nav>
+    <div class="p-3 mt-5">
+      <a href="{{url('/logout')}}" class="btn btn-block btn-primary">Logout</a >
+    </div>
     <!-- /.sidebar-menu -->
   </div>
   <!-- /.sidebar -->

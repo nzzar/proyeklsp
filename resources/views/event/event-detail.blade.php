@@ -14,5 +14,6 @@ Event Sertifikasi
             @livewire('ms.event.detail', ['id' => $id])
             @break
         @default
+            @livewire('asesi.event.detail', ['id' => $id])
     @endswitch
 @endsection
