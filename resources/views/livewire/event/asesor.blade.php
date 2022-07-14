@@ -5,7 +5,7 @@
                 <h6 class="card-title">Data Asesor</h6>
             </div>
             <div class="card-body">
-                @if(Auth::user()->role == 'admin')
+                @if(Auth::user()->role == 'ms')
                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-asesor-modal">Tambah Asesor</button>
                 @endif
                 <table class="table">
@@ -29,7 +29,7 @@
                             <td>{{$asesorItem->asesor->reg_number}}</td>
                             <td>{{$asesorItem->asesor->name}}</td>
                             <td>{{$asesorItem->asesor->start_date}} - {{$asesorItem->asesor->expired_date}}</td>
-                            @if(Auth::user()->role == 'admin')
+                            @if(Auth::user()->role == 'ms')
                             <td><button class="btn btn-danger btn-sm" wire:click.prevent="deleteAsesor('{{$asesorItem->id}}')"><i class="fas fa-trash-alt"></i> delete</button></td>
                             @endif
                         </tr>

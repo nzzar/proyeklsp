@@ -6,8 +6,11 @@ use App\Models\Asesi;
 use App\Models\Event;
 use App\Models\PersyaratanAsesi;
 use App\Models\PersyaratanSkema;
+use App\Models\SkemaAsesi;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -15,7 +18,7 @@ use Livewire\WithFileUploads;
 class Detail extends Component
 {
 
-    use WithFileUploads; 
+    use WithFileUploads;
 
     public $eventId;
 
@@ -24,12 +27,31 @@ class Detail extends Component
     public $file;
 
     public $view_file;
+    public $validRegister = false;
+    public $errorMessage;
 
+    public $signature;
     public $tujuan;
+
+
 
     public function mount($id)
     {
         $this->eventId = $id;
+
+
+
+        $skema = SkemaAsesi::where([
+            'event_id' => $id,
+            'asesi_id' => Auth::user()->asesi->id,
+        ])
+            ->first();
+        
+        // dd($skema);
+        if($skema) {
+            $this->tujuan = $skema->tujuan_asesmen;
+        }
+            
     }
 
 
@@ -42,24 +64,45 @@ class Detail extends Component
             $event = Event::where('status', 'Approved')
                 ->with([
                     'skema.unitKompetensi',
-                    'skema.persyaratan.asesi' => function($query) use($eventId){
+                    'asesi' => function ($query) use ($eventId) {
+                        $query->where('event_id', $eventId);
+                    },
+                    'skema.persyaratan.asesi' => function ($query) use ($eventId) {
                         $query->where('event_id', $eventId);
                     }
                 ])
                 ->where('id', $eventId)
                 ->firstOrFail();
 
+            if ($event->asesi) {
+                $this->signature = $event->asesi->ttd_asesi;
+            }
+            $countUpload = PersyaratanAsesi::where('event_id', $this->eventId)->count();
+            $countSyarat = count($event->skema->persyaratan);
 
-            // dd($event);
-
+            if ($countSyarat != $countUpload) {
+                $this->validRegister = false;
+                $this->errorMessage = '* Upload semua kelengkapan dokumen yang dibutuhkan';
+            } else if (!$this->tujuan) {
+                $this->validRegister = false;
+                $this->errorMessage = '* Pilih tujuan asesmen terlebih dahulu';
+            } else if (!$this->signature) {
+                $this->validRegister = false;
+                $this->errorMessage = '* Tanda tangan tidak boleh kosong';
+            } else {
+                $this->validRegister = true;
+                $this->errorMessage = null;
+            }
         } catch (Exception $err) {
+            dd($err);
             abort(404);
         }
 
-        return view('livewire.asesi.event.detail', compact('asesi', 'event', ));
+        return view('livewire.asesi.event.detail', compact('asesi', 'event',));
     }
 
-    public function uploadPersyaratan() {
+    public function uploadPersyaratan()
+    {
 
         try {
             $this->validate([
@@ -75,16 +118,16 @@ class Detail extends Component
                 'persyaratan_id' => $syarat->id,
                 'asesi_id' => $asesi->id,
                 'event_id' => $this->eventId,
-            ])->first(); 
-            
-            if(!$data) {
+            ])->first();
+
+            if (!$data) {
                 $data = new PersyaratanAsesi();
             } else {
                 Storage::delete($data->file);
             }
 
             $file_name = 'persyaratan_' . time() . '_' . $asesi->id . '.' . $this->file->getClientOriginalExtension();
-            $file_path = $this->file->storeAs("public/event/". $this->eventId . "/asesi" ."/". $asesi->id . "/persyaratan". "/", $file_name);
+            $file_path = $this->file->storeAs("public/event/" . $this->eventId . "/asesi" . "/" . $asesi->id . "/", $file_name);
 
             $data->file = $file_path;
             $data->asesi_id = $asesi->id;
@@ -102,9 +145,7 @@ class Detail extends Component
                 'showConfirmButton' => false,
                 'position' => 'top-right'
             ]);
-
-             
-        } catch(Exception $err) {
+        } catch (Exception $err) {
             dd($err);
             $this->dispatchBrowserEvent('swal', [
                 'title' => 'Error!',
@@ -115,19 +156,17 @@ class Detail extends Component
                 'showConfirmButton' => false,
                 'position' => 'top-right'
             ]);
-
-
         }
-        
-    } 
+    }
 
-    public function getPeryaratan($persyaratanId) {
+    public function getPeryaratan($persyaratanId)
+    {
         try {
             $data = PersyaratanSkema::findOrFail($persyaratanId);
             $this->persyaratan_id = $data->id;
             $this->persyaratan_name = $data->name;
             $this->emit('get-persyaratan-success', ['type' => 'upload']);
-        } catch(Exception $err) {
+        } catch (Exception $err) {
             $this->dispatchBrowserEvent('swal', [
                 'title' => 'Error!',
                 'title' => 'Gagal mengambil data persyaratan',
@@ -137,7 +176,51 @@ class Detail extends Component
                 'showConfirmButton' => false,
                 'position' => 'top-right'
             ]);
+        }
+    }
 
+    public function registerSkema()
+    {
+
+        DB::beginTransaction();
+        try {
+            $asesi = Auth::user()->asesi;
+            $event = Event::findOrFail($this->eventId);
+
+            $data = new SkemaAsesi();
+
+            $file_name = 'signature_' . time() . '_' . $asesi->id . '.' . $this->signature->getClientOriginalExtension();
+            $file_path = $this->signature->storeAs("public/event/" . $this->eventId . "/asesi" . "/" . $asesi->id . "/", $file_name);
+
+            $data->ttd_asesi = $file_path;
+            $data->asesi_id = $asesi->id;
+            $data->event_id = $event->id;
+            $data->tujuan_asesmen   = $this->tujuan;
+            $data->tgl_ttd_asesi = Carbon::now()->format('Y-m-d');
+            $data->save();
+
+            DB::commit();
+            $this->dispatchBrowserEvent('swal', [
+                'title' => 'Success!',
+                'title' => 'Pendaftaran Skema Berhasil',
+                'timer' => 3000,
+                'icon' => 'success',
+                'toast' => true,
+                'showConfirmButton' => false,
+                'position' => 'top-right'
+            ]);
+        } catch (Exception $err) {
+            DB::rollBack();
+            dd($err);
+            $this->dispatchBrowserEvent('swal', [
+                'title' => 'Error!',
+                'title' => 'Gagal mendaftarkan skema',
+                'timer' => 3000,
+                'icon' => 'error',
+                'toast' => true,
+                'showConfirmButton' => false,
+                'position' => 'top-right'
+            ]);
         }
     }
 }
