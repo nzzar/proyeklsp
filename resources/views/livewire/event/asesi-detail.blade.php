@@ -334,13 +334,14 @@ Registrasi Skema
                                             <span class="badge badge-warning">{{$syarat->asesi->status}}</span>
                                             @endswitch
 
-                                            @else
                                             <span class="badge badge-secondary">Belum Upload Persyaratan</span>
                                             @endif
                                         </td>
                                         <td>
-                                            @if(($syarat->asesi->status ?? null) != 'Memenuhi Syarat' )
-                                            <button class="btn btn-primary btn-sm" wire:click.prevent="getPeryaratan('{{$syarat->id}}')" data-toggle="modal" data-target="#upload-modal">Upload</button>
+                                            @if($syarat->asesi->status == 'Sedang diperiksa')
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#upload-modal">Upload</button>
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#upload-modal">Memenuhi Syarat</button>
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#upload-modal">Tidak Memenuhi Syarat</button>
                                             @endif
                                             @if($syarat->asesi)
                                             <button class="btn btn-primary btn-sm btn-info" wire:click="$set('view_file', '{{$syarat->asesi->file}}')" data-toggle="modal" data-target="#view-file-modal">Lihat File</button>
@@ -386,13 +387,7 @@ Registrasi Skema
                                             <div class="d-flex">
                                                 <div style="width: 200px; height: 150px;">
                                                     @if($signature)
-                                                        @if(is_string($signature))
-                                                            <img src="{{Storage::url($signature)}}" alt="" class="rounded w-100 mb-2">
-                                                        @else
-                                                            <img src="{{$signature->temporaryUrl()}}" alt="" class="rounded w-100 mb-2">
-                                                        @endif
-                                                    @else
-                                                        <div wire:ignore class="w-100 h-100" id="signature-pad"></div>
+                                                        <img src="{{Storage::url($signature)}}" alt="" class="rounded w-100 mb-2">
                                                     @endif
                                                 </div>
                                                 @if(!$signature)
@@ -414,43 +409,11 @@ Registrasi Skema
                     </div>
                     @if(!$event->asesi)
                     <div class="text-danger">{{$errorMessage}}</div>
-                    @if($validRegister)
-                    <button class="btn btn-primary btn-block" id="btn-register" wire:click="registerSkema()">Register Skema</button>
-                    @else 
-                    <button class="btn btn-primary btn-block" disabled>Register Skema</button>
+                        @if($validRegister)
+                            <button class="btn btn-primary btn-block" id="btn-register" wire:click="registerSkema()">Register Skema</button>
+                            <button class="btn btn-primary btn-block" disabled>Register Skema</button>
+                        @endif
                     @endif
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-    <div wire:ignore.self class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="create-unit" aria-hidden="true" id="upload-modal">
-        <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Upload {{$persyaratan_name}}</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @if($file)
-                    @if(is_string($file))
-                    <div class="text-center"><img src="{{Storage::url($file)}}" alt="" class="rounded w-25 mb-2"></div>
-                    @else
-                    <div class="text-center"><img src="{{$file->temporaryUrl()}}" alt="" class="rounded w-25 mb-2"></div>
-                    @endif
-                    @endif
-
-                    <div class="custom-file mb-3">
-                        <input type="file" wire:model="file" class="custom-file-input @error('file') is-invalid @enderror" id="customFile" name="file">
-                        <label class="custom-file-label" for="customFile">Upload {{$persyaratan_name}}</label>
-                        @error('file') <span class="text-danger">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" wire:click.prevent="uploadPersyaratan()" data-dismiss="modal">Upload</button>
                 </div>
             </div>
         </div>
@@ -483,9 +446,6 @@ Registrasi Skema
         $('#signature-pad').signature()
     })
 
-    Livewire.on('get-persyaratan-success', (data) => {
-        console.log(data);
-    });
 
     $('#save-signature').click(async function() {
         let invalidSignate = $('#signature-pad').signature('isEmpty')

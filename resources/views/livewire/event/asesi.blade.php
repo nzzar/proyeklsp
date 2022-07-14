@@ -32,7 +32,7 @@
                                     @case('Menunggu Keputusan')
                                         <span class="badge badge-secondary">{{$skema->status}}</span>
                                     @break
-                                    @case('Lulus')
+                                    @case('Diterima')
                                         <span class="badge badge-success">{{$skema->status}}</span>
                                     @break
                                     @default
@@ -45,7 +45,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="5" class="text-center text-secondary">Tidak ada data asesor</td>
+                            <td colspan="5" class="text-center text-secondary">Tidak ada data asesi</td>
                         </tr>
                         @endforelse
                     </tbody>

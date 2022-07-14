@@ -14,7 +14,7 @@
         <img src="{{asset('assets/dashboard/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">{{Auth::user()->asesi->name ?? Auth::user()->asesor->name ?? 'Admin'}}</a>
+        <a href="#" class="d-block">{{Auth::user()->asesi->name ?? Auth::user()->asesor->name ?? Auth::user()->role == 'admin' ? 'Admin' : 'Manager Sertifikasi' }}</a>
       </div>
     </div>
 
