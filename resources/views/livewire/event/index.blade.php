@@ -58,7 +58,6 @@
                     <a href="{{url('/event/'.$data->id)}}" class="btn btn-sm btn-primary mb-1"><i class="fas fa-folder-open"></i> Detail Event</a>
                     @if($data->status == 'Draft')
                     <button class="btn btn-sm btn-danger" wire:click.prevent="deleteEvent('{{$data->id}}')"> <i class="fas fa-trash-alt"></i> Delete Event</button>
-                    <button class="btn btn-sm btn-info" wire:click.prevent="deleteEvent('{{$data->id}}')"><i class="fas fa-file-alt"></i> Ajukan Event</button>
                     @endif
                 </td>
             </tr>
