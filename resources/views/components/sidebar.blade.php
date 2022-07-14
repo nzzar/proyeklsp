@@ -15,7 +15,7 @@
       <div class="info">
         <a href="#" class="d-block">
           @switch(Auth::user()->role)
-            @case('sesi')
+            @case('asesi')
               {{Auth::user()->asesi->name}}
             @break
             @case('asesor')
