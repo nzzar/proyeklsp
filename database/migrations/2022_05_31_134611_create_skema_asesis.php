@@ -22,7 +22,6 @@ class CreateSkemaAsesis extends Migration
             $table->string('tujuan_asesmen');
             $table->string('ttd_asesi');
             $table->date('tgl_ttd_asesi');
-            $table->string('ttd_admin')->nullable();
             $table->date('tgl_ttd_admin')->nullable();
             $table->enum('status', ['Menunggu Keputusan', 'Diterima', 'Tidak Diterima'])->default('Menunggu Keputusan');
             $table->enum('skema_status', ['Kompeten', 'Belum Kompeten'])->nullable();

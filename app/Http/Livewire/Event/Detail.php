@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Event;
 
 use App\Models\Event;
 use App\Models\Skema;
+use Carbon\Carbon;
 use Exception;
 use Livewire\Component;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -96,8 +97,8 @@ class Detail extends Component
 
         $event = Event::findOrFail($this->eventId);
         $event->skema_id = $this->skemaId;
-        $event->start_date = $this->startDate;
-        $event->end_date = $this->endDate;
+        $event->start_date = Carbon::createFromFormat('d/m/Y h:i', $this->startDate)->format('Y-m-d h:i');
+        $event->end_date = Carbon::createFromFormat('d/m/Y h:i', $this->endDate)->format('Y-m-d h:i');
         $event->title = $this->title;
         $event->qty = $this->qty;
         $event->tuk = $this->tuk;

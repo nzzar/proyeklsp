@@ -56,5 +56,9 @@ class User extends Authenticatable
         return $this->hasOne(Asesi::class);
     }
 
+    public function admin() {
+        return $this->hasOne(Admin::class);
+    }
+
     
 }

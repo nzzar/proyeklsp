@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AsesiController extends Controller
+class AdminController extends Controller
 {
-    public function profile(Request $request)
-    {
-
+    public function index() {
         return view('profile');
     }
 }

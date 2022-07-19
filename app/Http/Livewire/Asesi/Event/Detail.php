@@ -33,6 +33,7 @@ class Detail extends Component
     public $signature;
     public $tujuan;
 
+    public $validAsesmen;
 
 
     public function mount($id)
@@ -47,7 +48,20 @@ class Detail extends Component
         ])
             ->first();
         
-        // dd($skema);
+        $now = Carbon::now();
+        $startDate = Carbon::createFromFormat('d/m/Y h:i', $skema->event->start_date);
+        
+        if($now->gte($startDate)) {
+            $this->validAsesmen = true;
+        } else {
+            $this->validAsesmen = false;
+            
+        }
+
+
+
+
+            
         if($skema) {
             $this->tujuan = $skema->tujuan_asesmen;
         }
@@ -134,6 +148,7 @@ class Detail extends Component
             $data->event_id = $this->eventId;
             $data->persyaratan_id = $syarat->id;
             $data->skema_id = $syarat->skema_id;
+            $data->status = 'Sedang diperiksa';
             $data->save();
 
             $this->dispatchBrowserEvent('swal', [

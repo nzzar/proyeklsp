@@ -17,4 +17,12 @@ class EventController extends Controller
     public function registerEvent(Request $request, $id) {
         return view('event.event-detail', compact('id'));
     }
+
+    public function asesmentMandiri(Request $request, $id) {
+        return view('event.asesment-mandiri', compact('id'));
+    }
+
+    public function skemaAsesi(Request $request, $id) {
+        return view('event.event-asesi', compact('id'));
+    }
 }
