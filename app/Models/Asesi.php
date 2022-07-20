@@ -30,6 +30,8 @@ class Asesi extends Model
 
     function getBirthDateAttribute($value)
     {
-        return Carbon::createFromFormat('Y-m-d', $value)->format('d M Y'); 
+        if($value != null ) {
+            return Carbon::createFromFormat('Y-m-d', $value)->format('d M Y'); 
+        }
     }
 }

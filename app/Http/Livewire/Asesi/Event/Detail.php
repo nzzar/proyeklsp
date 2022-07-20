@@ -41,31 +41,28 @@ class Detail extends Component
         $this->eventId = $id;
 
 
+        try {
 
-        $skema = SkemaAsesi::where([
-            'event_id' => $id,
-            'asesi_id' => Auth::user()->asesi->id,
-        ])
-            ->first();
-        
-        $now = Carbon::now();
-        $startDate = Carbon::createFromFormat('d/m/Y h:i', $skema->event->start_date);
-        
-        if($now->gte($startDate)) {
-            $this->validAsesmen = true;
-        } else {
-            $this->validAsesmen = false;
+            $skema = SkemaAsesi::where([
+                'event_id' => $id,
+                'asesi_id' => Auth::user()->asesi->id
+            ])
+                ->first();
             
+            if ($skema) {
+                $this->tujuan = $skema->tujuan_asesmen;
+                $now = Carbon::now();
+                $startDate = Carbon::createFromFormat('d/m/Y h:i', $skema->event->start_date);
+
+                if ($now->gte($startDate)) {
+                    $this->validAsesmen = true;
+                } else {
+                    $this->validAsesmen = false;
+                }
+            }
+        } catch (Exception $err) {
+            abort('500');
         }
-
-
-
-
-            
-        if($skema) {
-            $this->tujuan = $skema->tujuan_asesmen;
-        }
-            
     }
 
 

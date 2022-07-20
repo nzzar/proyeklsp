@@ -24,6 +24,6 @@ class Element extends Model
     }
 
     public function asesi() {
-        return $this->hasOne(AsesmentMandiri::class);
+        return $this->hasOne(AsesmentMandiri::class, 'element_id');
     }
 }

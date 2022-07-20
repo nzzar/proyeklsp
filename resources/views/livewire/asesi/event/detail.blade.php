@@ -48,11 +48,11 @@ Registrasi Skema
                         </div>
                     </div>
                     @endif
-                    @if($event->asesi->status == 'Diterima')
+                    @if(($event->asesi->status ?? null) == 'Diterima')
                         <div class="text-danger">* Lakukan asesmen mandiri pada tanggal {{$event->start_date}}</div>
                     @endif
                 </div>
-                @if($event->asesi->status == 'Diterima')
+                @if(($event->asesi->status ?? null) == 'Diterima')
                 <div class="card-footer">
                     @if($validAsesmen)
                     <a href="{{url('/event/'.$event->asesi->id.'/asesmen-mandiri')}}" class="btn btn-sm btn-primary">Asessment Mandiri</a >
@@ -260,7 +260,6 @@ Registrasi Skema
                                             :
                                         </td>
                                         <td>
-                                            {{$tujuan}}
                                             <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Sertifikasi')" @endif >
                                                 <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck1" @if($tujuan=='Sertifikasi' ) checked @endif @if($event->asesi) disabled @endif>
                                                 <label class="custom-control-label" for="customCheck1">Sertifikasi</label>
@@ -383,7 +382,7 @@ Registrasi Skema
                                             <div>
                                                 Berdasarkan Ketentuan persyaratan dasar makan pemohon:
                                                 <br>
-                                                <span class="font-weight-bold">@if($event->asesi->status == 'Tidak Diterima') <del>Diterima</del> @else Diterima @endif / @if($event->asesi->status == 'Diterima') <del>Tidak Diterima</del> @else Tidak Diterima @endif  </span>
+                                                <span class="font-weight-bold">@if(($event->asesi->status ?? null) == 'Tidak Diterima') <del>Diterima</del> @else Diterima @endif / @if(($event->asesi->status ?? null) == 'Diterima') <del>Tidak Diterima</del> @else Tidak Diterima @endif  </span>
                                                 sebagai perserta sertifikasi
                                             </div>
                                         </td>
@@ -421,7 +420,7 @@ Registrasi Skema
                                         <td>Tanggal</td>
                                         <td>{{\Carbon\Carbon::now()->format('d M y')}}</td>
                                     </tr>
-                                    @if($event->asesi->admin)
+                                    @if($event->asesi->admin ?? null)
                                     <tr>
                                         <td colspan="2" class="font-weight-bold">Admin LSP:</td>
                                     </tr>

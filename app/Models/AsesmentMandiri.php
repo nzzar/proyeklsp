@@ -17,6 +17,11 @@ class AsesmentMandiri extends Model
         'event_id' => 'string',
         'skema_id' => 'string',
         'unit_kompetensi_id' => 'string',
+        'persyaratan_asesi_id' => 'string',
         'element_id' => 'string',
     ];
+
+    public function syarat() {
+        return $this->belongsTo(PersyaratanAsesi::class, 'persyaratan_asesi_id');
+    }
 }

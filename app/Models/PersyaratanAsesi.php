@@ -10,6 +10,7 @@ class PersyaratanAsesi extends Model
     use HasFactory;
 
     protected $table = 'persyaratan_asesi';
+    protected $keyType = 'string';
     protected $casts = [
         'id' => 'string',
         'skema_id' => 'string',
