@@ -1,0 +1,15 @@
+@extends('layout')
+
+@section('page-title')
+Asesi Detail
+@endsection
+
+@section('main-content')
+    @switch(Auth::User()->role)
+        @case('admin')
+            @livewire('event.asesi-detail', ['id' => $id])
+            @break
+        @default
+            @livewire('asesi.event-detail.detail', ['id' => $id])
+    @endswitch
+@endsection

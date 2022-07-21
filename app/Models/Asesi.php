@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,5 +26,12 @@ class Asesi extends Model
 
     public function prodi() {
         return $this->belongsTo(Prodi::class);
+    }
+
+    function getBirthDateAttribute($value)
+    {
+        if($value != null ) {
+            return Carbon::createFromFormat('Y-m-d', $value)->format('d M Y'); 
+        }
     }
 }

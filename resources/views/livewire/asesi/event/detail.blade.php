@@ -36,19 +36,32 @@ Registrasi Skema
                         <label for="staticEmail" class="col-sm-2 col-form-label">Status Registrasi</label>
                         <div class="col-sm-10">
                             @switch($event->asesi->status)
-                                    @case('Menunggu Keputusan')
-                                        <span class="badge badge-secondary">{{$event->asesi->status}}</span>
-                                    @break
-                                    @case('Diterima')
-                                        <span class="badge badge-success">{{$event->asesi->status}}</span>
-                                    @break
-                                    @default
-                                        <span class="badge badge-danger">{{$event->asesi->status}}</span>
-                                @endswitch
+                            @case('Menunggu Keputusan')
+                            <span class="badge badge-secondary">{{$event->asesi->status}}</span>
+                            @break
+                            @case('Diterima')
+                            <span class="badge badge-success">{{$event->asesi->status}}</span>
+                            @break
+                            @default
+                            <span class="badge badge-danger">{{$event->asesi->status}}</span>
+                            @endswitch
                         </div>
                     </div>
                     @endif
+                    @if(($event->asesi->status ?? null) == 'Diterima')
+                        <div class="text-danger">* Lakukan asesmen mandiri pada tanggal {{$event->start_date}}</div>
+                    @endif
                 </div>
+                @if(($event->asesi->status ?? null) == 'Diterima')
+                <div class="card-footer">
+                    @if($validAsesmen)
+                    <a href="{{url('/event/'.$event->asesi->id.'/asesmen-mandiri')}}" class="btn btn-sm btn-primary">Asessment Mandiri</a >
+                    @else 
+                    <button class="btn btn-sm btn-primary" disabled>Asessment Mandiri</button>
+                    @endif
+                    <button class="btn btn-sm btn-primary">Feed back</button>
+                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -247,9 +260,8 @@ Registrasi Skema
                                             :
                                         </td>
                                         <td>
-                                            {{$tujuan}}
                                             <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Sertifikasi')" @endif >
-                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck1" @if($tujuan == 'Sertifikasi') checked @endif  @if($event->asesi) disabled @endif>
+                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck1" @if($tujuan=='Sertifikasi' ) checked @endif @if($event->asesi) disabled @endif>
                                                 <label class="custom-control-label" for="customCheck1">Sertifikasi</label>
                                             </div>
                                         </td>
@@ -259,7 +271,7 @@ Registrasi Skema
                                         </td>
                                         <td>
                                             <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Sertifikasi Ulang')" @endif >
-                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck2" @if($tujuan == 'Sertifikasi Ulang') checked @endif @if($event->asesi) disabled @endif>
+                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck2" @if($tujuan=='Sertifikasi Ulang' ) checked @endif @if($event->asesi) disabled @endif>
                                                 <label class="custom-control-label" for="customCheck2">Sertifikasi Ulang</label>
                                             </div>
                                         </td>
@@ -268,8 +280,8 @@ Registrasi Skema
                                         <td>
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Pengakuan Kompetensi Terkini (PKT)')" @endif   >
-                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck3" @if($tujuan == 'Pengakuan Kompetensi Terkini (PKT)') checked @endif @if($event->asesi) disabled @endif>
+                                            <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Pengakuan Kompetensi Terkini (PKT)')" @endif >
+                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck3" @if($tujuan=='Pengakuan Kompetensi Terkini (PKT)' ) checked @endif @if($event->asesi) disabled @endif>
                                                 <label class="custom-control-label" for="customCheck3">Pengakuan Kompetensi Terkini (PKT)</label>
                                             </div>
                                         </td>
@@ -278,8 +290,8 @@ Registrasi Skema
                                         <td>
                                         </td>
                                         <td>
-                                            <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Rekognisi Pembelaran Lampau')" @endif  >
-                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck4" @if($tujuan == 'Rekognisi Pembelaran Lampau') checked @endif @if($event->asesi) disabled @endif>
+                                            <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Rekognisi Pembelaran Lampau')" @endif >
+                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck4" @if($tujuan=='Rekognisi Pembelaran Lampau' ) checked @endif @if($event->asesi) disabled @endif>
                                                 <label class="custom-control-label" for="customCheck4">Rekognisi Pembelaran Lampau</label>
                                             </div>
                                         </td>
@@ -289,7 +301,7 @@ Registrasi Skema
                                         </td>
                                         <td>
                                             <div class="custom-control custom-radio" @if(!$event->asesi) wire:click="$set('tujuan', 'Lain nya')" @endif >
-                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck5" @if($tujuan == 'Lain nya') checked @endif @if($event->asesi) disabled @endif>
+                                                <input type="radio" name="tujuan_asesment" class="custom-control-input" id="customCheck5" @if($tujuan=='Lain nya' ) checked @endif @if($event->asesi) disabled @endif>
                                                 <label class="custom-control-label" for="customCheck5">Lain nya</label>
                                             </div>
                                         </td>
@@ -331,7 +343,7 @@ Registrasi Skema
                                             <span class="badge badge-success">{{$syarat->asesi->status}}</span>
                                             @break
                                             @default
-                                            <span class="badge badge-warning">{{$syarat->asesi->status}}</span>
+                                            <span class="badge badge-danger">{{$syarat->asesi->status}}</span>
                                             @endswitch
 
                                             @else
@@ -363,14 +375,14 @@ Registrasi Skema
                             <table class="table table-bordered mt-3">
                                 <tbody>
                                     <tr>
-                                        <td rowspan="4">
+                                        <td rowspan="9">
                                             <div class="font-weight-bold">
                                                 Rekomendasi (diisi oleh LSP)
                                             </div>
                                             <div>
                                                 Berdasarkan Ketentuan persyaratan dasar makan pemohon:
                                                 <br>
-                                                <span class="font-weight-bold">Diterima / Tidak Diterima </span>
+                                                <span class="font-weight-bold">@if(($event->asesi->status ?? null) == 'Tidak Diterima') <del>Diterima</del> @else Diterima @endif / @if(($event->asesi->status ?? null) == 'Diterima') <del>Tidak Diterima</del> @else Tidak Diterima @endif  </span>
                                                 sebagai perserta sertifikasi
                                             </div>
                                         </td>
@@ -386,13 +398,13 @@ Registrasi Skema
                                             <div class="d-flex">
                                                 <div style="width: 200px; height: 150px;">
                                                     @if($signature)
-                                                        @if(is_string($signature))
-                                                            <img src="{{Storage::url($signature)}}" alt="" class="rounded w-100 mb-2">
-                                                        @else
-                                                            <img src="{{$signature->temporaryUrl()}}" alt="" class="rounded w-100 mb-2">
-                                                        @endif
+                                                    @if(is_string($signature))
+                                                    <img src="{{Storage::url($signature)}}" alt="" class="rounded w-100 mb-2">
                                                     @else
-                                                        <div wire:ignore class="w-100 h-100" id="signature-pad"></div>
+                                                    <img src="{{$signature->temporaryUrl()}}" alt="" class="rounded w-100 mb-2">
+                                                    @endif
+                                                    @else
+                                                    <div wire:ignore class="w-100 h-100" id="signature-pad"></div>
                                                     @endif
                                                 </div>
                                                 @if(!$signature)
@@ -408,6 +420,35 @@ Registrasi Skema
                                         <td>Tanggal</td>
                                         <td>{{\Carbon\Carbon::now()->format('d M y')}}</td>
                                     </tr>
+                                    @if($event->asesi->admin ?? null)
+                                    <tr>
+                                        <td colspan="2" class="font-weight-bold">Admin LSP:</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nama</td>
+                                        <td>{{$event->asesi->admin->name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>No. Reg</td>
+                                        <td>{{$event->asesi->admin->no_reg}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanda Tangan</td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div style="width: 200px; height: 150px;">
+                                                    @if($event->asesi->ttd_asesi)
+                                                    <img src="{{Storage::url($event->asesi->admin->signature)}}" alt="" class="rounded w-100 mb-2">
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal</td>
+                                        <td>{{$event->asesi->tgl_ttd_admin}}</td>
+                                    </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -416,7 +457,7 @@ Registrasi Skema
                     <div class="text-danger">{{$errorMessage}}</div>
                     @if($validRegister)
                     <button class="btn btn-primary btn-block" id="btn-register" wire:click="registerSkema()">Register Skema</button>
-                    @else 
+                    @else
                     <button class="btn btn-primary btn-block" disabled>Register Skema</button>
                     @endif
                     @endif

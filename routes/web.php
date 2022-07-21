@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AsesiController;
 use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\AuthController;
@@ -33,8 +34,11 @@ Route::post('/signup', [AuthController::class, 'register']);
 Route::get('/logout', [AuthController::class, 'signOut']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('role:all');
 
-Route::group(['middleware' => 'role:admin'], function () {
 
+Route::group(['middleware' => 'role:admin'], function () {
+    
+    Route::get('/admin/profile', [AdminController::class, 'index']);
+    
     Route::group(['prefix' => '/asesor'], function () {
         Route::get('/', [AsesorController::class, 'index']);
         Route::get('/create', [AsesorController::class, 'create']);
@@ -50,7 +54,12 @@ Route::group(['middleware' => 'role:admin'], function () {
 Route::group(['prefix' => '/event', 'middleware' => 'role:all'], function() {
     Route::get('/', [EventController::class, 'index']);
     Route::get('/{id}', [EventController::class, 'detail']);
+    Route::get('/{id}/asesi', [EventController::class, 'skemaAsesi']);
+});
+
+Route::group(['prefix' => '/event', 'middleware' => 'role:asesi'], function() {
     Route::get('/{id}/register', [EventController::class, 'registerEvent']);
+    Route::get('/{id}/asesmen-mandiri', [EventController::class, 'asesmentMandiri']);
 });
 
 Route::group(['prefix' => '/skema', 'middleware' => 'role:all'], function () {

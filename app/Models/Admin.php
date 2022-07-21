@@ -5,15 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PersyaratanAsesi extends Model
+class Admin extends Model
 {
     use HasFactory;
 
-    protected $table = 'persyaratan_asesi';
-    protected $keyType = 'string';
+    protected $table = 'admin';
+    
     protected $casts = [
         'id' => 'string',
-        'skema_id' => 'string',
-        'event_id' => 'string'
+        'user_id' => 'string',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

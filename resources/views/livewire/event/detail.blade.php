@@ -128,6 +128,14 @@
         },
     })
 
+    $('#end-date').daterangepicker({
+        timePicker: true,
+        singleDatePicker: true,
+        locale: {
+            format: 'DD/MM/YYYY hh:mm'
+        },
+    })
+
     function proposeEvent() {
         Swal.fire({
             icon: 'question',

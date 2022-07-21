@@ -22,4 +22,8 @@ class Element extends Model
     public function unjukKerja() {
         return $this->hasMany(UnjukKerja::class);
     }
+
+    public function asesi() {
+        return $this->hasOne(AsesmentMandiri::class, 'element_id');
+    }
 }

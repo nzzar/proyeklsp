@@ -58,14 +58,16 @@ Event Sertifikasi Management
     //Date picker
     $('#start-date').daterangepicker({
         singleDatePicker: true,
+        timePicker: true,
         locale: {
-            format: 'DD/MM/YYYY'
+            format: 'DD/MM/YYYY hh:mm'
         },
     })
     $('#end-date').daterangepicker({
         singleDatePicker: true,
+        timePicker: true,
         locale: {
-            format: 'DD/MM/YYYY'
+            format: 'DD/MM/YYYY hh:mm'
         },
     })
 
