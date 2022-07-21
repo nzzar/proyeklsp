@@ -99,7 +99,7 @@
     window.livewire.on('delete-set-persyaratan-success', name => {
         Swal.fire({
             icon: 'question',
-            title: `Yakin ingin menghapus persyaratan ${name}`,
+            title: `Yakin ingin menghapus Persyaratan ${name}?`,
             showCancelButton: true,
             cancelButtonText: 'Batal',
             confirmButtonText: 'Hapus',
@@ -121,7 +121,7 @@
     window.livewire.on('delete-set-unit-id-success', name => {
         Swal.fire({
             icon: 'question',
-            title: `Yakin ingin menghapus unit ${name}`,
+            title: `Yakin ingin menghapus Unit Kompetensi ${name}?`,
             showCancelButton: true,
             cancelButtonText: 'Batal',
             confirmButtonText: 'Hapus',

@@ -85,7 +85,7 @@ Data Prodi
         console.log(name)
         Swal.fire({
             icon: 'question',
-            title: `Yakin ingin menghapus prodi ${name}`,
+            title: `Yakin ingin menghapus prodi ${name}?`,
             showCancelButton: true,
             cancelButtonText: 'TidaK',
             confirmButtonText: 'Ya',
@@ -108,7 +108,7 @@ Data Prodi
     window.livewire.on('successDeletedProdi', () => {
         Toast.fire({
             icon: 'success',
-            title: `Data prodi berhasil dihapus`
+            title: `Berhasil menghapus prodi`
         })
 
     })

@@ -159,7 +159,7 @@ Event Sertifikasi Management
         console.log(name)
         Swal.fire({
             icon: 'question',
-            html: `Yakin ingin menghapus <strong> ${data.nomor} | ${data.name} </strong> ?`,
+            html: `Yakin ingin menghapus <strong> ${data.nomor} | ${data.name} </strong>?`,
             showCancelButton: true,
             cancelButtonText: 'TidaK',
             confirmButtonText: 'Ya',
@@ -183,7 +183,7 @@ Event Sertifikasi Management
     window.livewire.on('event-success-delete-event', () => {
         Toast.fire({
             icon: 'success',
-            title: `Data Event berhasil dihapus`
+            title: `Berhasil menghapus event`
         })
 
     })

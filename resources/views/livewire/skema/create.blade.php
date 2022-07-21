@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content p-2 p-md-3">
             <div class="modal-header">
-                <h4 class="modal-title">Buat Skema</h4>
+                <h4 class="modal-title">Tambah Skema</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>

@@ -2,7 +2,7 @@
     <div class="row mb-2">
         @userRole(admin)
         <div class="col">
-            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#create-skema-modal"> + Buat Skema</button>
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#create-skema-modal"> + Tambah Skema</button>
         </div>
         @endUserRole
         <div class="col-12 col-md-3">

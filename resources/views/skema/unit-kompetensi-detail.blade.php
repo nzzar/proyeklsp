@@ -71,7 +71,7 @@
         if(isDelete) {
             Swal.fire({
             icon: 'question',
-            title: `Yakin ingin menghapus element ${data.name} ?`,
+            title: `Yakin ingin menghapus Element ${data.name}?`,
             showCancelButton: true,
             cancelButtonText: 'Batal',
             confirmButtonText: 'Hapus',
@@ -88,7 +88,7 @@
         if(isDelete) {
             Swal.fire({
             icon: 'question',
-            title: `Yakin ingin menghapus unjuk kerja`,
+            title: `Yakin ingin menghapus Unjuk Kerja ${data.name}?`,
             showCancelButton: true,
             cancelButtonText: 'Batal',
             confirmButtonText: 'Hapus',

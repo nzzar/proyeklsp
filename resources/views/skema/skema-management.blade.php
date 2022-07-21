@@ -108,7 +108,7 @@ Data Skema
         window.livewire.on('successSetSkemaDeleted', name => {
             Swal.fire({
                 icon: 'question',
-                title: `Yakin ingin menghapus Skema ${name}`,
+                title: `Yakin ingin menghapus Skema ${name}?`,
                 showCancelButton: true,
                 cancelButtonText: 'TidaK',
                 confirmButtonText: 'Ya',
@@ -131,7 +131,7 @@ Data Skema
         window.livewire.on('successDeletedSkema', () => {
             Toast.fire({
                 icon: 'success',
-                title: `Data skema berhasil dihapus`
+                title: `Berhasil menghapus skema`
             })
 
         })
