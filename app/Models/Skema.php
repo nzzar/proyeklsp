@@ -25,4 +25,8 @@ class Skema extends Model
         return $this->hasMany(PersyaratanSkema::class, 'skema_id', 'id');
     }
 
+    public function element() {
+        return $this->hasManyThrough(Element::class, UnitKompetensi::class, 'skema_id', 'unit_kompetensi_id', 'id');
+    }
+
 }

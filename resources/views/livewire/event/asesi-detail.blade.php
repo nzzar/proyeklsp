@@ -75,9 +75,9 @@
                 <div class="card-footer">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1"><i class="fas fa-list-ul"></i> FR.APL.01</button>
+                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="$set('tabActive','form')"><i class="fas fa-list-ul"></i> FR.APL.01</button>
                             @if($skemaAsesi->status == 'Diterima')
-                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1"><i class="fas fa-tasks"></i>Asessment mandiri</button>
+                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="$set('tabActive','asesmen')" ><i class="fas fa-tasks"></i>Asessment mandiri</button>
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1"><i class="fas fa-tasks"></i> Checklist observasi</button>
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1"><i class="far fa-comment-alt"></i> Feed back</button>
                             @endif
@@ -99,7 +99,9 @@
         </div>
     </div>
     @if($tabActive == 'form')
-    @livewire('event.asesi.form', ['id' => $skemaAsesiId])
+        @livewire('event.asesi.form', ['id' => $skemaAsesiId])
+    @elseif($tabActive == 'asesmen')
+        @livewire('event.asesi.asesmen-mandiri', ['id' => $skemaAsesiId])
     @endif
 </div>
 

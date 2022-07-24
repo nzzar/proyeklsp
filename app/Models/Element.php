@@ -16,7 +16,7 @@ class Element extends Model
 
     protected $cast  = [
         'id' => 'string',
-        'skema_id' => 'string'
+        'unit_kompetensi_id' => 'string'
     ];
 
     public function unjukKerja() {
@@ -26,4 +26,5 @@ class Element extends Model
     public function asesi() {
         return $this->hasOne(AsesmentMandiri::class, 'element_id');
     }
+
 }

@@ -12,6 +12,9 @@ class SkemaAsesi extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $keyType = 'string';
+
+
     protected $casts = [
         'id' => 'string',
         'event_id' => 'string',
@@ -47,6 +50,10 @@ class SkemaAsesi extends Model
 
     public function admin() {
         return $this->belongsTo(Admin::class);
+    }
+
+    public function asesmentMandiri() {
+    return $this->hasOne(AsesmentMandiriResult::class);
     }
 
 }

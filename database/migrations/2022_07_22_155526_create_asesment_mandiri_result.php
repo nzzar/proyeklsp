@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
+class CreateAsesmentMandiriResult extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('asesment_mandiri_result', function (Blueprint $table) {
+            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('skema_asesi_id')->index();
+            $table->uuid('asesor_id')->index()->nullable();
+            $table->date('tgl_ttd_asesi');
+            $table->date('tgl_ttd_asesor')->nullable();
+            $table->boolean('continue')->nullable();
+            $table->timestamps();
+
+            $table->foreign('skema_asesi_id')->references('id')->on('skema_asesis');
+            $table->foreign('asesor_id')->references('id')->on('asesors');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('asesment_mandiri_result');
+    }
+}

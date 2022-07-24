@@ -6,7 +6,7 @@
   </a>
 
   <!-- Sidebar -->
-  <div class="sidebar d-flex flex-column">
+  <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
@@ -34,8 +34,8 @@
     <!-- SidebarSearch Form -->
 
     <!-- Sidebar Menu -->
-    <nav class="mt-2 flex-fill">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <nav class="mt-2">
+      <ul class="nav nav-sidebar" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         @userRole(admin)
