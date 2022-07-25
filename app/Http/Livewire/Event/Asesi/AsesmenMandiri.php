@@ -122,6 +122,8 @@ class AsesmenMandiri extends Component
 
             DB::commit();
 
+            $this->emit('refress-parent');
+
             $this->dispatchBrowserEvent('swal', [
                 'title' => 'Success!',
                 'text' => 'Berhasil menyimpan rekomendasi',
