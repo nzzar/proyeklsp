@@ -19,6 +19,7 @@ class CreateSkemaAsesis extends Migration
             $table->uuid('event_id')->index();
             $table->uuid('asesi_id')->index();
             $table->uuid('asesor_id')->index()->nullable();
+            $table->string('ttd_asesor')->nullable();
             $table->string('tujuan_asesmen');
             $table->string('ttd_asesi');
             $table->date('tgl_ttd_asesi');

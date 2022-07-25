@@ -256,7 +256,7 @@
                                             </td>
                                             <td>
                                                 <button class="btn btn-sm mb-1 btn-info" wire:click="$set('view_file', '{{$syarat->asesi->file}}')" data-toggle="modal" data-target="#view-file-modal">Lihat File</button>
-                                                @if(($syarat->asesi->status ?? null) == 'Sedang diperiksa' )
+                                                @if(($syarat->asesi->status ?? null) == 'Sedang diperiksa' && Auth::user()->role == 'admin')
                                                 <button class="btn btn-success btn-sm mb-1" onclick="approvePersyaratan('{{$syarat->asesi->id}}')">Memenuhi Syarat</button>
                                                 <button class="btn btn-danger btn-sm mb-1" onclick="rejectPersyaratan('{{$syarat->asesi->id}}')">TIdak Memenuhi Syarat</button>
                                                 @endif
@@ -362,34 +362,33 @@
             </div>
         </div>
     </div>
+    @section('script-1')
+    <script>
+        function approvePersyaratan($id) {
+            Swal.fire({
+                icon: 'question',
+                title: 'Sudah memenuhi syarat ?',
+                showCancelButton: true,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Livewire.emit('approvePersyaratan', $id)
+                }
+            })
+        
+        }
+        function rejectPersyaratan($id) {
+            Swal.fire({
+                icon: 'question',
+                title: 'Tidak memenuhi syarat ?',
+                showCancelButton: true,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Livewire.emit('rejectPersyaratan', $id)
+                }
+            })
+        }
+    </script>
+    @stop
 </div>
-
-@section('script-1')
-<script>
-    function approvePersyaratan($id) {
-        Swal.fire({
-            icon: 'question',
-            title: 'Sudah memenuhi syarat ?',
-            showCancelButton: true,
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                Livewire.emit('approvePersyaratan', $id)
-            }
-        })
-    
-    }
-    function rejectPersyaratan($id) {
-        Swal.fire({
-            icon: 'question',
-            title: 'Tidak memenuhi syarat ?',
-            showCancelButton: true,
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                Livewire.emit('rejectPersyaratan', $id)
-            }
-        })
-    }
-</script>
-@stop

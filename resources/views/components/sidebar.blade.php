@@ -48,7 +48,7 @@
           </a>
         </li>
         @endUserRole
-        @if(in_array(Auth::user()->role, ['admin', 'ms']) || isValidAsesi())
+        @if(in_array(Auth::user()->role, ['admin', 'ms', 'asesor']) || isValidAsesi())
         <li class="nav-item">
           <a href="{{url('/event')}}" class="nav-link">
             <i class="nav-icon fas fa-calendar"></i>

@@ -16,9 +16,7 @@
                                 <th>Nama Lengkap</th>
                                 <th>Prodi</th>
                                 <th>Status</th>
-                                @if(Auth::user()->role == 'admin')
                                 <th>Action</th>
-                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -42,9 +40,7 @@
                                     <span class="badge badge-danger">{{$skema->status}}</span>
                                     @endswitch
                                 </td>
-                                @if(Auth::user()->role == 'admin')
                                 <td><a href="{{url('/event/'.$skema->id.'/asesi')}}" class="btn btn-info btn-sm"><i class="fas fa-file-alt"></i> Lihat Berkas</a></td>
-                                @endif
                             </tr>
                             @empty
                             <tr>

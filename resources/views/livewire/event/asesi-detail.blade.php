@@ -56,6 +56,15 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-4 col-md-2">
+                            Asesor
+                        </div>
+                        <div class="col">
+                            : {{$skemaAsesi->asesor->name ?? '-'}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-4 col-md-2">
                             Rekomendasi
                         </div>
                         <div class="col d-flex">
@@ -75,9 +84,9 @@
                 <div class="card-footer">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="$set('tabActive','form')"><i class="fas fa-list-ul"></i> FR.APL.01</button>
+                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('form')"><i class="fas fa-list-ul"></i> FR.APL.01</button>
                             @if($skemaAsesi->status == 'Diterima')
-                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="$set('tabActive','asesmen')" ><i class="fas fa-tasks"></i>Asessment mandiri</button>
+                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('asesmen')"><i class="fas fa-tasks"></i>Asessment mandiri</button>
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1"><i class="fas fa-tasks"></i> Checklist observasi</button>
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1"><i class="far fa-comment-alt"></i> Feed back</button>
                             @endif
@@ -87,7 +96,7 @@
                             <span class="font-wight-bold">Rekomendasi :</span>
                             @if($validPersyaratan)
                             <button class="btn btn-sm btn-success ml-1 mr-1 mb-2 mb-md-1" onclick="approveAsesi('{{$skemaAsesiId}}')"><i class="fas fa-check"></i> Diterima</button>
-                            @else 
+                            @else
                             <button class="btn btn-sm btn-success ml-1 mr-1 mb-2 mb-md-1" disabled data-toggle="tooltip" data-placement="top" title="Berkas belum memenuhi syarat"><i class="fas fa-check"></i> Diterima</button>
                             @endif
                             <button class="btn btn-sm btn-danger mr-1 mb-2 mb-md-1" onclick="rejectAsesi('{{$skemaAsesiId}}')"><i class="fas fa-times"></i> Tidak Diterima</button>
@@ -99,13 +108,16 @@
         </div>
     </div>
     @if($tabActive == 'form')
-        @livewire('event.asesi.form', ['id' => $skemaAsesiId])
+    @livewire('event.asesi.form', ['id' => $skemaAsesiId])
     @elseif($tabActive == 'asesmen')
-        @livewire('event.asesi.asesmen-mandiri', ['id' => $skemaAsesiId])
+    @livewire('event.asesi.asesmen-mandiri', ['id' => $skemaAsesiId])
     @endif
 </div>
 
 @section('script')
+<script src="{{asset('/assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<script src="{{asset('/assets/plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js')}}"></script>
+<script src="{{asset('/assets/plugins/signature/js/jquery.signature.min.js')}}"></script>
 <script>
     window.addEventListener('swal', function(e) {
         Swal.fire(e.detail);
@@ -122,7 +134,7 @@
                 Livewire.emit('approveAsesi', $id)
             }
         })
-    
+
     }
 
     function rejectAsesi($id) {
@@ -136,7 +148,13 @@
                 Livewire.emit('rejectAsesi', $id)
             }
         })
-    
+
     }
+
+    
+
+    // window.livewire.on('tab-asesmen', () => {
+    //     $('#signature-pad').signature()
+    // })
 </script>
 @stop

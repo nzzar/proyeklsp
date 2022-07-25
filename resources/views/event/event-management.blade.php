@@ -18,6 +18,9 @@ Event Sertifikasi Management
                 @case('ms')
                     @livewire('ms.event.index')
                     @break
+                @case('asesor')
+                    @livewire('asesor.event.index')
+                    @break
                 @default
                     @livewire('asesi.event.index')
             @endswitch

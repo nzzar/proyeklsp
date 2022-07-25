@@ -123,5 +123,10 @@ class AsesiDetail extends Component
         $this->emit('refress');
     }
 
+    public function changeTab($tab) {
+        $this->tabActive = $tab;
+        $this->emit('tab-'.$this->tabActive);
+    }
+
     public function refress(){}
 }

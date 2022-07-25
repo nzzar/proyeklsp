@@ -9,6 +9,9 @@ Asesi Detail
         @case('admin')
             @livewire('event.asesi-detail', ['id' => $id])
             @break
+        @case('asesor')
+            @livewire('event.asesi-detail', ['id' => $id])
+            @break
         @default
             @livewire('asesi.event-detail.detail', ['id' => $id])
     @endswitch

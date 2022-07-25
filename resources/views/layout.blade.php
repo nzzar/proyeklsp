@@ -139,6 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </script>
   @yield('script')
   @yield('script-1')
+  @yield('script-2')
 </body>
 
 </html>

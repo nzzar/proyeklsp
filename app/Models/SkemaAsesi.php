@@ -53,7 +53,13 @@ class SkemaAsesi extends Model
     }
 
     public function asesmentMandiri() {
-    return $this->hasOne(AsesmentMandiriResult::class);
+        return $this->hasOne(AsesmentMandiriResult::class);
     }
+
+    public function asesor() {
+        return $this->belongsTo(Asesor::class);
+    }
+    
+    
 
 }
