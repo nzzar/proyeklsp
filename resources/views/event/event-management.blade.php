@@ -43,7 +43,7 @@ Event Sertifikasi Management
 
 <script>
     $(document).ready(function() {
-        let now = moment().format('DD/MM/YYYY')
+        let now = moment().format('DD/MM/YYYY hh:mm')
         console.log(now)
         Livewire.emit('event-set-start-date', now)
         Livewire.emit('event-set-end-date', now)
@@ -77,13 +77,13 @@ Event Sertifikasi Management
     $('#update-start-date').daterangepicker({
         singleDatePicker: true,
         locale: {
-            format: 'DD/MM/YYYY'
+            format: 'DD/MM/YYYY hh:mm A'
         },
     })
     $('#update-end-date').daterangepicker({
         singleDatePicker: true,
         locale: {
-            format: 'DD/MM/YYYY'
+            format: 'DD/MM/YYYY hh:mm A'
         },
     })
 
