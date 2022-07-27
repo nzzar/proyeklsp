@@ -72,10 +72,13 @@ class Profile extends Component
                 }
             }
 
-            $file_name = 'signature_' . time() . '_' . $admin->id . '.' . $this->signature->getClientOriginalExtension();
-            $file_path = $this->signature->storeAs("public/admin/" . $admin->id .  "/", $file_name);
+            if(!is_string($this->signature)) {
+                $file_name = 'signature_' . time() . '_' . $admin->id . '.' . $this->signature->getClientOriginalExtension();
+                $file_path = $this->signature->storeAs("public/admin/" . $admin->id .  "/", $file_name);
+                $admin->signature = $file_path;
+            }
+
             
-            $admin->signature = $file_path;
             $admin->name = $this->name;
             $admin->no_reg = $this->reg;
             $admin->save();

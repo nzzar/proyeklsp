@@ -19,4 +19,13 @@ class UnjukKerja extends Model
         'id' => 'string',
         'element_id' => 'string'
     ];
+
+    public function asesi() {
+        return $this->hasOne(CeklisObservasi::class);
+    }
+
+    public function element() {
+        return $this->belongsTo(Element::class, 'element_id');
+    }
+
 }

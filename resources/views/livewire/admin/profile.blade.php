@@ -50,9 +50,10 @@ Admin | Profile
                                 </div>
                                 @endif
                             </div>
-                            @if(!$errorMessage) 
-                            <button class="btn btn-primary btn-block" wire:click="save()">Simpan</button>
+                            @if($errorMessage)
+                                <div class="text-danger">{{$errorMessage}}</div> 
                             @endif
+                            <button class="btn btn-primary btn-block" wire:click="save()" @if($errorMessage)  disabled @endif>Simpan</button>
                         </div>
                     </div>
                 </div>
@@ -78,6 +79,10 @@ Admin | Profile
             $('#signature-pad').signature('clear')
         })
 
+    })
+
+    $('#test').click(function() {
+        console.log('test');
     })
 
     $('#save-signature').click(async function() {

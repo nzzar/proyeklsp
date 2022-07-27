@@ -90,7 +90,7 @@
                             @endif
 
                             @if($skemaAsesi->asesmentMandiri->continue)
-                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1"><i class="fas fa-tasks"></i> Checklist observasi</button>
+                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('observasi')"><i class="fas fa-tasks"></i> Checklist observasi</button>
                             @endif
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1"><i class="far fa-comment-alt"></i> Feed back</button>
                         </div>
@@ -114,6 +114,8 @@
     @livewire('event.asesi.form', ['id' => $skemaAsesiId])
     @elseif($tabActive == 'asesmen')
     @livewire('event.asesi.asesmen-mandiri', ['id' => $skemaAsesiId])
+    @elseif($tabActive == 'observasi')
+    @livewire('asesor.event.asesi.observasi', ['id' => $skemaAsesiId])
     @endif
 </div>
 

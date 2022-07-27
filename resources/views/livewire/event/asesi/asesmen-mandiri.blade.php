@@ -280,7 +280,7 @@
                                     <span>Tanda Tangan Asesi</span>
                                 </div>
                                 <div style="width: 200px; height: 150px;">
-                                    <img src="{{Storage::url($skemaAsesi->ttd_asesi)}}" alt="" srcset="">
+                                    <img src="{{Storage::url($skemaAsesi->ttd_asesi)}}" alt="" srcset="" class="h-100">
                                 </div>
                                 <div>Tanggal: {{$skemaAsesi->asesmentMandiri->tgl_ttd_asesi ?? '-'}}</div>
                             </div>
