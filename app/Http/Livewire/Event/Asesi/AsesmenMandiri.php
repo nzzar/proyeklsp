@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Event\Asesi;
 
 use App\Models\AsesmentMandiri;
 use App\Models\AsesmentMandiriResult;
+use App\Models\CeklisObservasiResult;
 use App\Models\PersyaratanSkema;
 use App\Models\Skema;
 use App\Models\SkemaAsesi;
@@ -119,6 +120,23 @@ class AsesmenMandiri extends Component
             $asesmenResult->continue = $this->continue;
             $asesmenResult->tgl_ttd_asesor = Carbon::now()->format('Y-m-d');
             $asesmenResult->save();
+
+            $units = [
+                [
+                    'skema_asesi_id' => $skemaAsesi->id,
+                    'unit_kompetensi' => 'Merencanakan Aktifitas dan proses asesmen',
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesi->id,
+                    'unit_kompetensi' => 'Melaksanakan Asesmen',
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesi->id,
+                    'unit_kompetensi' => 'Memberikan kontribusi dalam validasi asesmen',
+                ],
+            ];
+            
+            CeklisObservasiResult::insert($units);
 
             DB::commit();
 

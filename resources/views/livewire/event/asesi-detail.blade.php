@@ -89,7 +89,7 @@
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('asesmen')"><i class="fas fa-tasks"></i>Asessment mandiri</button>
                             @endif
 
-                            @if($skemaAsesi->asesmentMandiri->continue)
+                            @if($skemaAsesi->asesmentMandiri->continue ?? null)
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('observasi')"><i class="fas fa-tasks"></i> Checklist observasi</button>
                             @endif
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1"><i class="far fa-comment-alt"></i> Feed back</button>
@@ -156,7 +156,6 @@
 
     }
 
-    
 
     // window.livewire.on('tab-asesmen', () => {
     //     $('#signature-pad').signature()

@@ -59,7 +59,9 @@ class SkemaAsesi extends Model
     public function asesor() {
         return $this->belongsTo(Asesor::class);
     }
-    
-    
+
+    public function ceklisObservasi() {
+        return $this->hasMany(CeklisObservasiResult::class)->orderBy('unit_kompetensi');
+    }
 
 }
