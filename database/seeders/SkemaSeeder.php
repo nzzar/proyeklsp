@@ -22,8 +22,8 @@ class SkemaSeeder extends Seeder
         $endDate = date_format(date_add(date_create($startDate), date_interval_create_from_date_string('30 days')), 'Y-m-d');
 
         $skema = new Skema();
-        $skema->name = 'Pemrograman Aplikasi Dasar';
-        $skema->nomor = 'SSK.01 TI/2018';
+        // $skema->name = 'Pemrograman Aplikasi Dasar';
+        // $skema->nomor = 'SSK.01 TI/2018';
         $skema->active = true;
         $skema->save();
         
