@@ -21,11 +21,11 @@ class DatabaseSeeder extends Seeder
         try {
             $this->call([
                 ProdiSeeder::class,
-                // SkemaSeeder::class,
+                SkemaSeeder::class,
                 PersyaratanSkemaSeeder::class,
-                // EventSeeder::class,
+                EventSeeder::class,
                 UsersSeeder::class,
-                // AssesorSeeder::class,
+                AssesorSeeder::class,
                 AsesiSeeder::class,
             ]);
 
