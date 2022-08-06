@@ -20,7 +20,7 @@ class EventSeeder extends Seeder
         
         $data = new Event();
         $data->skema_id = $skema->id;
-        $data->title = 'Pemrograman Aplikasi Dasar 1';
+        $data->title = 'Pemrograman Aplikasi Dasar';
         $data->start_date = '2022-07-01 10:00';
         $data->end_date = '2022-09-01 10:00';
         $data->status = 'Approved';
