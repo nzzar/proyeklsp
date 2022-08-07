@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
                 UsersSeeder::class,
                 AssesorSeeder::class,
                 AsesiSeeder::class,
+                // UmpanBalikSeeder::class,
             ]);
 
             DB::commit();

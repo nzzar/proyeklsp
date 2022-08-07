@@ -105,7 +105,6 @@ class Detail extends Component
                 $this->errorMessage = null;
             }
         } catch (Exception $err) {
-            dd($err);
             abort(404);
         }
 

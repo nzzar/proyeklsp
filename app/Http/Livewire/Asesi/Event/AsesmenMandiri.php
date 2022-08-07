@@ -130,7 +130,6 @@ class AsesmenMandiri extends Component
 
             $this->emit('asesment', ['type' => 'get']);
         } catch (Exception $err) {
-            dd($err);
             $this->dispatchBrowserEvent('swal', [
                 'title' => 'Error!',
                 'title' => 'Gagal mendapatkan data asesmen',

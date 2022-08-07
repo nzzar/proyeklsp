@@ -75,4 +75,5 @@ Route::group(['prefix' => '/skema', 'middleware' => 'role:all'], function () {
 Route::group(['middleware' => 'role:asesi', 'prefix' => 'asesi'], function () {
     Route::get('/profile', [AsesiController::class, 'profile']);
     Route::post('/profile', [AsesiController::class, 'profile']);
+    Route::get('/umpan-balik-asesi/{id}', [AsesiController::class, 'umpanBalik']);
 });
