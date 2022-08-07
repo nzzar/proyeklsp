@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-5">
+    <div class="col-12 col-md-5">
         <div class="card">
             <div class="card-header">
                 <h6 class="card-title">FR.IA.01 CEKLIS OBSERVASI AKTIVITAS DI TEMPAT KERJA ATAU TEMPAT KERJA SIMULASI</h6>
@@ -143,7 +143,7 @@
             </div>
         </div>
     </div>
-    <div class="col-7">
+    <div class="col-12 col-md-7">
         <div class="card">
             <div class="card-header">
                 <h6 class="card-title">FR.AK.02. FORMULIR REKAMAN ASESMEN KOMPETENSI</h6>
