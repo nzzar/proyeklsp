@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MasterDataController;
+use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\SkemaManagementController;
 use App\Http\Controllers\UserManagementController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,10 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/user-management', [UserManagementController::class, 'index']);
     Route::get('/prodi-management', [MasterDataController::class, 'prodiManagement']);
 
+});
+
+Route::group(['prefix' => '/sertifikat', 'middelware' => 'role:all'], function() {
+    Route::get('/{id}', [SertifikatController::class, 'index']);
 });
 
 Route::group(['prefix' => '/event', 'middleware' => 'role:all'], function() {

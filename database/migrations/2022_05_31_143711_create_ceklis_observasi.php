@@ -23,6 +23,7 @@ class CreateCeklisObservasi extends Migration
             $table->uuid('element_id')->index();
             $table->uuid('unjuk_kerja_id')->index();
             $table->boolean('kompeten')->default(false);
+            
             $table->timestamps();
             $table->softDeletes();
 

@@ -60,14 +60,14 @@
                         <div class="row">
                             <div class="col-12 col-md-5">
                                 <div class="form-group">
-                                    <input readonly @if(!in_array($status, ['Draft', 'Unapproved' ])) disabled @endif type="text" value="{{$startDate}}" class="form-control  @error('startDate') is-invalid @enderror" id="start-date">
+                                    <input readonly type="text" value="{{$startDate}}" class="form-control  @error('startDate') is-invalid @enderror" id="start-date">
                                     @error('startDate') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
                             <div class="col-2 text-center">Sampai</div>
                             <div class="col-12 col-md-5">
                                 <div class="form-group">
-                                    <input readonly @if(!in_array($status, ['Draft', 'Unapproved' ])) disabled @endif type="text" value="{{$endDate}}" class="form-control  @error('endDate') is-invalid @enderror" id="end-date">
+                                    <input readonly type="text" value="{{$endDate}}" class="form-control  @error('endDate') is-invalid @enderror" id="end-date">
                                     @error('endDate') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
         timePicker: true,
         singleDatePicker: true,
         locale: {
-            format: 'DD/MM/YYYY hh:mm'
+            format: 'DD/MM/YYYY HH:mm'
         },
     })
 
@@ -132,7 +132,7 @@
         timePicker: true,
         singleDatePicker: true,
         locale: {
-            format: 'DD/MM/YYYY hh:mm'
+            format: 'DD/MM/YYYY HH:mm'
         },
     })
 

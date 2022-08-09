@@ -28,12 +28,12 @@ class Event extends Model
     // getter
     function getStartDateAttribute($value)
     {
-        return Carbon::createFromTimeString($value)->format('d/m/Y h:i'); 
+        return Carbon::createFromTimeString($value)->format('d/m/Y H:i'); 
     }
 
     function getEndDateAttribute($value)
     {
-        return Carbon::createFromTimeString($value)->format('d/m/Y h:i'); 
+        return Carbon::createFromTimeString($value)->format('d/m/Y H:i'); 
     }
 
     public function skema()

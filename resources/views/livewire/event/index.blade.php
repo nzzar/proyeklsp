@@ -59,6 +59,9 @@
                     @if($data->status == 'Draft')
                     <button class="btn btn-sm btn-danger" wire:click.prevent="deleteEvent('{{$data->id}}')"> <i class="fas fa-trash-alt"></i> Delete Event</button>
                     @endif
+                    @if($data->status == 'Approved')
+                    <a class="btn btn-sm btn-info" href="{{url('/sertifikat/'.$data->id)}}"> <i class="fas fa-file-upload"></i> Upload Sertifikat</a>
+                    @endif
                 </td>
             </tr>
             @endforeach
