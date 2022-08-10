@@ -23,4 +23,8 @@ class AsesiController extends Controller
             abort(404);
         }
     }
+
+    public function sertifikat() {
+        return view('asesi.sertifikat');
+    }
 }

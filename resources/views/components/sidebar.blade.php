@@ -58,16 +58,16 @@
           </a>
         </li>
         @endUserRole
-        <!-- @userRole(all)
+        @userRole(asesi)
         <li class="nav-item">
-          <a href="{{url('/sertifikat')}}" class="nav-link">
+          <a href="{{url('/asesi/sertifikat')}}" class="nav-link">
             <i class="nav-icon fas fa-id-card"></i>
             <p>
-              Sertifikat Asesmen
+              Sertifikat
             </p>
           </a>
         </li>
-        @endUserRole -->
+        @endUserRole
         @userRole(admin)
         <li class="nav-item">
           <a href="{{url('/asesor')}}" class="nav-link">
