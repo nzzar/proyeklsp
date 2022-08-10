@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSkemaAsesor extends Migration
+class CreateSertifikatAsesi extends Migration
 {
     /**
      * Run the migrations.
@@ -14,17 +14,15 @@ class CreateSkemaAsesor extends Migration
      */
     public function up()
     {
-        Schema::create('skema_asesor', function (Blueprint $table) {
+        Schema::create('sertifikat_asesi', function (Blueprint $table) {
             $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('event_id')->index();
-            $table->uuid('asesor_id');
-            $table->string('surat_tugas')->nullable();
+            $table->uuid('skema_asesi_id')->index();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->string('sertifikat');
             $table->timestamps();
-            $table->softDeletes();
 
-
-            $table->foreign('event_id')->references('id')->on('event');
-            $table->foreign('asesor_id')->references('id')->on('asesors');
+            $table->foreign('skema_asesi_id')->references('id')->on('skema_asesis');
         });
     }
 
@@ -35,6 +33,6 @@ class CreateSkemaAsesor extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skema_asesor');
+        Schema::dropIfExists('sertifikat_asesi');
     }
 }

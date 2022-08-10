@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-5">
+    <div class="col-12 col-md-5">
         <div class="card">
             <div class="card-header">
                 <h6 class="card-title">FR.IA.01 CEKLIS OBSERVASI AKTIVITAS DI TEMPAT KERJA ATAU TEMPAT KERJA SIMULASI</h6>
@@ -54,18 +54,18 @@
                                             @if(count($element->unjukKerja) > 0)
                                             <td class="align-middle text-center">
                                                 @if($element->unjukKerja[0]->asesi->kompeten ?? false)
-                                                <i class="far fa-check-square" wire:click="ceklis('{{$element->unjukKerja[0]->id}}', true)"></i>
+                                                <i class="far fa-check-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$element->unjukKerja[0]->id}}', true)" @endif></i>
                                                 @else
-                                                <i class="far fa-square" wire:click="ceklis('{{$element->unjukKerja[0]->id}}', true)"></i>
+                                                <i class="far fa-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$element->unjukKerja[0]->id}}', true)" @endif></i>
                                                 @endif
 
                                             </td>
                                             <td class="align-middle text-center">
 
                                                 @if($element->unjukKerja[0]->asesi && !($element->unjukKerja[0]->asesi->kompeten ?? false))
-                                                <i class="far fa-check-square" wire:click="ceklis('{{$element->unjukKerja[0]->id}}', false)"></i>
+                                                <i class="far fa-check-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$element->unjukKerja[0]->id}}', false)" @endif></i>
                                                 @else
-                                                <i class="far fa-square" wire:click="ceklis('{{$element->unjukKerja[0]->id}}', false)"></i>
+                                                <i class="far fa-square"  @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$element->unjukKerja[0]->id}}', false)" @endif></i>
                                                 @endif
 
                                             </td>
@@ -80,17 +80,17 @@
                                             <td>{{$kerja->description}}</td>
                                             <td class="align-middle text-center">
                                                 @if($kerja->asesi && $kerja->asesi->kompeten ?? false)
-                                                <i class="far fa-check-square" wire:click="ceklis('{{$kerja->id}}', true)"></i>
+                                                <i class="far fa-check-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$kerja->id}}', true)" @endif></i>
                                                 @else
-                                                <i class="far fa-square" wire:click="ceklis('{{$kerja->id}}', true)"></i>
+                                                <i class="far fa-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$kerja->id}}', true)" @endif></i>
                                                 @endif
 
                                             </td>
                                             <td class="align-middle text-center">
                                                 @if($kerja->asesi && !($kerja->asesi->kompeten ?? false))
-                                                <i class="far fa-check-square" wire:click="ceklis('{{$kerja->id}}', false)"></i>
+                                                <i class="far fa-check-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$kerja->id}}', false)" @endif></i>
                                                 @else
-                                                <i class="far fa-square" wire:click="ceklis('{{$kerja->id}}', false)"></i>
+                                                <i class="far fa-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$kerja->id}}', false)" @endif></i>
                                                 @endif
                                             </td>
                                         </tr>
@@ -103,11 +103,47 @@
                         </div>
                     </div>
                     @endforeach
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center" id="heading-ttd-observasi" data-toggle="collapse" data-target="#collapse-ttd-observasi" aria-expanded="true" aria-controls="#collapse-collapse-ttd-observasi">
+                            <div class="mr-auto">
+                                <h6 class="text-header">
+                                    Tanda Tangan
+                                </h6>
+                            </div>
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                        <div id="collapse-ttd-observasi" class="collapse show" aria-labelledby="heading-heading-ttd-observasi" data-parent="#accordion">
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>Asesi:{{$skemaAsesi->asesi->name}}</th>
+                                            <th>Asesor: {{$skemaAsesi->asesor->name}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Tanda tangan
+                                            </td>
+                                            <td>
+                                            <img src="{{Storage::url($skemaAsesi->ttd_asesi)}}" alt="" srcset="">
+                                            </td>
+                                            <td>
+                                                <img src="{{Storage::url($skemaAsesi->ttd_asesor)}}" alt="" srcset="">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-7">
+    <div class="col-12 col-md-7">
         <div class="card">
             <div class="card-header">
                 <h6 class="card-title">FR.AK.02. FORMULIR REKAMAN ASESMEN KOMPETENSI</h6>

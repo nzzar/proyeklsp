@@ -64,4 +64,12 @@ class SkemaAsesi extends Model
         return $this->hasMany(CeklisObservasiResult::class)->orderBy('unit_kompetensi');
     }
 
+    public function feedBackNotes() {
+        return $this->hasOne(UmpanBalikNote::class, 'skema_asesi_id');
+    }
+
+    public function sertifikat() {
+        return $this->hasOne(SertifikatAsesi::class, 'skema_asesi_id');
+    }
+
 }

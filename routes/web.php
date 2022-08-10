@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MasterDataController;
+use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\SkemaManagementController;
 use App\Http\Controllers\UserManagementController;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,10 @@ Route::group(['middleware' => 'role:admin'], function () {
 
 });
 
+Route::group(['prefix' => '/sertifikat', 'middelware' => 'role:all'], function() {
+    Route::get('/{id}', [SertifikatController::class, 'index']);
+});
+
 Route::group(['prefix' => '/event', 'middleware' => 'role:all'], function() {
     Route::get('/', [EventController::class, 'index']);
     Route::get('/{id}', [EventController::class, 'detail']);
@@ -75,4 +80,5 @@ Route::group(['prefix' => '/skema', 'middleware' => 'role:all'], function () {
 Route::group(['middleware' => 'role:asesi', 'prefix' => 'asesi'], function () {
     Route::get('/profile', [AsesiController::class, 'profile']);
     Route::post('/profile', [AsesiController::class, 'profile']);
+    Route::get('/umpan-balik-asesi/{id}', [AsesiController::class, 'umpanBalik']);
 });

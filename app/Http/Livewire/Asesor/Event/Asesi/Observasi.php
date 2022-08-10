@@ -6,6 +6,7 @@ use App\Models\CeklisObservasi;
 use App\Models\CeklisObservasiResult;
 use App\Models\Skema;
 use App\Models\SkemaAsesi;
+use App\Models\UmpanBalik;
 use App\Models\UnjukKerja;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ class Observasi extends Component
     public $isValidAsesor;
     public $rekomendasi;
     public $errorMessage;
+    public $validAsesor;
 
     protected $listeners = [
         'save-observasi' => 'saveCeklistObservasi'
@@ -36,6 +38,9 @@ class Observasi extends Component
     {
         try {
             $skemaAsesi = SkemaAsesi::findOrFail($this->skemaAsesi->id);
+
+            $this->validAsesor = $skemaAsesi->asesor_id == Auth::user()->asesor->id;
+
             $this->skemaAsesi = $skemaAsesi;
             $skema = Skema::with([
                 'unitKompetensi.element.unjukKerja.asesi' => function ($query) use ($skemaAsesi) {
@@ -55,16 +60,16 @@ class Observasi extends Component
                 ->count();
 
             $count = DB::table('skemas')
-            ->select('*')
-            ->join('unit_kompetensi', 'skemas.id', '=', 'unit_kompetensi.skema_id')
-            ->join('element', 'unit_kompetensi.id', '=', 'element.unit_kompetensi_id')
-            ->join('unjuk_kerja', 'element.id', '=', 'unjuk_kerja.element_id')
-            ->where('skemas.id', $skemaAsesi->event->skema_id)
-            ->count();
+                ->select('*')
+                ->join('unit_kompetensi', 'skemas.id', '=', 'unit_kompetensi.skema_id')
+                ->join('element', 'unit_kompetensi.id', '=', 'element.unit_kompetensi_id')
+                ->join('unjuk_kerja', 'element.id', '=', 'unjuk_kerja.element_id')
+                ->where('skemas.id', $skemaAsesi->event->skema_id)
+                ->count();
 
-            if($countAsesi < $count) {
+            if ($countAsesi < $count) {
                 $this->errorMessage = 'Isi semua form FR.APL.02 terlebih dahulu';
-            } else if(is_null($this->rekomendasi)) {
+            } else if (is_null($this->rekomendasi)) {
                 $this->errorMessage = 'Rekomendasi tidak boleh kosong';
             } else {
                 $this->errorMessage = null;
@@ -74,7 +79,6 @@ class Observasi extends Component
         } catch (Exception $err) {
             dd($err);
             abort(404);
-            
         }
     }
 
@@ -134,6 +138,7 @@ class Observasi extends Component
 
     public function ceklisObservasi($id, $field, $value = false)
     {
+
         try {
             $observasi = CeklisObservasiResult::findOrFail($id);
             $observasi->{$field} = $value;
@@ -164,10 +169,52 @@ class Observasi extends Component
     public function saveCeklistObservasi()
     {
 
+        DB::beginTransaction();
         try {
             $skemaAsesi = SkemaAsesi::findOrFail($this->skemaAsesi->id);
             $skemaAsesi->skema_status = $this->rekomendasi;
             $skemaAsesi->save();
+
+            $skemaAsesiId = $this->skemaAsesi->id;
+            $feedbacks = [
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'komponen'=>'Saya mendapatkan penjelasan yang cukup memadai mengenai proses asesmen/uji kompetensi',
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'komponen' => 'Saya diberikan kesempatan untuk mempelajari standar kompetensi yang akan diujikan dan menilai diri sendiri terhadap pencapaiannya',
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'komponen' => 'Asesor memberikan kesempatan untuk mendiskusikan/menegosiasikan metoda, instrumen dan sumber asesmen serta jadwal asesmen',
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'komponen' => 'Saya sepenuhnya diberikan kesempatan untuk mendemonstrasikan kompetensi yang saya miliki selama asesmen',
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'komponen' => 'Asesor memberikan umpan balik yang mendukung setelah asesmen serta tindak lanjutnya',
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'komponen' => 'Asesor bersama  saya mempelajari semua dokumen asesmen serta menandatanganinya',
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'komponen' => 'Saya mendapatkan jaminan kerahasiaan hasil asesmen serta penjelasan penanganan dokumen asesmen',
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'komponen' => 'Asesor menggunakan keterampilan komunikasi yang efektif selama asesmen',
+                ],
+            ];
+
+
+            UmpanBalik::insert($feedbacks);
+            
+            DB::commit();
 
             $this->dispatchBrowserEvent('swal', [
                 'title' => 'Success!',
@@ -178,7 +225,9 @@ class Observasi extends Component
                 'showConfirmButton' => false,
                 'position' => 'top-right'
             ]);
-        } catch(Exception $err) {
+        } catch (Exception $err) {
+            DB::rollBack();
+            dd($err);
             $this->dispatchBrowserEvent('swal', [
                 'title' => 'Error!',
                 'text' => 'Gagal memperbarui data',
@@ -189,6 +238,5 @@ class Observasi extends Component
                 'position' => 'top-right'
             ]);
         }
-
     }
 }

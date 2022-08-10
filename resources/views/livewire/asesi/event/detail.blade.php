@@ -59,7 +59,9 @@ Registrasi Skema
                     @else 
                     <button class="btn btn-sm btn-primary" disabled>Asessment Mandiri</button>
                     @endif
-                    <button class="btn btn-sm btn-primary">Feed back</button>
+                    @if($event->asesi->skema_status ?? null)
+                    <a href="{{url('/asesi/umpan-balik-asesi/'.$event->asesi->id)}}" class="btn btn-sm btn-primary">Feed back</a>
+                    @endif
                 </div>
                 @endif
             </div>

@@ -41,8 +41,8 @@ class Create extends Component
             $this->validate(
                 [
                     'skemaId' => 'required|exists:skemas,id',
-                    'startDate' => 'required|date_format:d/m/Y h:i|after_or_equal:' . date('d/m/Y h:i'),
-                    'endDate' => 'required|date_format:d/m/Y h:i|after:startDate',
+                    'startDate' => 'required|date_format:d/m/Y H:i',
+                    'endDate' => 'required|date_format:d/m/Y H:i|after:startDate',
                     'status' => 'required',
                     'title' => 'required',
                     'qty' => 'required|integer',
@@ -68,8 +68,8 @@ class Create extends Component
 
         $event = new Event();
         $event->skema_id = $this->skemaId;
-        $event->start_date =  Carbon::createFromFormat('d/m/Y h:i', $this->startDate)->format('Y-m-d h:i');
-        $event->end_date = Carbon::createFromFormat('d/m/Y h:i', $this->endDate)->format('Y-m-d h:i');
+        $event->start_date =  Carbon::createFromFormat('d/m/Y H:i', $this->startDate)->format('Y-m-d H:i');
+        $event->end_date = Carbon::createFromFormat('d/m/Y H:i', $this->endDate)->format('Y-m-d H:i');
         $event->active = $this->status;
         $event->status = 'Draft';
         $event->qty = $this->qty;

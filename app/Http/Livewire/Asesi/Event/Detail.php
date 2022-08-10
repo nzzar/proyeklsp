@@ -52,8 +52,7 @@ class Detail extends Component
             if ($skema) {
                 $this->tujuan = $skema->tujuan_asesmen;
                 $now = Carbon::now();
-                $startDate = Carbon::createFromFormat('d/m/Y h:i', $skema->event->start_date);
-
+                $startDate = Carbon::createFromFormat('d/m/Y H:i', $skema->event->start_date);
                 if ($now->gte($startDate)) {
                     $this->validAsesmen = true;
                 } else {
@@ -61,7 +60,7 @@ class Detail extends Component
                 }
             }
         } catch (Exception $err) {
-            abort('500');
+            abort('404');
         }
     }
 
@@ -105,7 +104,6 @@ class Detail extends Component
                 $this->errorMessage = null;
             }
         } catch (Exception $err) {
-            dd($err);
             abort(404);
         }
 
