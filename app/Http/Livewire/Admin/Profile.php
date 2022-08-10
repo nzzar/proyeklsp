@@ -111,6 +111,6 @@ class Profile extends Component
 
     public function test()
     {
-        dd('test');
+        // dd('test');
     }
 }
