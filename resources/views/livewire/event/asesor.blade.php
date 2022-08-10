@@ -15,9 +15,7 @@
                             <th>No. Registrasi</th>
                             <th>Nama Lengkap</th>
                             <th>Masa Berlaku Sertifikat</th>
-                            @if(Auth::user()->role == 'admin')
                             <th>Action</th>
-                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -29,9 +27,17 @@
                             <td>{{$asesorItem->asesor->reg_number}}</td>
                             <td>{{$asesorItem->asesor->name}}</td>
                             <td>{{$asesorItem->asesor->start_date}} - {{$asesorItem->asesor->expired_date}}</td>
-                            @if(Auth::user()->role == 'ms')
-                            <td><button class="btn btn-danger btn-sm" wire:click.prevent="deleteAsesor('{{$asesorItem->id}}')"><i class="fas fa-trash-alt"></i> delete</button></td>
-                            @endif
+                            <td>
+                                @if(Auth::user()->role == 'ms')
+                                    <button class="btn btn-danger btn-sm mt-1" wire:click.prevent="deleteAsesor('{{$asesorItem->id}}')"><i class="fas fa-trash-alt"></i> delete</button>
+                                @endif
+                                @if(Auth::user()->role == 'admin')
+                                    <button class="btn btn-info btn-sm mt-1" data-toggle="modal" data-target="#upload-modal" wire:click="$set('skemaAsesorId', '{{$asesorItem->id}}')"><i class="fas fa-file-upload"></i> Upload surat tugas</button>
+                                @endif
+                                @if($asesorItem->surat_tugas) 
+                                    <button class="btn btn-warning btn-sm mt-1" wire:click="downloadSurat('{{$asesorItem->id}}')"><i class="fas fa-file-download"></i> Download surat tugas</button>
+                                @endif
+                            </td>
                         </tr>
                         @empty
                         <tr>
@@ -113,6 +119,24 @@
                         @endif
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div wire:ignore.self class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="create-unit" aria-hidden="true" id="upload-modal">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header"><h6>Upload Surat tugas</h6></div>
+                <div class="modal-body">
+                    <div class="custom-file mb-3">
+                        <input type="file" wire:model="file" class="custom-file-input @error('file') is-invalid @enderror" id="customFile" name="file">
+                        <label class="custom-file-label" for="customFile">@if($file) {{$file->getClientOriginalName()}} @else Upload surat tugas @endif</label>
+                        @error('file') <span class="text-danger">{{ $message }}</span>@enderror
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="uploadSurat()" data-dismiss="modal">Upload</button>
+                </div>
             </div>
         </div>
     </div>
