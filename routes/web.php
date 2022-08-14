@@ -82,4 +82,5 @@ Route::group(['middleware' => 'role:asesi', 'prefix' => 'asesi'], function () {
     Route::get('/profile', [AsesiController::class, 'profile']);
     Route::post('/profile', [AsesiController::class, 'profile']);
     Route::get('/umpan-balik-asesi/{id}', [AsesiController::class, 'umpanBalik']);
+    Route::get('/observasi/{id}', [AsesiController::class, 'observasi']);
 });

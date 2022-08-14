@@ -51,7 +51,6 @@ class FeedBack extends Component
             ->get();
             
 
-            // dd($skemaAsesi);
             return view('livewire.asesi.event.feed-back', compact('skemaAsesi', 'umpanBalik'));
         } catch (Exception $err) {
             abort(404);

@@ -10,7 +10,7 @@ Asesi Detail
             @livewire('event.asesi-detail', ['id' => $id])
             @break
         @case('asesor')
-            @livewire('event.asesi-detail', ['id' => $id])
+            @livewire('asesor.event.asesi.index', ['id' => $id])
             @break
         @default
             @livewire('asesi.event-detail.detail', ['id' => $id])

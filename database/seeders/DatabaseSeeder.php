@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
                 ProdiSeeder::class,
                 SkemaSeeder::class,
                 PersyaratanSkemaSeeder::class,
-                // EventSeeder::class,
+                EventSeeder::class,
                 UsersSeeder::class,
-                // AssesorSeeder::class,
+                AssesorSeeder::class,
                 AsesiSeeder::class,
             ]);
 
