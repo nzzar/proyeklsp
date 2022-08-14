@@ -126,7 +126,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tlp. Rumah</label>
-                        <input wire:model="house_phone" name="house_phone" type="text" class="form-control @error('house_phone') is-invalid @enderror" placeholder="Masukan telepon ruman">
+                        <input wire:model="house_phone" name="house_phone" type="text" class="form-control @error('house_phone') is-invalid @enderror" placeholder="Masukan telepon rumah">
                         @error('house_phone') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-group">
