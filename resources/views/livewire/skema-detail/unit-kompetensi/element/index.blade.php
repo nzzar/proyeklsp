@@ -82,7 +82,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Element</label>
-                            <input wire:model="element" type="text" class="form-control" placeholder="Enter Element">
+                            <input wire:model="element" type="text" class="form-control" placeholder="Tambah Element">
                             @error('element') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Element</label>
-                            <input wire:model="element" type="text" class="form-control" placeholder="Enter Element">
+                            <input wire:model="element" type="text" class="form-control" placeholder="Edit Element">
                             @error('element') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Unjuk Kerja</label>
-                            <input wire:model="unjuk" type="text" class="form-control" placeholder="Enter unjuk kerja">
+                            <input wire:model="unjuk" type="text" class="form-control" placeholder="Tambah Unjuk Kerja">
                             @error('unjuk') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Unjuk Kerja</label>
-                            <input wire:model="unjuk" type="text" class="form-control" placeholder="Unjuk Kerja">
+                            <input wire:model="unjuk" type="text" class="form-control" placeholder=" Edit Unjuk Kerja">
                             @error('unjuk') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
