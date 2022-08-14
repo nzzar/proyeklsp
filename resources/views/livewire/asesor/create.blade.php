@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Alamat</label>
-                            <input wire:model="address" type="text" class="form-control" placeholder="Masukan No. Telepon">
+                            <input wire:model="address" type="text" class="form-control" placeholder="Masukan Alamat">
                             @error('address') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nomor Registrasi</label>
-                            <input wire:model="no_blanko" type="text" class="form-control @error('no_blanko') is-invalid @enderror" placeholder="Masukan Nomor Blanko">
+                            <input wire:model="no_blanko" type="text" class="form-control @error('no_blanko') is-invalid @enderror" placeholder="Masukan Nomor Registrasi">
                             @error('no_blangko') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <label for="exampleInputEmail1">Masa Berlaku</label>
