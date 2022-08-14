@@ -70,7 +70,7 @@
                 </div>
                 <div class="form-group">
                     <label>Alamat Rumah</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter ..." wire:model="address"></textarea>
+                    <textarea class="form-control" rows="3" placeholder="Masukan alamat rumah" wire:model="address"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Kode Pos</label>
@@ -126,7 +126,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tlp. Rumah</label>
-                        <input wire:model="house_phone" name="house_phone" type="text" class="form-control @error('house_phone') is-invalid @enderror" placeholder="Masukan telepon ruman">
+                        <input wire:model="house_phone" name="house_phone" type="text" class="form-control @error('house_phone') is-invalid @enderror" placeholder="Masukan telepon rumah">
                         @error('house_phone') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-group">
@@ -141,18 +141,18 @@
                 <h5>Data Pekerjaan Sekarang</h5>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nama Institusi / Perusahaan</label>
-                    <input wire:model="office"  type="text" class="form-control @error('office') is-invalid @enderror" placeholder="">
+                    <input wire:model="office"  type="text" class="form-control @error('office') is-invalid @enderror" placeholder="Masukan nama institusi atau perusahaan">
                     @error('office') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Jabatan</label>
-                    <input wire:model="position" type="text" class="form-control @error('position') is-invalid @enderror" placeholder="Masukan nomor telepon">
+                    <input wire:model="position" type="text" class="form-control @error('position') is-invalid @enderror" placeholder="Masukan jabatan">
                     @error('position') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 
                 <div class="form-group">
                     <label>Alamat Institusi/Kantor</label>
-                    <textarea class="form-control @error('office_address') is-invalid @enderror" rows="3" placeholder="Enter ..." wire:model="office_address"></textarea>
+                    <textarea class="form-control @error('office_address') is-invalid @enderror" rows="3" placeholder="Masukan alamat institusi kantor" wire:model="office_address"></textarea>
                     @error('office_address') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">

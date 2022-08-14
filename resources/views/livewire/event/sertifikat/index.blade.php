@@ -11,7 +11,7 @@
                         <div class="col ml-1">: {{$event->title}}</div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-4 col-md-3">Quota Peserta</div>
+                        <div class="col-4 col-md-3">Kuota Peserta</div>
                         <div class="col ml-1">: {{$event->qty}}</div>
                     </div>
                     <div class="row mb-2">

@@ -17,7 +17,7 @@
                 <th>Skema</th>
                 <th>Waktu pelaksanaan</th>
                 <th>TUK</th>
-                <th style="width: 5%;">Quota Peserta </th>
+                <th style="width: 5%;">Kuota Peserta </th>
                 <th style="width: 5%;">Jumlah Asesi</th>
                 <th style="width: 8%;"> Status</th>
                 <th>Action</th>

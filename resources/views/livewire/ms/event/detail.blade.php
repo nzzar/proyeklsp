@@ -32,8 +32,8 @@
                             <input wire:model="title" disabled type="text" class="form-control" placeholder="Masukanm judul Event">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Quota Peserta</label>
-                            <input wire:model="qty" disabled type="number" class="form-control" placeholder="Masukanm Quota Peserta">
+                            <label for="exampleInputEmail1">Kuota Peserta</label>
+                            <input wire:model="qty" disabled type="number" class="form-control" placeholder="Masukan Jumlah Kuota Peserta">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tempat Uji Kompetensi (TUK)</label>
