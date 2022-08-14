@@ -16,7 +16,7 @@
                 <th>Judul Event</th>
                 <th>Waktu pelaksanaan</th>
                 <th>Tempat Uji Kompetensi</th>
-                <th style="width: 20%;">Quota Peserta</th>
+                <th style="width: 20%;">Kuota Peserta</th>
                 <th>Action</th>
             </tr>
         </thead>
