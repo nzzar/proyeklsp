@@ -37,11 +37,11 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tempat Uji Kompetensi (TUK)</label>
-                            <input wire:model="tuk" disabled type="text" class="form-control" placeholder="Masukanm TUK">
+                            <input wire:model="tuk" disabled type="text" class="form-control" placeholder="Masukan TUK">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Skema</label>
-                            <input value="{{$skema->nomor}} | {{$skema->name}}" disabled type="text" class="form-control" placeholder="Masukanm TUK">
+                            <input value="{{$skema->nomor}} | {{$skema->name}}" disabled type="text" class="form-control" placeholder="Masukan TUK">
                         </div>
 
 

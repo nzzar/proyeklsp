@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tempat Uji Kompetensi (TUK)</label>
-                    <input wire:model="tuk" type="text" class="form-control  @error('nik') is-invalid @enderror" placeholder="Masukanm TUK">
+                    <input wire:model="tuk" type="text" class="form-control  @error('nik') is-invalid @enderror" placeholder="Masukan TUK">
                     @error('tuk') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
 
