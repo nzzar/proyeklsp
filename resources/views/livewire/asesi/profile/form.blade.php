@@ -141,18 +141,18 @@
                 <h5>Data Pekerjaan Sekarang</h5>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nama Institusi / Perusahaan</label>
-                    <input wire:model="office"  type="text" class="form-control @error('office') is-invalid @enderror" placeholder="">
+                    <input wire:model="office"  type="text" class="form-control @error('office') is-invalid @enderror" placeholder="Masukan nama institusi atau perusahaan">
                     @error('office') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Jabatan</label>
-                    <input wire:model="position" type="text" class="form-control @error('position') is-invalid @enderror" placeholder="Masukan nomor telepon">
+                    <input wire:model="position" type="text" class="form-control @error('position') is-invalid @enderror" placeholder="Masukan jabatan">
                     @error('position') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 
                 <div class="form-group">
                     <label>Alamat Institusi/Kantor</label>
-                    <textarea class="form-control @error('office_address') is-invalid @enderror" rows="3" placeholder="Enter ..." wire:model="office_address"></textarea>
+                    <textarea class="form-control @error('office_address') is-invalid @enderror" rows="3" placeholder="Masukan alamat institusi kantor" wire:model="office_address"></textarea>
                     @error('office_address') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
