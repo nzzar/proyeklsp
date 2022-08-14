@@ -87,8 +87,8 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" wire:click.prevent="createElement()" data-dismiss="modal">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary" wire:click.prevent="createElement()" data-dismiss="modal">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -110,8 +110,8 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" wire:click.prevent="updateElement()" data-dismiss="modal">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary" wire:click.prevent="updateElement()" data-dismiss="modal">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -133,8 +133,8 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" wire:click.prevent="createUnjukKerja()" data-dismiss="modal">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary" wire:click.prevent="createUnjukKerja()" data-dismiss="modal">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -156,8 +156,8 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" wire:click.prevent="updateUnjukKerja()" data-dismiss="modal">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-primary" wire:click.prevent="updateUnjukKerja()" data-dismiss="modal">Simpan</button>
                     </div>
                 </div>
             </div>
