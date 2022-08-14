@@ -97,7 +97,7 @@
                         </div>
                         <div class="form-group">
                             <label>Nomor Registrasi</label>
-                            <input wire:model="reg_number" type="text" value="{{$reg_number ?? old('reg_number')}}" class="form-control @error('reg_number') is-invalid @enderror" placeholder="Masukan Nomor Blanko">
+                            <input wire:model="reg_number" type="text" value="{{$reg_number ?? old('reg_number')}}" class="form-control @error('reg_number') is-invalid @enderror" placeholder="Masukan Nomor Registrasi">
                             @error('reg_number') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <label>Masa Berlaku</label>
