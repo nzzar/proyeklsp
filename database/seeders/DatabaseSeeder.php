@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         try {
             // kalo mau ada yang dimatiin initial data nya disini
             $this->call([
-                ProdiSeeder::class,
-                SkemaSeeder::class,
-                PersyaratanSkemaSeeder::class,
+                // ProdiSeeder::class,
+                // SkemaSeeder::class,
+                // PersyaratanSkemaSeeder::class,
                 // EventSeeder::class,
                 UsersSeeder::class,
                 // AssesorSeeder::class,
