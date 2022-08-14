@@ -62,6 +62,9 @@ Registrasi Skema
                     @if($event->asesi->skema_status ?? null)
                     <a href="{{url('/asesi/umpan-balik-asesi/'.$event->asesi->id)}}" class="btn btn-sm btn-primary">Feed back</a>
                     @endif
+                    @if($event->asesi->skema_status ?? null)
+                    <a href="{{url('/asesi/observasi/'.$event->asesi->id)}}" class="btn btn-sm btn-primary">observasi</a>
+                    @endif
                 </div>
                 @endif
             </div>

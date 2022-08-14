@@ -14,6 +14,7 @@ use Livewire\Component;
 class AsesiDetail extends Component
 {
 
+    
     public $skemaAsesiId;
     public $tabActive;
     public $validPersyaratan;
@@ -34,7 +35,7 @@ class AsesiDetail extends Component
     {
 
         try {
-            $skemaAsesi = SkemaAsesi::findOrFail($this->skemaAsesiId);
+            $skemaAsesi = SkemaAsesi::with('feedBackNotes')->findOrFail($this->skemaAsesiId);
             $event = Event::where('id', $skemaAsesi->event_id)
             ->firstOrFail();
 

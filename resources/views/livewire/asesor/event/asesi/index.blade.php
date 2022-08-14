@@ -92,34 +92,23 @@
                             @if($skemaAsesi->asesmentMandiri->continue ?? null)
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('observasi')"><i class="fas fa-tasks"></i> Checklist observasi</button>
                             @endif
-                            @if($skemaAsesi->feedBackNotes)
-                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('feedback')"><i class="far fa-comment-alt"></i> Feed back</button>
+                            @if($skemaAsesi->feedBackNotes ?? null)
+                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('feedback')"><i class="far fa-comment-alt"></i>Umpan Balik Asesi</button>
                             @endif
                         </div>
-                        @if($skemaAsesi->status == 'Menunggu Keputusan')
-                        <div class="d-flex">
-                            <span class="font-wight-bold">Rekomendasi :</span>
-                            @if($validPersyaratan)
-                            <button class="btn btn-sm btn-success ml-1 mr-1 mb-2 mb-md-1" onclick="approveAsesi('{{$skemaAsesiId}}')"><i class="fas fa-check"></i> Diterima</button>
-                            @else
-                            <button class="btn btn-sm btn-success ml-1 mr-1 mb-2 mb-md-1" disabled data-toggle="tooltip" data-placement="top" title="Berkas belum memenuhi syarat"><i class="fas fa-check"></i> Diterima</button>
-                            @endif
-                            <button class="btn btn-sm btn-danger mr-1 mb-2 mb-md-1" onclick="rejectAsesi('{{$skemaAsesiId}}')"><i class="fas fa-times"></i> Tidak Diterima</button>
-                        </div>
-                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
     @if($tabActive == 'form')
-    @livewire('event.asesi.form', ['id' => $skemaAsesiId])
+    @livewire('asesor.event.asesi.form', ['id' => $skemaAsesiId])
     @elseif($tabActive == 'asesmen')
-    @livewire('event.asesi.asesmen-mandiri', ['id' => $skemaAsesiId])
+    @livewire('asesor.event.asesi.asesment-mandiri', ['id' => $skemaAsesiId])
     @elseif($tabActive == 'observasi')
-    @livewire('event.asesi.observasi', ['id' => $skemaAsesiId])
+    @livewire('asesor.event.asesi.observasi', ['id' => $skemaAsesiId])
     @elseif($tabActive == 'feedback')
-    @livewire('event.asesi.feedback', ['id' => $skemaAsesiId])
+    @livewire('asesor.event.asesi.feedback', ['id' => $skemaAsesiId])
     @endif
 </div>
 
@@ -127,42 +116,11 @@
 <script src="{{asset('/assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <script src="{{asset('/assets/plugins/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js')}}"></script>
 <script src="{{asset('/assets/plugins/signature/js/jquery.signature.min.js')}}"></script>
+
 <script>
     window.addEventListener('swal', function(e) {
         Swal.fire(e.detail);
     });
-
-    function approveAsesi($id) {
-        Swal.fire({
-            icon: 'question',
-            title: 'Terima asesi ?',
-            showCancelButton: true,
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                Livewire.emit('approveAsesi', $id)
-            }
-        })
-
-    }
-
-    function rejectAsesi($id) {
-        Swal.fire({
-            icon: 'question',
-            title: 'Tolak asesi ?',
-            showCancelButton: true,
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                Livewire.emit('rejectAsesi', $id)
-            }
-        })
-
-    }
-
-
-    // window.livewire.on('tab-asesmen', () => {
-    //     $('#signature-pad').signature()
-    // })
 </script>
+
 @stop

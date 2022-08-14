@@ -27,4 +27,8 @@ class AsesiController extends Controller
     public function sertifikat() {
         return view('asesi.sertifikat');
     }
+
+    public function observasi($id){
+        return view('asesi.observasi', compact('id'));
+    }
 }

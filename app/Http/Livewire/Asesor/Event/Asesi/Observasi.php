@@ -57,7 +57,7 @@ class Observasi extends Component
                 'event_id' => $skemaAsesi->event_id,
                 'asesi_id' => $skemaAsesi->asesi_id,
             ])
-                ->count();
+            ->count();
 
             $count = DB::table('skemas')
                 ->select('*')
@@ -66,9 +66,6 @@ class Observasi extends Component
                 ->join('unjuk_kerja', 'element.id', '=', 'unjuk_kerja.element_id')
                 ->where('skemas.id', $skemaAsesi->event->skema_id)
                 ->count();
-            
-            // dd($count);
-                
             if ($countAsesi < $count) {
                 $this->errorMessage = 'Isi semua form FR.APL.02 terlebih dahulu';
             } else if (is_null($this->rekomendasi)) {

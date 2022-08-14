@@ -285,7 +285,7 @@
                                             <div>
                                                 Berdasarkan Ketentuan persyaratan dasar makan pemohon:
                                                 <br>
-                                                <span class="font-weight-bold">Diterima / Tidak Diterima </span>
+                                                <span class="font-weight-bold">{{$skema->status}} </span>
                                                 sebagai perserta sertifikasi
                                             </div>
                                         </td>
@@ -362,33 +362,4 @@
             </div>
         </div>
     </div>
-    @section('script-1')
-    <script>
-        function approvePersyaratan($id) {
-            Swal.fire({
-                icon: 'question',
-                title: 'Sudah memenuhi syarat ?',
-                showCancelButton: true,
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Livewire.emit('approvePersyaratan', $id)
-                }
-            })
-        
-        }
-        function rejectPersyaratan($id) {
-            Swal.fire({
-                icon: 'question',
-                title: 'Tidak memenuhi syarat ?',
-                showCancelButton: true,
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Livewire.emit('rejectPersyaratan', $id)
-                }
-            })
-        }
-    </script>
-    @stop
 </div>
