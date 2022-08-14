@@ -31,8 +31,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Quota Peserta</label>
-                    <input wire:model="qty" type="number" class="form-control  @error('qty') is-invalid @enderror" placeholder="Masukanm Quota Peserta">
+                    <label for="exampleInputEmail1">Kuota Peserta</label>
+                    <input wire:model="qty" type="number" class="form-control  @error('qty') is-invalid @enderror" placeholder="Masukan Jumlah Kuota Peserta">
                     @error('qty') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
