@@ -70,7 +70,7 @@
                 </div>
                 <div class="form-group">
                     <label>Alamat Rumah</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter ..." wire:model="address"></textarea>
+                    <textarea class="form-control" rows="3" placeholder="Masukan alamat rumah" wire:model="address"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Kode Pos</label>

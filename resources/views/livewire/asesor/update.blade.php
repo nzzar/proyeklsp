@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Alamat</label>
-                            <input wire:model="address" type="text" class="form-control" placeholder="Masukan No. Telepon">
+                            <input wire:model="address" type="text" class="form-control" placeholder="Masukan alamat">
                             @error('address') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
