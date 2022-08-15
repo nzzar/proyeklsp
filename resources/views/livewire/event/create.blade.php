@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Judul Event</label>
-                    <input wire:model="title" type="text" class="form-control  @error('title') is-invalid @enderror" placeholder="Masukanm judul Event">
+                    <input wire:model="title" type="text" class="form-control  @error('title') is-invalid @enderror" placeholder="Masukan judul event">
                     @error('title') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <label for="exampleInputEmail1">Waktu Pelaksanaan</label>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Kuota Peserta</label>
-                    <input wire:model="qty" type="number" class="form-control  @error('qty') is-invalid @enderror" placeholder="Masukan Jumlah Kuota Peserta">
+                    <input wire:model="qty" type="number" class="form-control  @error('qty') is-invalid @enderror" placeholder="Masukan kuota peserta">
                     @error('qty') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">

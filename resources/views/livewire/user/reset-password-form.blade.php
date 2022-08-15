@@ -11,12 +11,12 @@
                 <form action="#" id="password-form">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Password</label>
-                        <input wire:model="password" type="password" class="form-control" placeholder="Enter email">
+                        <input wire:model="password" type="password" class="form-control" placeholder="Masukan password">
                         @error('password') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Confirm Password</label>
-                        <input wire:model="cpassword" type="password" class="form-control" placeholder="Enter email">
+                        <input wire:model="cpassword" type="password" class="form-control" placeholder="Confirm password">
                         @error('cpassword') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                 </form>

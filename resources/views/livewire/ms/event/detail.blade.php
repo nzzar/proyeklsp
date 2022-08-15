@@ -29,7 +29,7 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Judul Event</label>
-                            <input wire:model="title" disabled type="text" class="form-control" placeholder="Masukanm judul Event">
+                            <input wire:model="title" disabled type="text" class="form-control" placeholder="Masukan judul event">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Kuota Peserta</label>
@@ -139,7 +139,7 @@
     function approveEvent(id) {
         Swal.fire({
             icon: 'question',
-            title: 'Approve event ?',
+            title: 'Approve event?',
             text: 'Pastikan semua data sudah diisi dengan benar!',
             showCancelButton: true,
         }).then((result) => {

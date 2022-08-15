@@ -10,12 +10,12 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Kode</label>
-                    <input wire:model="kode" type="text" class="form-control" placeholder="Enter kode">
+                    <input wire:model="kode" type="text" class="form-control" placeholder="Masukan kode">
                     @error('kode') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Judul</label>
-                    <input wire:model="judul" type="text" class="form-control" placeholder="Enter name">
+                    <input wire:model="judul" type="text" class="form-control" placeholder="Masukan Judul">
                     @error('judul') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
             </div>

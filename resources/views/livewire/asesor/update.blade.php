@@ -13,12 +13,12 @@
                         <h6>Informasi akun</h6>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
-                            <input wire:model="email" type="email" class="form-control" placeholder="Enter email">
+                            <input wire:model="email" type="email" class="form-control" placeholder="Masukan email">
                             @error('email') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Password</label>
-                            <input wire:model="password" type="password" class="form-control" placeholder="Enter password">
+                            <input wire:model="password" type="password" class="form-control" placeholder="Masukan password">
                             @error('password') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">

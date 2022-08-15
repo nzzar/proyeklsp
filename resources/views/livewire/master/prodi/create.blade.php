@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
-                    <input wire:model="name" type="text" class="form-control" placeholder="Enter name">
+                    <input wire:model="name" type="text" class="form-control" placeholder="Tambah Prodi">
                     @error('name') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
             </div>

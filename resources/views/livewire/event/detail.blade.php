@@ -30,7 +30,7 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Judul Event</label>
-                            <input wire:model="title" @if(!in_array($status, ['Draft', 'Unapproved' ])) disabled @endif type="text" class="form-control  @error('title') is-invalid @enderror" placeholder="Masukanm judul Event">
+                            <input wire:model="title" @if(!in_array($status, ['Draft', 'Unapproved' ])) disabled @endif type="text" class="form-control  @error('title') is-invalid @enderror" placeholder="Masukan judul event">
                             @error('title') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">

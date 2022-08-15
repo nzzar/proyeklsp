@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary float-right btn-block" type="submit">Save Data</button>
+                <button class="btn btn-primary float-right btn-block" type="submit">Simpan</button>
             </div>
             <div class="col-12 col-md">
                 <div class="card">
@@ -92,12 +92,12 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>Nomor Blanko</label>
-                            <input wire:model="blanko" type="text" value="{{$blanko ?? old('blanko')}}" class="form-control @error('blanko') is-invalid @enderror" placeholder="Masukan Nomor Blanko">
+                            <input wire:model="blanko" type="text" value="{{$blanko ?? old('blanko')}}" class="form-control @error('blanko') is-invalid @enderror" placeholder="Masukan nomor blanko">
                             @error('blangko') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
                             <label>Nomor Registrasi</label>
-                            <input wire:model="reg_number" type="text" value="{{$reg_number ?? old('reg_number')}}" class="form-control @error('reg_number') is-invalid @enderror" placeholder="Masukan Nomor Registrasi">
+                            <input wire:model="reg_number" type="text" value="{{$reg_number ?? old('reg_number')}}" class="form-control @error('reg_number') is-invalid @enderror" placeholder="Masukan nomor registrasi">
                             @error('reg_number') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <label>Masa Berlaku</label>
@@ -129,7 +129,7 @@
                         <div class="form-group mt-3">
                             <div class="custom-file">
                                 <input wire:model="image" type="file" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label @error('expired_date') is-invalid @enderror" for="customFile">Upload Sertifikat</label>
+                                <label class="custom-file-label @error('expired_date') is-invalid @enderror" for="customFile">Upload sertifikat</label>
                                 @error('expired_date') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>
