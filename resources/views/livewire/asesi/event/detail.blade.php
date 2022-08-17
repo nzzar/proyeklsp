@@ -525,6 +525,10 @@ Registrasi Skema
         Swal.fire(e.detail);
     });
 
+    $('#clear-signature').click(function() {
+        $('#signature-pad').signature('clear')
+    })
+
     $(document).ready(function() {
         $('#signature-pad').signature()
     })
