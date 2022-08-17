@@ -52,6 +52,11 @@ class Index extends Component
     {
         DB::beginTransaction();
         try {
+
+            $this->validate([
+                'file' => 'required|max:10000|mimes:pdf'
+            ]);
+
             $skemaAsesi = SkemaAsesi::findOrFail($this->skemaAsesiId);
 
             $file_name = 'sertifikat_' . time() . '_' . $this->skemaAsesiId . '.' . $this->file->getClientOriginalExtension();
@@ -94,6 +99,25 @@ class Index extends Component
                 'position' => 'top-right'
             ]);
 
+        }
+    }
+
+    public function downloadSertifikat($id) {
+        try {
+            $data = SertifikatAsesi::findOrFail($id);
+            
+            return Storage::download($data->sertifikat);
+        } catch (Exception $err) {
+            dd($err);
+            $this->dispatchBrowserEvent('swal', [
+                'title' => 'Error!',
+                'text' => 'Gagal download surat tugas',
+                'timer' => 3000,
+                'icon' => 'error',
+                'toast' => true,
+                'showConfirmButton' => false,
+                'position' => 'top-right'
+            ]);
         }
     }
 }

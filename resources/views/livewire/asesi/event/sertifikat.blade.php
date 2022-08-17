@@ -30,7 +30,7 @@
                                     <td>{{$event->event->tuk}}</td>
                                     <td>
                                         @if($event->sertifikat)
-                                        <a href="#" class="btn btn-primary btn-sm" wire:click.prevent="$set('view_file', '{{$event->sertifikat->sertifikat ?? null}}')" data-toggle="modal" data-target="#view-file-modal">Lihat Sertifikat</a>
+                                        <a href="#" class="btn btn-primary btn-sm" wire:click.prevent="downloadSertifikat('{{$event->sertifikat->id}}')" >Download Sertifikat</a>
                                         @else
                                         Sertifikat belum tersedia
                                         @endif
@@ -39,19 +39,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div wire:ignore.self class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="create-unit" aria-hidden="true" id="view-file-modal">
-        <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="text-center">
-                        @if($view_file)
-                        <img src="{{Storage::url($view_file)}}" alt="" class="rounded w-100 mb-2">
-                        @endif
                     </div>
                 </div>
             </div>

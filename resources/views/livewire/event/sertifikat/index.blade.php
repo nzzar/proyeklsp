@@ -68,7 +68,7 @@
                                     <td>
                                         <button class="btn btn-sm btn-info mt-1" wire:click="$set('skemaAsesiId' , '{{$asesi->id}}')" data-toggle="modal" data-target="#upload-modal">Upload Sertifikat</button>
                                         @if($asesi->sertifikat) 
-                                        <button class="btn btn-success btn-sm mt-1" wire:click="$set('view_file', '{{$asesi->sertifikat->sertifikat}}')"  data-toggle="modal" data-target="#view-file-modal">Lihat Sertifikat</button>
+                                        <button class="btn btn-success btn-sm mt-1" wire:click="downloadSertifikat('{{$asesi->sertifikat->id}}')">Download</button>
                                         @endif
                                     </td>
                                 </tr>
@@ -90,36 +90,15 @@
                 <div class="modal-header"><h6>Upload Sertifikat</h6></div>
                 <div class="modal-body">
 
-                    @if($file)
-                        @if(is_string($file))
-                        <div class="text-center"><img src="{{Storage::url($file)}}" alt="" class="rounded w-25 mb-2"></div>
-                        @else
-                        <div class="text-center"><img src="{{$file->temporaryUrl()}}" alt="" class="rounded w-25 mb-2"></div>
-                        @endif
-                    @endif
-
                     <div class="custom-file mb-3">
                         <input type="file" wire:model="file" class="custom-file-input @error('file') is-invalid @enderror" id="customFile" name="file">
-                        <label class="custom-file-label" for="customFile">Upload Sertifikat</label>
+                        <label class="custom-file-label" for="customFile">@if($file) {{$file->getClientOriginalName()}} @else Upload sertifikat @endif</label>
                         @error('file') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary" wire:click.prevent="uploadSertificat" data-dismiss="modal">Upload</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div wire:ignore.self class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="create-unit" aria-hidden="true" id="view-file-modal">
-        <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="text-center">
-                        @if($view_file)
-                        <img src="{{Storage::url($view_file)}}" alt="" class="rounded w-100 mb-2">
-                        @endif
-                    </div>
                 </div>
             </div>
         </div>
