@@ -290,17 +290,17 @@
                         </div>
                         <div id="test-container">
                             @if(!$skemaAsesi->asesor)
-                                @if(!$errorMessage)
-                                <button class="btn btn-primary btn-block mt-1" id="save-rekomendasi">Simpan Rekomendasi</button>
-                                @else
-                                <div class="text-danger">
-                                    {{$errorMessage}}
-                                </div>
-                                <button class="btn btn-primary btn-block mt-1" disabled>Simpan Rekomendasi</button>
-                                @endif
+                            @if(!$errorMessage)
+                            <button class="btn btn-primary btn-block mt-1" id="save-rekomendasi">Simpan Rekomendasi</button>
+                            @else
+                            <div class="text-danger">
+                                {{$errorMessage}}
+                            </div>
+                            <button class="btn btn-primary btn-block mt-1" disabled>Simpan Rekomendasi</button>
+                            @endif
                             @endif
                         </div>
-                        @else 
+                        @else
                         <div class="text-center text-secondary">
                             Asesi belum melakukan asesmen mandiri
                         </div>
@@ -347,6 +347,10 @@
             let resImg = await fetch(base64)
             let blobImg = await resImg.blob()
             @this.upload('signature', blobImg)
+        })
+
+        $('#clear-signature').click(function() {
+            $('#signature-pad').signature('clear')
         })
 
         $('#test-container').on('click', '#save-rekomendasi', function() {
