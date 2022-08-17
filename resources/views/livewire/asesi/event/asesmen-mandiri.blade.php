@@ -43,9 +43,9 @@
                         <div class="row mb-2">
                             <div class="col-6 col-md-3">Rekomendasi</div>
                             <div class="col ml-2">:
-                                @if(is_null($skemaAsesi->asesmentMandiri->continue))
+                                @if(is_null($skemaAsesi->asesmentMandiri->continue ?? null))
                                 <span class="badge badge-secondary"> Sedang ditinjau oleh asesor </span>
-                                @elseif($skemaAsesi->asesmentMandiri->continue)
+                                @elseif($skemaAsesi->asesmentMandiri->continue ?? null)
                                 <span class="badge badge-success"> Asesmen dapat dilanjutkan </span>
                                 @else
                                 <span class="badge badge-danger"> Asesmen tidak dapat dilanjutkan </span>
@@ -175,7 +175,7 @@
                                             </div>
                                             <div class="col-4 border border-right-0 border-top-0">
                                                 <div class="font-weight-bold mb-2">Rekomendasi:</div>
-                                                @if(is_null($skemaAsesi->asesmentMandiri->continue))
+                                                @if(is_null($skemaAsesi->asesmentMandiri->continue ?? null))
                                                     -
                                                 @else
                                                 Asesmen <span class="font-weight-bold">{{($skemaAsesi->asesmentMandiri->continue ?? null) ? 'Dapat dilanjutkan' : 'Tidak dapat dilanjutkan'}}</span>
