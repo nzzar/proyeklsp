@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Asesor\Event\Asesi;
 
 use App\Models\AsesmentMandiriResult;
 use App\Models\CeklisObservasiResult;
+use App\Models\PersetujuanAsesmen;
 use App\Models\PersyaratanSkema;
 use App\Models\Skema;
 use App\Models\SkemaAsesi;
@@ -66,8 +67,8 @@ class AsesmentMandiri extends Component
         }
 
         try {
-            $skemaAsesi = SkemaAsesi::with('asesmentMandiri')->findOrFail($this->skemaAsesi->id);
-
+            $skemaAsesi = SkemaAsesi::findOrFail($this->skemaAsesi->id);
+            // dd($skemaAsesi->assent);
             $this->skemaAsesi = $skemaAsesi;
             $skema = Skema::with([
                 'unitKompetensi.element.asesi' =>  function ($query) use ($skemaAsesi) {
@@ -149,6 +150,43 @@ class AsesmentMandiri extends Component
             $this->dispatchBrowserEvent('swal', [
                 'title' => 'Error !',
                 'text' => 'Gagal menyimpan rekomendasi',
+                'timer' => 3000,
+                'icon' => 'error',
+                'toast' => true,
+                'showConfirmButton' => false,
+                'position' => 'top-right'
+            ]);
+        }
+    }
+
+    public function savePersetujuan($field, $value = false) {
+        try {
+            $skemaAsesi = SkemaAsesi::findOrFail($this->skemaAsesi->id);
+            $this->skemaAsesi = $skemaAsesi;
+            if($skemaAsesi->asesor) {
+                return;
+            }
+            
+            $persetujuan = PersetujuanAsesmen::where('skema_asesi_id', $skemaAsesi->id)
+            ->firstOrFail();
+
+            $persetujuan->{$field} = $value;
+            $persetujuan->save();
+
+            $this->dispatchBrowserEvent('swal', [
+                'title' => 'Success!',
+                'text' => 'Berhasil update persetujuan',
+                'timer' => 3000,
+                'icon' => 'success',
+                'toast' => true,
+                'showConfirmButton' => false,
+                'position' => 'top-right'
+            ]);
+
+        } catch(Exception $err) {
+            $this->dispatchBrowserEvent('swal', [
+                'title' => 'Error !',
+                'text' => 'Gagal update persetujuan',
                 'timer' => 3000,
                 'icon' => 'error',
                 'toast' => true,

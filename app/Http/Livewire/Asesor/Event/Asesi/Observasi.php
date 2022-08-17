@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Asesor\Event\Asesi;
 
 use App\Models\CeklisObservasi;
 use App\Models\CeklisObservasiResult;
+use App\Models\MeninjauAsesment;
 use App\Models\Skema;
 use App\Models\SkemaAsesi;
 use App\Models\UmpanBalik;
@@ -57,7 +58,7 @@ class Observasi extends Component
                 'event_id' => $skemaAsesi->event_id,
                 'asesi_id' => $skemaAsesi->asesi_id,
             ])
-            ->count();
+                ->count();
 
             $count = DB::table('skemas')
                 ->select('*')
@@ -178,7 +179,7 @@ class Observasi extends Component
             $feedbacks = [
                 [
                     'skema_asesi_id' => $skemaAsesiId,
-                    'komponen'=>'Saya mendapatkan penjelasan yang cukup memadai mengenai proses asesmen/uji kompetensi',
+                    'komponen' => 'Saya mendapatkan penjelasan yang cukup memadai mengenai proses asesmen/uji kompetensi',
                 ],
                 [
                     'skema_asesi_id' => $skemaAsesiId,
@@ -212,7 +213,48 @@ class Observasi extends Component
 
 
             UmpanBalik::insert($feedbacks);
-            
+
+            $meninjau = [
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'kegiatan_asesmen' => 'Instruksi perangkat asesmen dan kondisi asesmen diidentifikasi dengan jelas'
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'kegiatan_asesmen' => 'Informasi tertulis dituliskan secara tepat'
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'kegiatan_asesmen' => 'Kegiatan asesmen mebahas persyaratan bukti untuk kompetensi yang diases'
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'kegiatan_asesmen' => 'Tingkat kesulitan bahasa, literasi, dan berhitung sesuai dengan tingkat unit kompetensi yang dinilai'
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'kegiatan_asesmen' => 'Tingkat kesulitan bahasa, literasi, dan berhitung sesuai dengan tingkat unit kompetensi yang dinilai'
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'kegiatan_asesmen' => 'Tingkat kesulitan kegiatan disesuaikan dengan kompetensi atau kompetensi yang diases'
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'kegiatan_asesmen' => 'Contoh, benchmark dan / atau ceklis asesmen tersedia untuk digunakan dalam pengambilan keputusan asesmen '
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'kegiatan_asesmen' => 'Diperlukan modifikasi (seperti yang diidentifikasi dalam komentar)'
+                ],
+                [
+                    'skema_asesi_id' => $skemaAsesiId,
+                    'kegiatan_asesmen' => 'Tugas asesmen siap digunakan'
+                ],
+            ];
+
+            MeninjauAsesment::insert($meninjau);
+
             DB::commit();
 
             $this->dispatchBrowserEvent('swal', [

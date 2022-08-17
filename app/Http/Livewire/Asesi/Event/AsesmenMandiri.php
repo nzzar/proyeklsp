@@ -5,12 +5,14 @@ namespace App\Http\Livewire\Asesi\Event;
 use App\Models\AsesmentMandiri;
 use App\Models\AsesmentMandiriResult;
 use App\Models\Element;
+use App\Models\PersetujuanAsesmen;
 use App\Models\PersyaratanSkema;
 use App\Models\Skema;
 use App\Models\SkemaAsesi;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class AsesmenMandiri extends Component
@@ -205,6 +207,7 @@ class AsesmenMandiri extends Component
 
     public function saveAsesment()
     {
+        DB::beginTransaction();
         try {
 
             $data = new AsesmentMandiriResult();
@@ -212,6 +215,13 @@ class AsesmenMandiri extends Component
             $data->tgl_ttd_asesi = Carbon::now()->format('Y-m-d');
             $data->save();
 
+
+            $assent = new PersetujuanAsesmen();
+            $assent->skema_asesi_id = $this->skemaAsesiId;
+            $assent->save();
+            
+            DB::commit();
+            
             $this->dispatchBrowserEvent('swal', [
                 'title' => 'Success!',
                 'title' => 'Data asesmen mandiri berhasil disimpan',
@@ -222,7 +232,9 @@ class AsesmenMandiri extends Component
                 'position' => 'top-right'
             ]);
         } catch (Exception $err) {
-
+            
+            DB::rollBack();
+            
             $this->dispatchBrowserEvent('swal', [
                 'title' => 'Success!',
                 'title' => 'Gagal menyimpan data asesmen mandiri',

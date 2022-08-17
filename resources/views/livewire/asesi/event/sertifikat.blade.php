@@ -29,7 +29,11 @@
                                     <td>{{$event->event->start_date}} - {{$event->event->end_date}}</td>
                                     <td>{{$event->event->tuk}}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm" wire:click.prevent="$set('view_file', '{{$event->sertifikat->sertifikat}}')" data-toggle="modal" data-target="#view-file-modal">Lihat Sertifikat</a>
+                                        @if($event->sertifikat)
+                                        <a href="#" class="btn btn-primary btn-sm" wire:click.prevent="$set('view_file', '{{$event->sertifikat->sertifikat ?? null}}')" data-toggle="modal" data-target="#view-file-modal">Lihat Sertifikat</a>
+                                        @else
+                                        Sertifikat belum tersedia
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

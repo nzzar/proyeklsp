@@ -88,11 +88,13 @@
                             @if($skemaAsesi->status == 'Diterima')
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('asesmen')"><i class="fas fa-tasks"></i>Asessment mandiri</button>
                             @endif
-
                             @if($skemaAsesi->asesmentMandiri->continue ?? null)
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('observasi')"><i class="fas fa-tasks"></i> Checklist observasi</button>
                             @endif
-                            @if($skemaAsesi->feedBackNotes ?? null)
+                            @if($skemaAsesi->asesmentMandiri->continue ?? null)
+                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('tinjau')"><i class="fas fa-list-ul"></i> Menijau Asesi</button>
+                            @endif
+                            @if($skemaAsesi->asesmentMandiri->continue ?? null)
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('feedback')"><i class="far fa-comment-alt"></i>Umpan Balik Asesi</button>
                             @endif
                         </div>
@@ -109,6 +111,8 @@
     @livewire('asesor.event.asesi.observasi', ['id' => $skemaAsesiId])
     @elseif($tabActive == 'feedback')
     @livewire('asesor.event.asesi.feedback', ['id' => $skemaAsesiId])
+    @elseif($tabActive == 'tinjau')
+    @livewire('asesor.event.asesi.meninjau-asesmen', ['id' => $skemaAsesiId])
     @endif
 </div>
 
@@ -121,6 +125,22 @@
     window.addEventListener('swal', function(e) {
         Swal.fire(e.detail);
     });
+
+    $('#save-container').on('click', '.btn-save', function() {
+            Swal.fire({
+                icon: 'question',
+                title: `Simpan Data Meninjau Instrumen Asesmen ?`,
+                html: 'Pastikan semua data telah diisi dengan benar, tidak dapat melakukan perubahan data setelah disimpan!',
+                showCancelButton: true,
+                cancelButtonText: 'Batal',
+                confirmButtonText: 'Simpan',
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Livewire.emit('save')
+                }
+            })
+        })
 </script>
 
 @stop

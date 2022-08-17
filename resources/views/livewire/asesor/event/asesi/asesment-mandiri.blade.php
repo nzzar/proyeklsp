@@ -162,8 +162,8 @@
                                     <div class="col-4 border border-top-0">
                                         <div class="font-weight-bold mb-2">Tanda Tangan dan Tangal:</div>
 
-                                        <img src="{{Storage::url($skemaAsesi->ttd_asesor)}}" alt="" class="rounded w-100 mb-2">
-                                        {{$skemaAsesi->asesmentMandiri->tgl_ttd_asesor}}
+                                        <img src="{{Storage::url($skemaAsesi->ttd_asesor)}}" alt="" class="rounded w-50 mb-2 d-block">
+                                        {{\Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesor)->format('d F Y') }}
                                     </div>
                                 </div>
                                 @endif
@@ -186,6 +186,7 @@
                         <h6 class="card-title">FR.AK.01 PERSETUJUAN ASESMEN DAN KERAHASIAAN</h6>
                     </div>
                     <div class="card-body">
+                        @if($skemaAsesi->assent)
                         <div class="row">
                             <div class="col-12 border p-2">Persetujuan Asesmen ini untuk menjamin bahwa asesi telah diberi arahan secara rinci tentang perencanaan dan proses asesmen</div>
                         </div>
@@ -194,53 +195,49 @@
                             <div class="col">
                                 <div class="row">
                                     <div class="col-3 border-right border-bottom p-1">judul</div>
-                                    <div class="col ml-2 font-weight-bold p-1 border-right border-bottom">Judul Skema</div>
+                                    <div class="col ml-2 font-weight-bold p-1 border-right border-bottom">{{$skemaAsesi->event->skema->name}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-3 border-right border-bottom p-1">Nomor</div>
-                                    <div class="col ml-2 font-weight-bold p-1 border-right border-bottom">Nomor Skema</div>
+                                    <div class="col ml-2 font-weight-bold p-1 border-right border-bottom">{{$skemaAsesi->event->skema->nomor}}</div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6 border border-top-0 p-1">TUK</div>
-                            <div class="col-6 border-right border-bottom p-1">Tempat Kerja</div>
+                            <div class="col-6 border-right border-bottom p-1">{{$skemaAsesi->event->tuk}}</div>
                         </div>
                         <div class="row">
                             <div class="col-6 border border-top-0 p-1">Nama Asesor</div>
-                            <div class="col-6 border-right border-bottom p-1">Tempat Kerja</div>
+                            <div class="col-6 border-right border-bottom p-1">{{$skemaAsesi->asesor->name ?? '-'}}</div>
                         </div>
                         <div class="row">
                             <div class="col-6 border border-top-0 p-1">Nama Asesi</div>
-                            <div class="col-6 border-right border-bottom p-1">Tempat Kerja</div>
+                            <div class="col-6 border-right border-bottom p-1">{{$skemaAsesi->asesi->name}}</div>
                         </div>
                         <div class="row">
                             <div class="col-6 border border-top-0">Bukti yang akan dikumpulkan</div>
                             <div class="col-6 border-right border-bottom">
                                 <div class="row">
-                                    <div class="col-6 border-right border-bottom p-1">TL: Verifikasi Portofolio</div>
-                                    <div class="col-6 p-1 border-bottom">L: Observasi Langsung</div>
+                                    <div class="col-6 border-right border-bottom p-1" wire:click="savePersetujuan('portofolio', {{!$skemaAsesi->assent->portofolio}})"> <i class="far @if($skemaAsesi->assent->portofolio) fa-check-square @else fa-square @endif"></i> TL: Verifikasi Portofolio</div>
+                                    <div class="col-6 p-1 border-bottom" wire:click="savePersetujuan('observasi_langsung', {{!$skemaAsesi->assent->observasi_langsung}})"> <i class="far @if($skemaAsesi->assent->observasi_langsung) fa-check-square @else fa-square @endif"></i> L: Observasi Langsung</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col p-1 border-bottom">TL: Hasil Tes Tulis</div>
+                                    <div class="col p-1 border-bottom" wire:click="savePersetujuan('tes_tulis', {{!$skemaAsesi->assent->tes_tulis}})"> <i class="far @if($skemaAsesi->assent->tes_tulis) fa-check-square @else fa-square @endif"></i> TL: Hasil Tes Tulis</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col p-1 border-bottom">TL: Hasil Tes Lisan</div>
+                                    <div class="col p-1 border-bottom" wire:click="savePersetujuan('tes_lisan', {{!$skemaAsesi->assent->tes_lisan}})"> <i class="far @if($skemaAsesi->assent->tes_lisan) fa-check-square @else fa-square @endif"></i> TL: Hasil Tes Lisan</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col p-1 border-bottom">TL: Hasil Wawancara</div>
+                                    <div class="col p-1 border-bottom" wire:click="savePersetujuan('wawancara', {{!$skemaAsesi->assent->wawancara}})"><i class="far @if($skemaAsesi->assent->wawancara) fa-check-square @else fa-square @endif"></i> TL: Hasil Wawancara</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-4 border-right border-bottom p-1">Hari/Tanggal</div>
-                                    <div class="col p-1 border-bottom"></div>
+                                    <div class="col p-1 border-bottom">{{\Carbon\Carbon::parse($skemaAsesi->assent->updated_at)->format('d F Y')}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-4 border-right border-bottom p-1">Waktu</div>
-                                    <div class="col p-1 border-bottom"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4 border-right border-bottom p-1">TUK</div>
-                                    <div class="col p-1 border-bottom"></div>
+                                    <div class="col p-1 border-bottom">{{\Carbon\Carbon::parse($skemaAsesi->assent->updated_at)->format('h:i')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -292,16 +289,22 @@
                             </div>
                         </div>
                         <div id="test-container">
-                            @if(!$errorMessage)
-                            <button class="btn btn-primary btn-block mt-1" id="save-rekomendasi">Simpan Rekomendasi</button>
-                            @else
-                            <div class="text-danger">
-                                {{$errorMessage}}
-                            </div>
-                            <button class="btn btn-primary btn-block mt-1" disabled>Simpan Rekomendasi</button>
+                            @if(!$skemaAsesi->asesor)
+                                @if(!$errorMessage)
+                                <button class="btn btn-primary btn-block mt-1" id="save-rekomendasi">Simpan Rekomendasi</button>
+                                @else
+                                <div class="text-danger">
+                                    {{$errorMessage}}
+                                </div>
+                                <button class="btn btn-primary btn-block mt-1" disabled>Simpan Rekomendasi</button>
+                                @endif
                             @endif
                         </div>
-
+                        @else 
+                        <div class="text-center text-secondary">
+                            Asesi belum melakukan asesmen mandiri
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

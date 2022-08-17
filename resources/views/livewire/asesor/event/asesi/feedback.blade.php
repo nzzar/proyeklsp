@@ -7,15 +7,14 @@
                 </h6>
             </div>
             <div class="card-body">
+            @if($skemaAsesi->feedBackNotes)
+            
                 <table class="table table table-bordered">
                     <thead>
                         <tr>
                             <th rowspan="2" class="align-middle text-center" style="width: 50% ;">Komponen</th>
                             <th colspan="2" class="text-center">Hasil</th>
-                            <th rowspan="2" class="align-middle text-center" style="max-width: 20% ;">Catatan Kompentar Asesi</th>
-                            @if(!$skemaAsesi->feedBackNotes)
-                            <th rowspan="2" class="align-middle text-center">Action</th>
-                            @endif
+                            <th rowspan="2" class="align-middle text-center" style="max-width: 20% ;">Catatan Komentar Asesi</th>
                         </tr>
                         <tr>
                             <th class="text-center">Ya</th>
@@ -35,9 +34,6 @@
                             <td>
                                 {{$umpanBalik->notes}}
                             </td>
-                            @if(!$skemaAsesi->feedBackNotes)
-                            <td><button class="btn btn-sm btn-primary">Umpan Balik</button></td>
-                            @endif
                         </tr>
                         @endforeach
                         <tr>
@@ -58,8 +54,8 @@
                         </tr>
                     </tbody>
                 </table>
-                @if(!$skemaAsesi->feedBackNotes)
-                <button class="btn btn-block btn-primary mt-3" onclick="saveFeedback()">Simpan</button>
+                @else
+                <div class="text-center text-secondary">Asesi belum memberikan umpan balik</div>
                 @endif
             </div>
         </div>
