@@ -156,7 +156,7 @@
                                             </div>
                                             <div class="col-4 border border-right-0">
                                                 <div class="font-weight-bold mb-2">Tanggal:</div>
-                                                {{$skemaAsesi->asesmentMandiri->tgl_ttd_asesi ? \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesi)->format('d F Y') : '-'}}
+                                                {{($skemaAsesi->asesmentMandiri->tgl_ttd_asesi ?? null) ? \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesi)->format('d F Y') : '-'}}
                                             </div>
                                             <div class="col-4 border">
                                                 <div class="font-weight-bold mb-2">Tanda Tangan Asesi:</div>
@@ -178,7 +178,7 @@
                                                 @if(is_null($skemaAsesi->asesmentMandiri->continue))
                                                     -
                                                 @else
-                                                Asesmen <span class="font-weight-bold">{{$skemaAsesi->asesmentMandiri->continue ? 'Dapat dilanjutkan' : 'Tidak dapat dilanjutkan'}}</span>
+                                                Asesmen <span class="font-weight-bold">{{($skemaAsesi->asesmentMandiri->continue ?? null) ? 'Dapat dilanjutkan' : 'Tidak dapat dilanjutkan'}}</span>
                                                 @endif
                                             </div>
                                             <div class="col-4 border border-top-0">
@@ -186,7 +186,7 @@
                                                 <div style="width:150px; height: 100px;">
                                                     <img src="{{Storage::url($skemaAsesi->ttd_asesi)}}" class="h-100" alt="" srcset="">
                                                 </div>
-                                                <div>Tanggal: {{$skemaAsesi->asesmentMandiri->tgl_ttd_asesor ?  \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesor)->format('d F Y') : '-'}}</div>
+                                                <div>Tanggal: {{($skemaAsesi->asesmentMandiri->tgl_ttd_asesor ?? null) ?  \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesor)->format('d F Y') : '-'}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -290,7 +290,7 @@
                                         <div style="width: 200px; height: 150px;">
                                             <img src="{{Storage::url($skemaAsesi->ttd_asesi)}}" alt="" srcset="" class="h-100">
                                         </div>
-                                        <div>Tanggal: {{$skemaAsesi->asesmentMandiri->tgl_ttd_asesi ? \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesi)->format('d F Y') : '-'}}</div>
+                                        <div>Tanggal: {{($skemaAsesi->asesmentMandiri->tgl_ttd_asesi ?? null) ? \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesi)->format('d F Y') : '-'}}</div>
                                     </div>
                                     <div class="col-6 border border-top-0 p-1">
                                         <div>
@@ -303,7 +303,7 @@
                                             <div></div>
                                             @endif
                                         </div>
-                                        <div>Tanggal: {{$skemaAsesi->asesmentMandiri->tgl_ttd_asesor ?  \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesor)->format('d F Y') : '-'}}</div>
+                                        <div>Tanggal: {{($skemaAsesi->asesmentMandiri->tgl_ttd_asesor ?? null) ?  \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesor)->format('d F Y') : '-'}}</div>
                                     </div>
                                 </div>
                                 @else
