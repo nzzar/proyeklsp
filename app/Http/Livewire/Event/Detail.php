@@ -77,8 +77,8 @@ class Detail extends Component
         $this->validate(
             [
                 'skemaId' => 'required|exists:skemas,id',
-                'startDate' => 'required|date_format:d/m/Y h:i|after_or_equal:' . $this->startDate,
-                'endDate' => 'required|date_format:d/m/Y h:i|after:startDate',
+                'startDate' => 'required|date_format:date_format:d/m/Y H:i',
+                'endDate' => 'required|date_format:d/m/Y H:i|after:startDate',
                 'title' => 'required',
                 'qty' => 'required|integer',
                 'tuk' => 'required'

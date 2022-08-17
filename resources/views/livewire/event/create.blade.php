@@ -14,7 +14,6 @@
                     @error('title') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <label for="exampleInputEmail1">Waktu Pelaksanaan</label>
-                {{$startDate}}
                 <div class="row">
                     <div class="col-12 col-md-5">
                         <div class="form-group">
