@@ -76,4 +76,11 @@ class SkemaAsesi extends Model
         return $this->hasOne(PersetujuanAsesmen::class, 'skema_asesi_id');
     }
 
+    public function meninjauAsesment() {
+        return $this->hasMany(MeninjauAsesment::class, 'skema_asesi_id');
+    }
+    public function meninjauAsesmentNotes() {
+        return $this->hasOne(MeninjauAsesmenNotes::class, 'skema_asesi_id');
+    }
+
 }

@@ -14,12 +14,14 @@ class Sertifikat extends Component
     public function render()
     {
 
-        $skemaAsesi = SkemaAsesi::where([
+        $skemaAsesi = SkemaAsesi::with('sertifikat')
+        ->where([
             'asesi_id' => Auth::user()->asesi->id,
             'skema_status' => 'Kompeten'
         ])
         ->get();
-
+        
+        // dd($skemaAsesi);
         
         return view('livewire.asesi.event.sertifikat', compact('skemaAsesi'));
     }

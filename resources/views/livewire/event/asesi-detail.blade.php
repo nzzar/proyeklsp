@@ -95,6 +95,9 @@
                             @if($skemaAsesi->feedBackNotes)
                             <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('feedback')"><i class="far fa-comment-alt"></i> Feed back</button>
                             @endif
+                            @if($skemaAsesi->meninjauAsesmentNotes)
+                            <button class="btn btn-sm btn-primary mr-1 mb-2 mb-md-1" wire:click="changeTab('tinjau')"><i class="fas fa-list-ul mr-1"></i>Meninjau Asesi</button>
+                            @endif
                         </div>
                         @if($skemaAsesi->status == 'Menunggu Keputusan')
                         <div class="d-flex">
@@ -120,6 +123,8 @@
     @livewire('event.asesi.observasi', ['id' => $skemaAsesiId])
     @elseif($tabActive == 'feedback')
     @livewire('event.asesi.feedback', ['id' => $skemaAsesiId])
+    @elseif($tabActive == 'tinjau')
+    @livewire('event.asesi.meninjau-asesmen', ['id' => $skemaAsesiId])
     @endif
 </div>
 

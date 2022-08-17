@@ -14,4 +14,8 @@ class AsesorController extends Controller
         return view('asesor.asesor-form' , compact('id'));
 
     }
+
+    public function meninjauAsesmen($id) {
+        return view('asesor.meninjau-asesment', compact('id'));
+    }
 }
