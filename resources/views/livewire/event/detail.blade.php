@@ -72,9 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if(in_array($status, ['Draft', 'Unapproved']))
                         <button class="btn btn-primary btn-block" wire:click.prevent="edit()">Simpan Perubahan</button>
-                        @endif
                         <small class="form-text text-muted">* Perubahan hanya dapat dilakukan ketika status Draft atau Tidak disetujui</small>
                     </div>
                 </div>

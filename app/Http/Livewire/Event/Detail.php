@@ -94,14 +94,15 @@ class Detail extends Component
             ]
         );
 
-
         $event = Event::findOrFail($this->eventId);
-        $event->skema_id = $this->skemaId;
-        $event->start_date = Carbon::createFromFormat('d/m/Y h:i', $this->startDate)->format('Y-m-d h:i');
-        $event->end_date = Carbon::createFromFormat('d/m/Y h:i', $this->endDate)->format('Y-m-d h:i');
-        $event->title = $this->title;
-        $event->qty = $this->qty;
-        $event->tuk = $this->tuk;
+        if(in_array($event->status, ['Draft', 'Unapproved'])) {
+            $event->skema_id = $this->skemaId;
+            $event->title = $this->title;
+            $event->qty = $this->qty;
+            $event->tuk = $this->tuk;
+        }
+        $event->start_date = Carbon::createFromFormat('d/m/Y H:i', $this->startDate)->format('Y-m-d H:i');
+        $event->end_date = Carbon::createFromFormat('d/m/Y H:i', $this->endDate)->format('Y-m-d H:i');
         $event->save();
 
 
