@@ -11,6 +11,7 @@ class Form extends Component
 {
 
     public $skemaAsesiId;
+    public $asesiId;
     public $view_file;
 
 
@@ -21,15 +22,29 @@ class Form extends Component
     ];
     
     public function mount($id) {
-        $this->skemaAsesiId = $id;
+
+        try {
+            $data = SkemaAsesi::findOrFail($id);
+            $this->asesiId = $data->asesi_id;
+            $this->skemaAsesiId = $id;
+
+        } catch (Exception $err) {
+            abort(404);
+        }
     }
     
     
     public function render()
-    {
+    {   
+        $asesiId = $this->asesiId;
 
         try {
-            $skema = SkemaAsesi::where('id', $this->skemaAsesiId)->firstOrFail();
+            $skema = SkemaAsesi::with([
+                'event.skema.persyaratan.asesi' => function($query) use ($asesiId) {
+                    $query->where('asesi_id', $asesiId);
+                }
+            ])
+            ->where('id', $this->skemaAsesiId)->firstOrFail();
         } catch (Exception $err) {
             abort(404);
         }
