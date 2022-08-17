@@ -69,7 +69,7 @@
             </span>
             @enderror
           </div>
-          <div class="row">
+          {{-- <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
                 <input type="checkbox" id="remember">
@@ -77,9 +77,9 @@
                   Remember Me
                 </label>
               </div>
-            </div>
+            </div> --}}
             <!-- /.col -->
-            <div class="col-4">
+            <div class="col-12">
               <button type="submit" class="btn btn-primary btn-block">Sign In</button>
             </div>
             <!-- /.col -->
@@ -87,11 +87,11 @@
         </form>
 
 
-        <p class="mb-1">
+        {{-- <p class="mb-1">
           <a href="forgot-password.html">I forgot my password</a>
-        </p>
+        </p> --}}
         <p class="mb-0">
-          <a href="register.html" class="text-center">Register a new membership</a>
+         <center><a href="/signup" class="text-center">Don't have account? SIGN UP</a></center>
         </p>
       </div>
       <!-- /.login-card-body -->
