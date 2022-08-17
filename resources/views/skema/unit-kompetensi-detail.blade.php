@@ -85,10 +85,11 @@
     })
 
     window.livewire.on('success-set-unjuk-kerja', (data, isDelete) => {
+        console.log(data);
         if(isDelete) {
             Swal.fire({
             icon: 'question',
-            title: `Yakin ingin menghapus Unjuk Kerja ${data.name}?`,
+            title: `Yakin ingin menghapus Unjuk Kerja`,
             showCancelButton: true,
             cancelButtonText: 'Batal',
             confirmButtonText: 'Hapus',
