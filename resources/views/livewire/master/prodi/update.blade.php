@@ -10,13 +10,13 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
-                    <input wire:model="name" type="text" class="form-control" placeholder="Enter name">
+                    <input wire:model="name" type="text" class="form-control" placeholder="Edit Prodi">
                     @error('name') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" wire:click.prevent="update()">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary" wire:click.prevent="update()">Simpan</button>
             </div>
         </div>
     </div>

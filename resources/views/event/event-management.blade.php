@@ -55,7 +55,7 @@ Event Sertifikasi Management
         multiple: false,
         allowClear: true,
         tags: true,
-        placeholder: "Pilih Skema"
+        placeholder: "Pilih skema"
     })
 
     //Date picker
@@ -142,7 +142,7 @@ Event Sertifikasi Management
                 multiple: false,
                 allowClear: true,
                 tags: true,
-                placeholder: "Pilih Skema"
+                placeholder: "Pilih skema"
             })
         }
     })
@@ -155,7 +155,7 @@ Event Sertifikasi Management
                 multiple: false,
                 allowClear: true,
                 tags: true,
-                placeholder: "Pilih Skema"
+                placeholder: "Pilih skema"
             })
         }
     })

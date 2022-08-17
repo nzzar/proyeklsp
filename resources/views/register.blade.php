@@ -4,7 +4,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Registration Page</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -108,7 +107,7 @@
           </div>
           <div class="row">
             <!-- /.col -->
-            <div class="col-4">
+            <div class="col-12">
               <button type="submit" class="btn btn-primary btn-block">Register</button>
             </div>
             <!-- /.col -->
@@ -116,7 +115,7 @@
         </form>
 
 
-        <a href="{{url('/login')}}" class="text-center">I already have a membership</a>
+        <a href="{{url('/login')}}" class="text-center">I already have accout</a>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->

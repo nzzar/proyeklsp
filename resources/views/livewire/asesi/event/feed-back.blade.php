@@ -130,8 +130,8 @@
 
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" form="" class="btn btn-primary" wire:click.prevent="setFeedback()" data-dismiss="modal">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    <button type="submit" form="" class="btn btn-primary" wire:click.prevent="setFeedback()" data-dismiss="modal">Simpan</button>
                 </div>
             </div>
         </div>

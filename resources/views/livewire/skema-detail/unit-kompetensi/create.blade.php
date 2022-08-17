@@ -10,18 +10,18 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Kode</label>
-                    <input wire:model="kode" type="text" class="form-control" placeholder="Enter kode">
+                    <input wire:model="kode" type="text" class="form-control" placeholder="Masukan kode">
                     @error('kode') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Judul</label>
-                    <input wire:model="judul" type="text" class="form-control" placeholder="Enter name">
+                    <input wire:model="judul" type="text" class="form-control" placeholder="Masukan Judul">
                     @error('judul') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" wire:click.prevent="save()" data-dismiss="modal">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary" wire:click.prevent="save()" data-dismiss="modal">Simpan</button>
             </div>
         </div>
     </div>

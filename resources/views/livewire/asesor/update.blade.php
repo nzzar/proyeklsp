@@ -13,12 +13,12 @@
                         <h6>Informasi akun</h6>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
-                            <input wire:model="email" type="email" class="form-control" placeholder="Enter email">
+                            <input wire:model="email" type="email" class="form-control" placeholder="Masukan email">
                             @error('email') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Password</label>
-                            <input wire:model="password" type="password" class="form-control" placeholder="Enter password">
+                            <input wire:model="password" type="password" class="form-control" placeholder="Masukan password">
                             @error('password') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
@@ -81,8 +81,8 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" wire:click.prevent="save()">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary" wire:click.prevent="save()">Simpan</button>
             </div>
         </div>
     </div>

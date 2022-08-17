@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Judul Event</label>
-                    <input wire:model="title" type="text" class="form-control  @error('title') is-invalid @enderror" placeholder="Masukanm judul Event">
+                    <input wire:model="title" type="text" class="form-control  @error('title') is-invalid @enderror" placeholder="Masukan judul event">
                     @error('title') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <label for="exampleInputEmail1">Waktu Pelaksanaan</label>
@@ -32,12 +32,12 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Kuota Peserta</label>
-                    <input wire:model="qty" type="number" class="form-control  @error('qty') is-invalid @enderror" placeholder="Masukan Jumlah Kuota Peserta">
+                    <input wire:model="qty" type="number" class="form-control  @error('qty') is-invalid @enderror" placeholder="Masukan kuota peserta">
                     @error('qty') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tempat Uji Kompetensi (TUK)</label>
-                    <input wire:model="tuk" type="text" class="form-control  @error('nik') is-invalid @enderror" placeholder="Masukanm TUK">
+                    <input wire:model="tuk" type="text" class="form-control  @error('nik') is-invalid @enderror" placeholder="Masukan TUK">
                     @error('tuk') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
 
@@ -74,8 +74,8 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" form="" class="btn btn-primary" wire:click.prevent="save()">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <button type="submit" form="" class="btn btn-primary" wire:click.prevent="save()">Simpan</button>
             </div>
         </div>
     </div>

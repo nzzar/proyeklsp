@@ -99,7 +99,7 @@
     function approveEvent(id) {
         Swal.fire({
             icon: 'question',
-            title: 'Approve event ?',
+            title: 'Approve event?',
             text: 'Pastikan semua data sudah diisi dengan benar!',
             showCancelButton: true,
         }).then((result) => {

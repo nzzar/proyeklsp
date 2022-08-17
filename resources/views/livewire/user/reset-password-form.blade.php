@@ -11,19 +11,19 @@
                 <form action="#" id="password-form">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Password</label>
-                        <input wire:model="password" type="password" class="form-control" placeholder="Enter email">
+                        <input wire:model="password" type="password" class="form-control" placeholder="Masukan password">
                         @error('password') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Confirm Password</label>
-                        <input wire:model="cpassword" type="password" class="form-control" placeholder="Enter email">
+                        <input wire:model="cpassword" type="password" class="form-control" placeholder="Confirm password">
                         @error('cpassword') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" wire:click.prevent="resetPassword()">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary" wire:click.prevent="resetPassword()">Simpan</button>
             </div>
         </div>
     </div>
