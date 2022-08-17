@@ -48,7 +48,7 @@ class Detail extends Component
                 'asesi_id' => Auth::user()->asesi->id
             ])
                 ->first();
-            
+
             if ($skema) {
                 $this->tujuan = $skema->tujuan_asesmen;
                 $now = Carbon::now();
@@ -69,16 +69,24 @@ class Detail extends Component
     {
 
         try {
+            $user = Auth::user();
+
             $eventId = $this->eventId;
             $asesi = Asesi::where('user_id', Auth::user()->id)->firstOrFail();
             $event = Event::where('status', 'Approved')
                 ->with([
                     'skema.unitKompetensi',
-                    'asesi' => function ($query) use ($eventId) {
-                        $query->where('event_id', $eventId);
+                    'asesi' => function ($query) use ($eventId, $user) {
+                        $query->where([
+                            'event_id' => $eventId,
+                            'asesi_id' => $user->asesi->id
+                        ]);
                     },
-                    'skema.persyaratan.asesi' => function ($query) use ($eventId) {
-                        $query->where('event_id', $eventId);
+                    'skema.persyaratan.asesi' => function ($query) use ($eventId, $user) {
+                        $query->where([
+                            'event_id' => $eventId,
+                            'asesi_id' => $user->asesi->id
+                        ]);
                     }
                 ])
                 ->where('id', $eventId)
@@ -87,7 +95,11 @@ class Detail extends Component
             if ($event->asesi) {
                 $this->signature = $event->asesi->ttd_asesi;
             }
-            $countUpload = PersyaratanAsesi::where('event_id', $this->eventId)->count();
+            $countUpload = PersyaratanAsesi::where([
+                'event_id' => $this->eventId,
+                'asesi_id' => $user->asesi->id
+            ])->count();
+
             $countSyarat = count($event->skema->persyaratan);
 
             if ($countSyarat != $countUpload) {
