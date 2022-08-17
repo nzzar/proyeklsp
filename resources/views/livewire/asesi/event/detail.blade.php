@@ -48,7 +48,7 @@ Registrasi Skema
                         </div>
                     </div>
                     @endif
-                    @if(($event->asesi->status ?? null) == 'Diterima')
+                    @if(($event->asesi->status ?? null) == 'Diterima' && !$event->asesi)
                         <div class="text-danger">* Lakukan asesmen mandiri pada tanggal {{$event->start_date}}</div>
                     @endif
                 </div>
