@@ -72,4 +72,8 @@ class SkemaAsesi extends Model
         return $this->hasOne(SertifikatAsesi::class, 'skema_asesi_id');
     }
 
+    public function assent() {
+        return $this->hasOne(PersetujuanAsesmen::class, 'skema_asesi_id');
+    }
+
 }

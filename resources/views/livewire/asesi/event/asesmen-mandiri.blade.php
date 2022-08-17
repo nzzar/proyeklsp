@@ -42,8 +42,8 @@
                         @if($skemaAsesi->asesmentMandiri)
                         <div class="row mb-2">
                             <div class="col-6 col-md-3">Rekomendasi</div>
-                            <div class="col ml-2">: 
-                                @if(is_null($skemaAsesi->asesmentMandiri->continue)) 
+                            <div class="col ml-2">:
+                                @if(is_null($skemaAsesi->asesmentMandiri->continue))
                                 <span class="badge badge-secondary"> Sedang ditinjau oleh asesor </span>
                                 @elseif($skemaAsesi->asesmentMandiri->continue)
                                 <span class="badge badge-success"> Asesmen dapat dilanjutkan </span>
@@ -156,7 +156,7 @@
                                             </div>
                                             <div class="col-4 border border-right-0">
                                                 <div class="font-weight-bold mb-2">Tanggal:</div>
-                                                {{$skemaAsesi->asesi->name}}
+                                                {{$skemaAsesi->asesmentMandiri->tgl_ttd_asesi ? \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesi)->format('d F Y') : '-'}}
                                             </div>
                                             <div class="col-4 border">
                                                 <div class="font-weight-bold mb-2">Tanda Tangan Asesi:</div>
@@ -175,13 +175,18 @@
                                             </div>
                                             <div class="col-4 border border-right-0 border-top-0">
                                                 <div class="font-weight-bold mb-2">Rekomendasi:</div>
-                                                Asesmen  <span class="font-weight-bold">dapat dilanjutkan / tidak dapat dilanjutkan</span>
+                                                @if(is_null($skemaAsesi->asesmentMandiri->continue))
+                                                    -
+                                                @else
+                                                Asesmen <span class="font-weight-bold">{{$skemaAsesi->asesmentMandiri->continue ? 'Dapat dilanjutkan' : 'Tidak dapat dilanjutkan'}}</span>
+                                                @endif
                                             </div>
                                             <div class="col-4 border border-top-0">
                                                 <div class="font-weight-bold mb-2">Tanda Tangan dan Tangal:</div>
                                                 <div style="width:150px; height: 100px;">
                                                     <img src="{{Storage::url($skemaAsesi->ttd_asesi)}}" class="h-100" alt="" srcset="">
                                                 </div>
+                                                <div>Tanggal: {{$skemaAsesi->asesmentMandiri->tgl_ttd_asesor ?  \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesor)->format('d F Y') : '-'}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -194,111 +199,120 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">FR.AK.01 PERSETUJUAN ASESMEN DAN KERAHASIAAN</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12 border p-2">Persetujuan Asesmen ini untuk menjamin bahwa asesi telah diberi arahan secara rinci tentang perencanaan dan proses asesmen</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 border border-top-0">Skema Sertifikasi</div>
-                            <div class="col">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="card-title">FR.AK.01 PERSETUJUAN ASESMEN DAN KERAHASIAAN</h6>
+                            </div>
+                            <div class="card-body">
+                                @if($skemaAsesi->assent)
                                 <div class="row">
-                                    <div class="col-3 border-right border-bottom p-1">judul</div>
-                                    <div class="col ml-2 font-weight-bold p-1 border-right border-bottom">Judul Skema</div>
+                                    <div class="col-12 border p-2">Persetujuan Asesmen ini untuk menjamin bahwa asesi telah diberi arahan secara rinci tentang perencanaan dan proses asesmen</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-3 border-right border-bottom p-1">Nomor</div>
-                                    <div class="col ml-2 font-weight-bold p-1 border-right border-bottom">Nomor Skema</div>
+                                    <div class="col-4 border border-top-0">Skema Sertifikasi</div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-3 border-right border-bottom p-1">judul</div>
+                                            <div class="col ml-2 font-weight-bold p-1 border-right border-bottom">{{$skemaAsesi->event->skema->name}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3 border-right border-bottom p-1">Nomor</div>
+                                            <div class="col ml-2 font-weight-bold p-1 border-right border-bottom">{{$skemaAsesi->event->skema->nomor}}</div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-6 border border-top-0 p-1">TUK</div>
+                                    <div class="col-6 border-right border-bottom p-1">{{$skemaAsesi->event->tuk}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 border border-top-0 p-1">Nama Asesor</div>
+                                    <div class="col-6 border-right border-bottom p-1">{{$skemaAsesi->asesor->name ?? '-'}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 border border-top-0 p-1">Nama Asesi</div>
+                                    <div class="col-6 border-right border-bottom p-1">{{$skemaAsesi->asesi->name}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 border border-top-0">Bukti yang akan dikumpulkan</div>
+                                    <div class="col-6 border-right border-bottom">
+                                        <div class="row">
+                                            <div class="col-6 border-right border-bottom p-1"> <i class="far @if($skemaAsesi->assent->portofolio) fa-check-square @else fa-square @endif"></i> TL: Verifikasi Portofolio</div>
+                                            <div class="col-6 p-1 border-bottom"> <i class="far @if($skemaAsesi->assent->observasi_langsung) fa-check-square @else fa-square @endif"></i> L: Observasi Langsung</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col p-1 border-bottom"> <i class="far @if($skemaAsesi->assent->tes_tulis) fa-check-square @else fa-square @endif"></i> TL: Hasil Tes Tulis</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col p-1 border-bottom"> <i class="far @if($skemaAsesi->assent->tes_lisan) fa-check-square @else fa-square @endif"></i> TL: Hasil Tes Lisan</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col p-1 border-bottom"><i class="far @if($skemaAsesi->assent->wawancara) fa-check-square @else fa-square @endif"></i> TL: Hasil Wawancara</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 border-right border-bottom p-1">Hari/Tanggal</div>
+                                            <div class="col p-1 border-bottom">{{\Carbon\Carbon::parse($skemaAsesi->assent->updated_at)->format('d F Y')}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 border-right border-bottom p-1">Waktu</div>
+                                            <div class="col p-1 border-bottom">{{\Carbon\Carbon::parse($skemaAsesi->assent->updated_at)->format('h:i')}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 border border-top-0 p-1">
+                                        <div class="font-weight-bold">Asesi:</div>
+                                        Bahwa Saya Sudah Mendapatkan Penjelasan Hak Dan Prosedur Banding Oleh Asesor
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 border border-top-0 p-1">
+                                        <div class="font-weight-bold">Asesor:</div>
+                                        Menyatakan tidak akan membuka hasil pekerjaan yang saya peroleh karena penugasan saya sebagai Asesor
+                                        dalam pekerjaan Sesmen kepada siapapun atau organisasi manapun selain kepada pihak yang berwenang sehubungan dengan kewajiban
+                                        saya sebagai Asesor yang ditugaskan oleh LSP.
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 border border-top-0 p-1">
+                                        <div class="font-weight-bold">Asesi:</div>
+                                        Saya setuju mengikuti asesmen dengan pemahaman bahwa informasi yang dikumpulkan hanya digunakan untuk pengembangan
+                                        profesional dan hanya dapat diakses oleh orang tertentu saja
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 border border-top-0 p-1">
+                                        <div>
+                                            <span>Tanda Tangan Asesi</span>
+                                        </div>
+                                        <div style="width: 200px; height: 150px;">
+                                            <img src="{{Storage::url($skemaAsesi->ttd_asesi)}}" alt="" srcset="" class="h-100">
+                                        </div>
+                                        <div>Tanggal: {{$skemaAsesi->asesmentMandiri->tgl_ttd_asesi ? \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesi)->format('d F Y') : '-'}}</div>
+                                    </div>
+                                    <div class="col-6 border border-top-0 p-1">
+                                        <div>
+                                            <span>Tanda Tangan Asesor</span>
+                                        </div>
+                                        <div style="width: 200px; height: 150px;">
+                                            @if($skemaAsesi->ttd_asesor)
+                                            <img src="{{Storage::url($skemaAsesi->ttd_asesor)}}" alt="" class="rounded w-100 mb-2">
+                                            @else
+                                            <div></div>
+                                            @endif
+                                        </div>
+                                        <div>Tanggal: {{$skemaAsesi->asesmentMandiri->tgl_ttd_asesor ?  \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesor)->format('d F Y') : '-'}}</div>
+                                    </div>
+                                </div>
+                                @else
+                                <div class="text-center text-secondary">
+                                    Asesi belum melakukan asesmen mandiri
+                                </div>
+                                @endif
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6 border border-top-0 p-1">TUK</div>
-                            <div class="col-6 border-right border-bottom p-1">Tempat Kerja</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 border border-top-0 p-1">Nama Asesor</div>
-                            <div class="col-6 border-right border-bottom p-1">Tempat Kerja</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 border border-top-0 p-1">Nama Asesi</div>
-                            <div class="col-6 border-right border-bottom p-1">Tempat Kerja</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 border border-top-0">Bukti yang akan dikumpulkan</div>
-                            <div class="col-6 border-right border-bottom">
-                                <div class="row">
-                                    <div class="col-6 border-right border-bottom p-1">TL: Verifikasi Portofolio</div>
-                                    <div class="col-6 p-1 border-bottom">L: Observasi Langsung</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col p-1 border-bottom">TL: Hasil Tes Tulis</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col p-1 border-bottom">TL: Hasil Tes Lisan</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col p-1 border-bottom">TL: Hasil Wawancara</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4 border-right border-bottom p-1">Hari/Tanggal</div>
-                                    <div class="col p-1 border-bottom"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4 border-right border-bottom p-1">Waktu</div>
-                                    <div class="col p-1 border-bottom"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4 border-right border-bottom p-1">TUK</div>
-                                    <div class="col p-1 border-bottom"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 border border-top-0 p-1">
-                                <div class="font-weight-bold">Asesi:</div>
-                                Bahwa Saya Sudah Mendapatkan Penjelasan Hak Dan Prosedur Banding Oleh Asesor
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 border border-top-0 p-1">
-                                <div class="font-weight-bold">Asesor:</div>
-                                Menyatakan tidak akan membuka hasil pekerjaan yang saya peroleh karena penugasan saya sebagai Asesor
-                                dalam pekerjaan Sesmen kepada siapapun atau organisasi manapun selain kepada pihak yang berwenang sehubungan dengan kewajiban
-                                saya sebagai Asesor yang ditugaskan oleh LSP.
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 border border-top-0 p-1">
-                                <div class="font-weight-bold">Asesi:</div>
-                                Saya setuju mengikuti asesmen dengan pemahaman bahwa informasi yang dikumpulkan hanya digunakan untuk pengembangan
-                                profesional dan hanya dapat diakses oleh orang tertentu saja
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 border border-top-0 p-1">
-                                <div>
-                                    <span>Tanda Tangan Asesi</span>
-                                </div>
-                                <div style="width: 200px; height: 150px;">
-                                    <img src="{{Storage::url($skemaAsesi->ttd_asesi)}}" alt="" srcset="">
-                                </div>
-                                <div>Tanggal:</div>
-                            </div>
-                            <div class="col-6 border border-top-0 p-1">
-                                <div>
-                                    <span>Tanda Tangan Asesor</span>
-                                </div>
-                                <div style="width: 200px; height: 150px;">
-
-                                </div>
-                                <div>Tanggal:</div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -379,25 +393,23 @@
 
     function saveAsesment() {
         Swal.fire({
-                icon: 'question',
-                title: `Simpan Data Asesment ?`,
-                html: 'Pastikan semua data telah diisi dengan benar, tidak dapat melakukan perubahan data setelah disimpan!',
-                showCancelButton: true,
-                cancelButtonText: 'Batal',
-                confirmButtonText: 'Simpan',
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Livewire.emit('saveAsesment')
-                }
+            icon: 'question',
+            title: `Simpan Data Asesment ?`,
+            html: 'Pastikan semua data telah diisi dengan benar, tidak dapat melakukan perubahan data setelah disimpan!',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Simpan',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                Livewire.emit('saveAsesment')
+            }
         })
     }
 
-    
+
     $('#select-syarat').change(function() {
         @this.set('persyaratan_id', $(this).val())
     })
-
-    
 </script>
 @stop

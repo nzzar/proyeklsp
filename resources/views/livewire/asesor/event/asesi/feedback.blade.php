@@ -12,7 +12,7 @@
                         <tr>
                             <th rowspan="2" class="align-middle text-center" style="width: 50% ;">Komponen</th>
                             <th colspan="2" class="text-center">Hasil</th>
-                            <th rowspan="2" class="align-middle text-center" style="max-width: 20% ;">Catatan Kompentar Asesi</th>
+                            <th rowspan="2" class="align-middle text-center" style="max-width: 20% ;">Catatan Komentar Asesi</th>
                             @if(!$skemaAsesi->feedBackNotes)
                             <th rowspan="2" class="align-middle text-center">Action</th>
                             @endif
