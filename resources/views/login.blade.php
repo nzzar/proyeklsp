@@ -81,6 +81,14 @@
             <!-- /.col -->
             <div class="col-12">
               <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </div><br>
+            <div class="text-center">
+              <span class="text-center">
+                Don't have account?
+              </span>
+              <a href="/signup" class="text-center"> 
+                Register here.... 
+              </a>
             </div>
             <!-- /.col -->
           </div>
@@ -90,9 +98,10 @@
         {{-- <p class="mb-1">
           <a href="forgot-password.html">I forgot my password</a>
         </p> --}}
-        <p class="mb-0">
+        
+        {{-- <p class="mb-0">
          <center><a href="/signup" class="text-center">Don't have account? SIGN UP</a></center>
-        </p>
+        </p> --}}
       </div>
       <!-- /.login-card-body -->
     </div>
