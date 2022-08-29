@@ -23,6 +23,7 @@ class AsesmentMandiri extends Component
     public $view_file;
     public $signature;
     public $continue;
+    public $canEdit = true;
 
     public $errorMessage;
 
@@ -49,6 +50,9 @@ class AsesmentMandiri extends Component
                     'skema_id' => $skemaAsesi->event->skema->id,
                 ])
                 ->get();
+
+            
+            
 
 
             $this->skemaAsesi = $skemaAsesi;
