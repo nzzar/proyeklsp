@@ -15,7 +15,7 @@
                                 <th class="text-center" style="width: 10% ;">Ya</th>
                                 <th class="text-center " style="width: 10% ;">Tidak</th>
                                 <th class="align-middle text-center" style="max-width: 20% ;">Kompentar</th>
-                                @if(!$skemaAsesi->meninjauAsesmentNotes)
+                                @if($canEdit)
                                 <th class="align-middle text-center">Action</th>
                                 @endif
                             </tr>
@@ -37,7 +37,7 @@
                                 <td>
                                     {{$tinjau->komentar}}
                                 </td>
-                                @if(!$skemaAsesi->meninjauAsesmentNotes)
+                                @if($canEdit)
                                 <td class="align-middle text-center" style="max-width: 3%;"><button class="btn btn-sm btn-primary" wire:click="tinjau('{{$tinjau->id}}')">Hasil</button></td>
                                 @endif
                             </tr>
@@ -71,7 +71,7 @@
                             </td>
                         </tr>
                     </table>
-                    @if(!$skemaAsesi->meninjauAsesmentNotes)
+                    @if($canEdit)
                     <div id="save-container">
                         <button class="btn btn-block btn-primary mt-3 btn-save">Simpan</button>
                     </div>

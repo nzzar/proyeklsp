@@ -9,6 +9,7 @@ use App\Models\Skema;
 use App\Models\SkemaAsesi;
 use App\Models\UmpanBalik;
 use App\Models\UnjukKerja;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +22,7 @@ class Observasi extends Component
     public $rekomendasi;
     public $errorMessage;
     public $validAsesor;
+    public $canEdit = true;
 
     protected $listeners = [
         'save-observasi' => 'saveCeklistObservasi'
@@ -30,6 +32,11 @@ class Observasi extends Component
     {
         try {
             $this->skemaAsesi = SkemaAsesi::with(['event', 'asesmentMandiri', 'asesor', 'asesi'])->findOrFail($id);
+
+            $endDate = Carbon::parse($this->skemaAsesi->event->end_date);
+            $now = Carbon::now();
+
+            $this->canEdit = $endDate->gte($now);
         } catch (Exception $err) {
             abort(404);
         }
@@ -84,6 +91,8 @@ class Observasi extends Component
 
     public function ceklis($id, $value)
     {
+
+        if (!$this->canEdit) return;
 
         DB::beginTransaction();
         try {
@@ -169,6 +178,8 @@ class Observasi extends Component
     public function saveCeklistObservasi()
     {
 
+        if(!$this->canEdit) return;
+        
         DB::beginTransaction();
         try {
             $skemaAsesi = SkemaAsesi::findOrFail($this->skemaAsesi->id);
@@ -176,85 +187,91 @@ class Observasi extends Component
             $skemaAsesi->save();
 
             $skemaAsesiId = $this->skemaAsesi->id;
-            $feedbacks = [
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'komponen' => 'Saya mendapatkan penjelasan yang cukup memadai mengenai proses asesmen/uji kompetensi',
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'komponen' => 'Saya diberikan kesempatan untuk mempelajari standar kompetensi yang akan diujikan dan menilai diri sendiri terhadap pencapaiannya',
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'komponen' => 'Asesor memberikan kesempatan untuk mendiskusikan/menegosiasikan metoda, instrumen dan sumber asesmen serta jadwal asesmen',
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'komponen' => 'Saya sepenuhnya diberikan kesempatan untuk mendemonstrasikan kompetensi yang saya miliki selama asesmen',
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'komponen' => 'Asesor memberikan umpan balik yang mendukung setelah asesmen serta tindak lanjutnya',
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'komponen' => 'Asesor bersama  saya mempelajari semua dokumen asesmen serta menandatanganinya',
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'komponen' => 'Saya mendapatkan jaminan kerahasiaan hasil asesmen serta penjelasan penanganan dokumen asesmen',
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'komponen' => 'Asesor menggunakan keterampilan komunikasi yang efektif selama asesmen',
-                ],
-            ];
+
+            $availabelFeedback = UmpanBalik::where('skema_asesi_id', $skemaAsesiId)->first();
+
+            if (!$availabelFeedback) {
 
 
-            UmpanBalik::insert($feedbacks);
+                $feedbacks = [
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'komponen' => 'Saya mendapatkan penjelasan yang cukup memadai mengenai proses asesmen/uji kompetensi',
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'komponen' => 'Saya diberikan kesempatan untuk mempelajari standar kompetensi yang akan diujikan dan menilai diri sendiri terhadap pencapaiannya',
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'komponen' => 'Asesor memberikan kesempatan untuk mendiskusikan/menegosiasikan metoda, instrumen dan sumber asesmen serta jadwal asesmen',
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'komponen' => 'Saya sepenuhnya diberikan kesempatan untuk mendemonstrasikan kompetensi yang saya miliki selama asesmen',
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'komponen' => 'Asesor memberikan umpan balik yang mendukung setelah asesmen serta tindak lanjutnya',
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'komponen' => 'Asesor bersama  saya mempelajari semua dokumen asesmen serta menandatanganinya',
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'komponen' => 'Saya mendapatkan jaminan kerahasiaan hasil asesmen serta penjelasan penanganan dokumen asesmen',
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'komponen' => 'Asesor menggunakan keterampilan komunikasi yang efektif selama asesmen',
+                    ],
+                ];
 
-            $meninjau = [
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'kegiatan_asesmen' => 'Instruksi perangkat asesmen dan kondisi asesmen diidentifikasi dengan jelas'
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'kegiatan_asesmen' => 'Informasi tertulis dituliskan secara tepat'
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'kegiatan_asesmen' => 'Kegiatan asesmen mebahas persyaratan bukti untuk kompetensi yang diases'
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'kegiatan_asesmen' => 'Tingkat kesulitan bahasa, literasi, dan berhitung sesuai dengan tingkat unit kompetensi yang dinilai'
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'kegiatan_asesmen' => 'Tingkat kesulitan bahasa, literasi, dan berhitung sesuai dengan tingkat unit kompetensi yang dinilai'
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'kegiatan_asesmen' => 'Tingkat kesulitan kegiatan disesuaikan dengan kompetensi atau kompetensi yang diases'
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'kegiatan_asesmen' => 'Contoh, benchmark dan / atau ceklis asesmen tersedia untuk digunakan dalam pengambilan keputusan asesmen '
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'kegiatan_asesmen' => 'Diperlukan modifikasi (seperti yang diidentifikasi dalam komentar)'
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesiId,
-                    'kegiatan_asesmen' => 'Tugas asesmen siap digunakan'
-                ],
-            ];
 
-            MeninjauAsesment::insert($meninjau);
+                UmpanBalik::insert($feedbacks);
 
+                $meninjau = [
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'kegiatan_asesmen' => 'Instruksi perangkat asesmen dan kondisi asesmen diidentifikasi dengan jelas'
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'kegiatan_asesmen' => 'Informasi tertulis dituliskan secara tepat'
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'kegiatan_asesmen' => 'Kegiatan asesmen mebahas persyaratan bukti untuk kompetensi yang diases'
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'kegiatan_asesmen' => 'Tingkat kesulitan bahasa, literasi, dan berhitung sesuai dengan tingkat unit kompetensi yang dinilai'
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'kegiatan_asesmen' => 'Tingkat kesulitan bahasa, literasi, dan berhitung sesuai dengan tingkat unit kompetensi yang dinilai'
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'kegiatan_asesmen' => 'Tingkat kesulitan kegiatan disesuaikan dengan kompetensi atau kompetensi yang diases'
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'kegiatan_asesmen' => 'Contoh, benchmark dan / atau ceklis asesmen tersedia untuk digunakan dalam pengambilan keputusan asesmen '
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'kegiatan_asesmen' => 'Diperlukan modifikasi (seperti yang diidentifikasi dalam komentar)'
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesiId,
+                        'kegiatan_asesmen' => 'Tugas asesmen siap digunakan'
+                    ],
+                ];
+
+                MeninjauAsesment::insert($meninjau);
+            }
             DB::commit();
 
             $this->dispatchBrowserEvent('swal', [

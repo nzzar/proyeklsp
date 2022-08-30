@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Asesor\Event\Asesi;
 use App\Models\MeninjauAsesmenNotes;
 use App\Models\MeninjauAsesment;
 use App\Models\SkemaAsesi;
+use Carbon\Carbon;
 use Exception;
 use Livewire\Component;
 
@@ -16,7 +17,8 @@ class MeninjauAsesmen extends Component
     public $tinjauId;
     public $notes;
     public $otherNotes;
-    
+    public $canEdit = true;
+
     protected $listeners = [
         'save'
     ];
@@ -24,8 +26,13 @@ class MeninjauAsesmen extends Component
     public function mount($id)
     {
         try {
-           SkemaAsesi::findOrFail($id);
+          $skemaAsesi  = SkemaAsesi::findOrFail($id);
            $this->skemaAsesiId = $id;
+
+           $endDate = Carbon::parse($skemaAsesi->event->end_date);
+           $now = Carbon::now();
+
+           $this->canEdit = $endDate->gte($now);
         } catch (Exception $err) {
             abort(404);
         }
@@ -38,6 +45,8 @@ class MeninjauAsesmen extends Component
     }
 
     public function tinjau($id) {
+        if(!$this->canEdit)  return;
+        
         try {
 
             $tinjau = MeninjauAsesment::findOrFail($id);
@@ -62,6 +71,7 @@ class MeninjauAsesmen extends Component
     }
 
     public function setTinjau() {
+        if(!$this->canEdit)  return;
         try {
             $item = MeninjauAsesment::findOrFail($this->tinjauId);
             $item->komentar = $this->notes;
@@ -93,9 +103,16 @@ class MeninjauAsesmen extends Component
     }
 
     public function save() {
+        if(!$this->canEdit)  return;
+        
         try {
 
-            $data = new MeninjauAsesmenNotes();
+            $data = MeninjauAsesmenNotes::where('skema_asesi_id', $this->skemaAsesiId)->first();
+
+            if(!$data) {
+                $data = new MeninjauAsesmenNotes();
+            }
+
             $data->skema_asesi_id = $this->skemaAsesiId;
             $data->komentar = $this->otherNotes;
             $data->save();

@@ -54,18 +54,18 @@
                                             @if(count($element->unjukKerja) > 0)
                                             <td class="align-middle text-center">
                                                 @if($element->unjukKerja[0]->asesi->kompeten ?? false)
-                                                <i class="far fa-check-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$element->unjukKerja[0]->id}}', true)" @endif></i>
+                                                <i class="far fa-check-square"  wire:click="ceklis('{{$element->unjukKerja[0]->id}}', true)"></i>
                                                 @else
-                                                <i class="far fa-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$element->unjukKerja[0]->id}}', true)" @endif></i>
+                                                <i class="far fa-square"  wire:click="ceklis('{{$element->unjukKerja[0]->id}}', true)"></i>
                                                 @endif
 
                                             </td>
                                             <td class="align-middle text-center">
 
                                                 @if($element->unjukKerja[0]->asesi && !($element->unjukKerja[0]->asesi->kompeten ?? false))
-                                                <i class="far fa-check-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$element->unjukKerja[0]->id}}', false)" @endif></i>
+                                                <i class="far fa-check-square"  wire:click="ceklis('{{$element->unjukKerja[0]->id}}', false)"></i>
                                                 @else
-                                                <i class="far fa-square"  @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$element->unjukKerja[0]->id}}', false)" @endif></i>
+                                                <i class="far fa-square"   wire:click="ceklis('{{$element->unjukKerja[0]->id}}', false)"></i>
                                                 @endif
 
                                             </td>
@@ -80,17 +80,17 @@
                                             <td>{{$kerja->description}}</td>
                                             <td class="align-middle text-center">
                                                 @if($kerja->asesi && $kerja->asesi->kompeten ?? false)
-                                                <i class="far fa-check-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$kerja->id}}', true)" @endif></i>
+                                                <i class="far fa-check-square"  wire:click="ceklis('{{$kerja->id}}', true)"></i>
                                                 @else
-                                                <i class="far fa-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$kerja->id}}', true)" @endif></i>
+                                                <i class="far fa-square"  wire:click="ceklis('{{$kerja->id}}', true)"></i>
                                                 @endif
 
                                             </td>
                                             <td class="align-middle text-center">
                                                 @if($kerja->asesi && !($kerja->asesi->kompeten ?? false))
-                                                <i class="far fa-check-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$kerja->id}}', false)" @endif></i>
+                                                <i class="far fa-check-square"  wire:click="ceklis('{{$kerja->id}}', false)"></i>
                                                 @else
-                                                <i class="far fa-square" @if(!$skemaAsesi->skema_status) wire:click="ceklis('{{$kerja->id}}', false)" @endif></i>
+                                                <i class="far fa-square"  wire:click="ceklis('{{$kerja->id}}', false)"></i>
                                                 @endif
                                             </td>
                                         </tr>
@@ -167,7 +167,7 @@
                     </thead>
                     <tbody>
 
-                        @if(!$skemaAsesi->skema_status)
+                        @if($canEdit)
                         @foreach($skemaAsesi->ceklisObservasi as $ceklis)
                         <tr>
                             <td>{{$ceklis->unit_kompetensi}}</td>
@@ -244,7 +244,7 @@
                         @endif
                     </tbody>
                 </table>
-                @if(!$skemaAsesi->skema_status)
+                @if($canEdit)
                 <div id="rekomdasi-container">
                     @if(!$errorMessage)
                     <button class="btn btn-primary btn-block mt-1" id="save-observasi">Simpan Observasi</button>
