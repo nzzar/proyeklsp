@@ -18,6 +18,7 @@ class MeninjauAsesmen extends Component
     public $notes;
     public $otherNotes;
     public $canEdit = true;
+    public $skemaAsesi;
 
     protected $listeners = [
         'save'
@@ -26,10 +27,10 @@ class MeninjauAsesmen extends Component
     public function mount($id)
     {
         try {
-          $skemaAsesi  = SkemaAsesi::findOrFail($id);
+            $this->skemaAsesi  = SkemaAsesi::findOrFail($id);
            $this->skemaAsesiId = $id;
 
-           $endDate = Carbon::parse($skemaAsesi->event->end_date);
+           $endDate =  Carbon::createFromFormat('d/m/Y H:i', $this->skemaAsesi->event->end_date);
            $now = Carbon::now();
 
            $this->canEdit = $endDate->gte($now);

@@ -28,9 +28,6 @@
                                             <th>K</th>
                                             <th>BK</th>
                                             <th>Bukti yang relevan</th>
-                                            @if(!$skemaAsesi->asesmentMandiri)
-                                            <th>Action</th>
-                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -66,9 +63,6 @@
                                                 </button>
                                                 @endif
                                             </td>
-                                            @if(!$skemaAsesi->asesmentMandiri)
-                                            <td class="text-center align-middle"><button class="btn btn-info btn-sm" wire:click.prevent="asesmen('{{$element->id}}')" )>Rekomendasi</button></td>
-                                            @endif
                                         </tr>
                                         @empty
                                         -
@@ -155,10 +149,25 @@
                                         <div class="font-weight-bold mb-2">Nama Asesor:</div>
                                         {{$skemaAsesi->asesor->name}}
                                     </div>
+                                    @if(!$canEdit)
                                     <div class="col-4 border border-right-0 border-top-0">
                                         <div class="font-weight-bold mb-2">Rekomendasi:</div>
                                         Asesmen <span class="font-weight-bold"> @if($skemaAsesi->asesmentMandiri->continue) Dapat dilanjutkan @else Tidak dapat dilanjutkan @endif </span>
                                     </div>
+                                    @else 
+                                    <div class="col-4 border border-right-0 border-top-0">
+                                        <div class="font-weight-bold mb-2">Rekomendasi:</div>
+                                        Asesmen
+                                        <div class="form-check" wire:click="$set('continue', true)">
+                                            <input class="form-check-input" type="radio" name="radio1" checked="" id="form-check-label1">
+                                            <label class="form-check-label" for="form-check-label1">dapat dilanjutkan</label>
+                                        </div>
+                                        <div class="form-check" wire:click="$set('continue', false)">
+                                            <input class="form-check-input" type="radio" name="radio1" checked="" id="form-check-label2">
+                                            <label class="form-check-label" for="form-check-label2">tidak dapat dilanjutkan</label>
+                                        </div>
+                                    </div>
+                                    @endif
                                     <div class="col-4 border border-top-0">
                                         <div class="font-weight-bold mb-2">Tanda Tangan dan Tangal:</div>
 
@@ -289,14 +298,14 @@
                             </div>
                         </div>
                         <div id="test-container">
-                            @if(!$skemaAsesi->asesor)
+                            @if($canEdit)
                             @if(!$errorMessage)
                             <button class="btn btn-primary btn-block mt-1" id="save-rekomendasi">Simpan Rekomendasi</button>
                             @else
                             <div class="text-danger">
                                 {{$errorMessage}}
                             </div>
-                            <button class="btn btn-primary btn-block mt-1" disabled>Simpan Rekomendasi</button>
+                                <button class="btn btn-primary btn-block mt-1" disabled>Simpan Rekomendasi</button>
                             @endif
                             @endif
                         </div>
