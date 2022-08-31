@@ -67,7 +67,7 @@
                             <div class="col-2 text-center">Sampai</div>
                             <div class="col-12 col-md-5">
                                 <div class="form-group">
-                                    <input readonly type="text" value="{{$endDate}}" class="form-control  @error('endDate') is-invalid @enderror" id="end-date">
+                                    <input readonly type="text" value="{{$endDate}}" wire:bind="endDate" class="form-control  @error('endDate') is-invalid @enderror" id="end-date">
                                     @error('endDate') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
@@ -126,12 +126,22 @@
         },
     })
 
+    $('#start-date').change(function() {
+        let val = $(this).val()
+        @this.$set('startDate', val)
+    })
+
     $('#end-date').daterangepicker({
         timePicker: true,
         singleDatePicker: true,
         locale: {
             format: 'DD/MM/YYYY HH:mm'
         },
+    })
+
+    $('#end-date').change(function() {
+        let val = $(this).val()
+        @this.$set('endDate', val)
     })
 
     function proposeEvent() {

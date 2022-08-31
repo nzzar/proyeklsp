@@ -51,11 +51,12 @@ class AsesmentMandiri extends Component
                 ])
                 ->get();
 
-            
-            
-
-
             $this->skemaAsesi = $skemaAsesi;
+
+            $endDate =  Carbon::createFromFormat('d/m/Y H:i', $this->skemaAsesi->event->end_date);
+            $now = Carbon::now();
+
+            $this->canEdit = $endDate->gte($now);
         } catch (Exception $err) {
             abort('404');
         }
@@ -64,7 +65,7 @@ class AsesmentMandiri extends Component
     public function render()
     {
 
-        if (is_null($this->continue) && !$this->signature) {
+        if (is_null($this->continue) && !$this->signature && !$this->skemaAsesi->asesor) {
             $this->errorMessage = '* Rekomendasi dan tanda tangan tidak boleh kosong';
         } else {
             $this->errorMessage = null;
@@ -103,16 +104,18 @@ class AsesmentMandiri extends Component
             $skemaAsesi = SkemaAsesi::with('asesmentMandiri')
                 ->findOrFail($this->skemaAsesi->id);
 
-            if ($skemaAsesi->asesor) {
+            if ($skemaAsesi->asesor && !$this->canEdit) {
                 throw new Exception("Asesi sudah diberi rekomendasi");
             }
             $skemaAsesi->asesor_id = Auth::user()->asesor->id;
 
-            $file_name = 'signature_asesor' . time() . '_' . Auth::user()->asesor->id . '.' . $this->signature->getClientOriginalExtension();
-            $file_path = $this->signature->storeAs("public/event/" . $this->skemaAsesi->event_id . "/asesi" . "/" . $skemaAsesi->asesi_id . "/", $file_name);
-
-            $skemaAsesi->ttd_asesor = $file_path;
-            $skemaAsesi->save();
+            if(!$skemaAsesi->asesor) {
+                $file_name = 'signature_asesor' . time() . '_' . Auth::user()->asesor->id . '.' . $this->signature->getClientOriginalExtension();
+                $file_path = $this->signature->storeAs("public/event/" . $this->skemaAsesi->event_id . "/asesi" . "/" . $skemaAsesi->asesi_id . "/", $file_name);
+                
+                $skemaAsesi->ttd_asesor = $file_path;
+                $skemaAsesi->save();
+            }
 
             $asesmenResult = AsesmentMandiriResult::findOrFail($skemaAsesi->asesmentMandiri->id);
             $asesmenResult->continue = $this->continue;
@@ -150,6 +153,7 @@ class AsesmentMandiri extends Component
                 'position' => 'top-right'
             ]);
         } catch (Exception $err) {
+            dd($err);
             DB::rollBack();
             $this->dispatchBrowserEvent('swal', [
                 'title' => 'Error !',
@@ -163,16 +167,19 @@ class AsesmentMandiri extends Component
         }
     }
 
-    public function savePersetujuan($field, $value = false) {
+    public function savePersetujuan($field, $value = false)
+    {
+        if(!$this->canEdit) return;
+        
         try {
             $skemaAsesi = SkemaAsesi::findOrFail($this->skemaAsesi->id);
             $this->skemaAsesi = $skemaAsesi;
-            if($skemaAsesi->asesor) {
-                return;
-            }
-            
+            // if ($skemaAsesi->asesor) {
+            //     return;
+            // }
+
             $persetujuan = PersetujuanAsesmen::where('skema_asesi_id', $skemaAsesi->id)
-            ->firstOrFail();
+                ->firstOrFail();
 
             $persetujuan->{$field} = $value;
             $persetujuan->save();
@@ -186,8 +193,7 @@ class AsesmentMandiri extends Component
                 'showConfirmButton' => false,
                 'position' => 'top-right'
             ]);
-
-        } catch(Exception $err) {
+        } catch (Exception $err) {
             $this->dispatchBrowserEvent('swal', [
                 'title' => 'Error !',
                 'text' => 'Gagal update persetujuan',

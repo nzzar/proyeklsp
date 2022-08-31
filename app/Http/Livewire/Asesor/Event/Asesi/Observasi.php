@@ -33,11 +33,12 @@ class Observasi extends Component
         try {
             $this->skemaAsesi = SkemaAsesi::with(['event', 'asesmentMandiri', 'asesor', 'asesi'])->findOrFail($id);
 
-            $endDate = Carbon::parse($this->skemaAsesi->event->end_date);
+            $endDate = Carbon::createFromFormat('d/m/Y H:i', $this->skemaAsesi->event->end_date);
             $now = Carbon::now();
 
             $this->canEdit = $endDate->gte($now);
         } catch (Exception $err) {
+            // dd($err);
             abort(404);
         }
     }

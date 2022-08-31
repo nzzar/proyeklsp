@@ -16,6 +16,10 @@ class Index extends Component
     public $tabActive;
     public $validPersyaratan;
 
+    protected $listeners = [
+        'refress-parent' => 'refress'
+    ];
+
     public function mount($id) {
         $this->tabActive = 'form';
         $this->skemaAsesiId = $id;
@@ -49,5 +53,9 @@ class Index extends Component
     public function changeTab($tab) {
         $this->tabActive = $tab;
         $this->emit('tab-'.$this->tabActive);
+    }
+
+    public function  refress() {
+
     }
 }
