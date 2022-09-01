@@ -29,14 +29,24 @@
             <div class="card p-2 p-md-3">
                 <h5>Data Pribadi</h5>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">NIK</label>
+                    <label for="exampleInputEmail1">Nama Lengkap</label>
+                    <input name="name" type="text" class="form-control  @error('name') is-invalid @enderror" placeholder="Masukan nama lengkap" wire:model="name">
+                    @error('name') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">No. KTP/NIK/Paspor</label>
                     <input name="nik" type="text" class="form-control  @error('nik') is-invalid @enderror" placeholder="Masukan NIK" wire:model="nik">
                     @error('nik') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Nama Lengkap</label>
-                    <input name="name" type="text" class="form-control  @error('name') is-invalid @enderror" placeholder="Masukan nama lengkap" wire:model="name">
-                    @error('name') <span class="text-danger">{{ $message }}</span>@enderror
+                    <label for="exampleInputEmail1">Tempat Lahir</label>
+                    <input name="tmpt_lahir" type="text" class="form-control  @error('tmpt_lahir') is-invalid @enderror" placeholder="Masukan tempat lahir" wire:model="tmpt_lahir">
+                    @error('tmpt_lahir') <span class="text-danger">{{ $message }}</span>@enderror
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tanggal Lahir</label>
+                    <input value="{{$birth_date}}" name="birth_date" type="text" class="form-control @error('birth_date') is-invalid @enderror" placeholder="Masukan tgl. lahir" id="birth-date">
+                    @error('birth_date') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <label for="exampleInputEmail1">Jenis Kelamin</label>
                 <div class="form-group clearfix">
@@ -52,16 +62,6 @@
                             Perempuan
                         </label>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Tempat Lahir</label>
-                    <input name="tmpt_lahir" type="text" class="form-control  @error('tmpt_lahir') is-invalid @enderror" placeholder="Masukan tempat lahir" wire:model="tmpt_lahir">
-                    @error('tmpt_lahir') <span class="text-danger">{{ $message }}</span>@enderror
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Tanggal Lahir</label>
-                    <input value="{{$birth_date}}" name="birth_date" type="text" class="form-control @error('birth_date') is-invalid @enderror" placeholder="Masukan tgl. lahir" id="birth-date">
-                    @error('birth_date') <span class="text-danger">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Kebangsaan</label>
@@ -116,23 +116,23 @@
                 <div class="card-body">
                     <h5>No. Telepon/E-mail</h5>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email</label>
-                        <input wire:model="email" name="email" type="text" class="form-control" placeholder="" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">HP</label>
-                        <input wire:model="phone" name="kebangsaan" type="text" class="form-control @error('phone') is-invalid @enderror" placeholder="Masukan phone">
-                        @error('phone') <span class="text-danger">{{ $message }}</span>@enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Tlp. Rumah</label>
+                        <label for="exampleInputEmail1"> Rumah</label>
                         <input wire:model="house_phone" name="house_phone" type="text" class="form-control @error('house_phone') is-invalid @enderror" placeholder="Masukan telepon rumah">
                         @error('house_phone') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Tlp. Kantor</label>
+                        <label for="exampleInputEmail1"> HP</label>
+                        <input wire:model="phone" name="kebangsaan" type="text" class="form-control @error('phone') is-invalid @enderror" placeholder="Masukan nomor hp">
+                        @error('phone') <span class="text-danger">{{ $message }}</span>@enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Kantor</label>
                         <input wire:model="office_phone" name="office_phone" type="text" class="form-control @error('office_phone') is-invalid @enderror" placeholder="Masukan telepon kantor">
                         @error('office_phone') <span class="text-danger">{{ $message }}</span>@enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input wire:model="email" name="email" type="text" class="form-control" placeholder="" disabled>
                     </div>
                 </div>
             </div>
