@@ -55,9 +55,9 @@ Registrasi Skema
                 @if(($event->asesi->status ?? null) == 'Diterima')
                 <div class="card-footer">
                     @if($validAsesmen)
-                    <a href="{{url('/event/'.$event->asesi->id.'/asesmen-mandiri')}}" class="btn btn-sm btn-primary">Asessment Mandiri</a >
+                    <a href="{{url('/event/'.$event->asesi->id.'/asesmen-mandiri')}}" class="btn btn-sm btn-primary">Asesment Mandiri</a >
                     @else 
-                    <button class="btn btn-sm btn-primary" disabled>Asessment Mandiri</button>
+                    <button class="btn btn-sm btn-primary" disabled>Asesment Mandiri</button>
                     @endif
                     @if($event->asesi->skema_status ?? null)
                     <a href="{{url('/asesi/umpan-balik-asesi/'.$event->asesi->id)}}" class="btn btn-sm btn-primary">Feed back</a>
