@@ -125,24 +125,6 @@ Registrasi Skema
                                     <div class="form-group row my-0">
                                         <div class="col-5">
                                             <div class="form-group row my-0">
-                                                <label for="staticEmail" class="col-sm-4 col-form-label">HP</label>
-                                                <div class="col">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$asesi->phone}}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-5">
-                                            <div class="form-group row my-0">
-                                                <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
-                                                <div class="col">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$asesi->user->email}}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row my-0">
-                                        <div class="col-5">
-                                            <div class="form-group row my-0">
                                                 <label for="staticEmail" class="col-sm-4 col-form-label">Tlp. Rumah</label>
                                                 <div class="col">
                                                     <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$asesi->house_phone}}">
@@ -154,6 +136,24 @@ Registrasi Skema
                                                 <label for="staticEmail" class="col-sm-4 col-form-label">Tlp. Kantor</label>
                                                 <div class="col">
                                                     <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$asesi->office_phone}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row my-0">
+                                        <div class="col-5">
+                                            <div class="form-group row my-0">
+                                                <label for="staticEmail" class="col-sm-4 col-form-label">HP</label>
+                                                <div class="col">
+                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$asesi->phone}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group row my-0">
+                                                <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                                                <div class="col">
+                                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$asesi->user->email}}">
                                                 </div>
                                             </div>
                                         </div>

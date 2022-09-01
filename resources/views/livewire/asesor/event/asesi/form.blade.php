@@ -119,7 +119,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h6>Bagian 2 : Data Sertifikasi</h6>
-                                <p>Tuliskan Judul dan nomor Skema Sertifikasi yang anda ajukan berikut Daftar Unit Kompetensi <br> sesuai kemasan pada skema sertifikasi untuk mendapatkan pengakuan sesuai dengan latar belakang pendidikanm pelatihan serta pengalaman kerja yang anda miliki</p>
+                                <p>Tuliskan Judul dan nomor Skema Sertifikasi yang anda ajukan berikut Daftar Unit Kompetensi <br> sesuai kemasan pada skema sertifikasi untuk mendapatkan pengakuan sesuai dengan latar belakang pendidika pelatihan serta pengalaman kerja yang anda miliki</p>
+
                                 <table class="table table-bordered mt-5">
                                     <tbody>
                                         <tr>

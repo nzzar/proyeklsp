@@ -121,15 +121,16 @@
                         @error('house_phone') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1"> HP</label>
-                        <input wire:model="phone" name="kebangsaan" type="text" class="form-control @error('phone') is-invalid @enderror" placeholder="Masukan nomor hp">
-                        @error('phone') <span class="text-danger">{{ $message }}</span>@enderror
-                    </div>
-                    <div class="form-group">
                         <label for="exampleInputEmail1"> Kantor</label>
                         <input wire:model="office_phone" name="office_phone" type="text" class="form-control @error('office_phone') is-invalid @enderror" placeholder="Masukan telepon kantor">
                         @error('office_phone') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> HP</label>
+                        <input wire:model="phone" name="kebangsaan" type="text" class="form-control @error('phone') is-invalid @enderror" placeholder="Masukan nomor hp">
+                        @error('phone') <span class="text-danger">{{ $message }}</span>@enderror
+                    </div>
+                    
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
                         <input wire:model="email" name="email" type="text" class="form-control" placeholder="" disabled>

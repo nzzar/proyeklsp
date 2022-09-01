@@ -24,17 +24,17 @@ class AssesorSeeder extends Seeder
         Asesor::insert([
             'user_id' => $user->id,
             'nik' => '12343545',
-            'name' => 'Aay bae',
+            'name' => 'Adi Suheryadi',
             'birth_date' => '1999-05-20',
-            'phone' => '0871232323',
+            'phone' => '085224100168',
             'gender' => 'p',
-            'address' => 'not empty ok !',
-            'reg_number' => 'REG-12345678',
-            'blanko_number' => 'BLANKO-12345',
+            'address' => 'Cirebon',
+            'reg_number' => 'No. Reg. Met.000.007167 2018',
+            'blanko_number' => '5922222',
             'education' => 'S1 Management',
-            'profession' => 'Profession Copywriter',
-            'start_date' => '2020-05-20',
-            'expired_date' => '2023-05-20',
+            'profession' => 'Dosen',
+            'start_date' => '2021-03-26',
+            'expired_date' => '2024-03-26',
         ]);
 
     }
