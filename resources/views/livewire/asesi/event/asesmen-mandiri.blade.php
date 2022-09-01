@@ -76,6 +76,17 @@
                                 </div>
 
                                 <div id="collapse-{{$kompetensi->id}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6>Panduan Asesmen Mandiri</h6>
+                                            <p>Instruksi:</p>
+                                            <ul>
+                                                <li>Baca setiap pertanyaan di kolom sebelah kiri</li>
+                                                <li>Beri Tanda centang (v) pada kotak jika Anda yakin dapat melakukan tugas yang dijelaskan</li>
+                                                <li>Isi kolom di sebelah kanan dengan mendaftar bukti yang Anda miliki untuk menunjukkan bahwa Anda melakukan tugas-tugas ini. </li>
+                                            </ul>
+                                        </div>
+                                    </div>     
                                     <div class="card-body">
                                         <table class="table table-bordered">
                                             <thead>
