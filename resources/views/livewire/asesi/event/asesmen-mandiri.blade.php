@@ -172,7 +172,7 @@
                                         <div class="row">
                                             <div class="col-4 border border-right-0 border-top-0">
                                                 <div class="font-weight-bold mb-2">Nama Asesor:</div>
-                                                {{$skemaAsesi->asesi->name}}
+                                                {{$skemaAsesi->asesor->name ?? '-'}}
                                             </div>
                                             <div class="col-4 border border-right-0 border-top-0">
                                                 <div class="font-weight-bold mb-2">Rekomendasi:</div>
@@ -184,9 +184,11 @@
                                             </div>
                                             <div class="col-4 border border-top-0">
                                                 <div class="font-weight-bold mb-2">Tanda Tangan dan Tangal:</div>
+                                                    @if($skemaAsesi->ttd_asesor)
                                                 <div style="width:150px; height: 100px;">
-                                                    <img src="{{Storage::url($skemaAsesi->ttd_asesi)}}" class="h-100" alt="" srcset="">
+                                                    <img src="{{Storage::url($skemaAsesi->ttd_asesor)}}" class="h-100" alt="" srcset="">
                                                 </div>
+                                                @endif
                                                 <div>Tanggal: {{($skemaAsesi->asesmentMandiri->tgl_ttd_asesor ?? null) ?  \Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesor)->format('d F Y') : '-'}}</div>
                                             </div>
                                         </div>
