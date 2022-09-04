@@ -169,10 +169,21 @@
                                     </div>
                                     @endif
                                     <div class="col-4 border border-top-0">
+                                        @if(is_string($signature))
                                         <div class="font-weight-bold mb-2">Tanda Tangan dan Tangal:</div>
-
                                         <img src="{{Storage::url($skemaAsesi->ttd_asesor)}}" alt="" class="rounded w-50 mb-2 d-block">
                                         {{\Carbon\Carbon::parse($skemaAsesi->asesmentMandiri->tgl_ttd_asesor)->format('d F Y') }}
+                                        @elseif(!is_string($signature) && !is_null($signature))
+                                            <img src="{{$signature->temporaryUrl()}}" alt="" class="rounded w-100 mb-2">
+                                        @endif
+                                        <div  wire:ignore  class="d-none border mx-auto m-2"  id="update-signature" style="width: 200px; height: 150px;"></div>
+                                        @if($canEdit)
+                                            <button wire:ignore.self class="btn btn-block btn-warning btn-sm" id="update-signature-btn" >Change signature</button>
+                                            <div wire:ignore id="update-signature-action" class="row mx-1 d-none">
+                                                <button class="btn col btn-primary mr-1" id="update-signature-btn-save" >Save</button>
+                                                <button class="btn col btn-danger ml-1" id="update-signature-btn-clear" >Clear</button>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                                 @endif
@@ -361,6 +372,44 @@
         $('#clear-signature').click(function() {
             $('#signature-pad').signature('clear')
         })
+
+        
+        $('#update-signature-btn').click(function() {
+            @this.$set('signature', null)
+            $('#update-signature').toggleClass('d-none')
+            $('#update-signature-action').toggleClass('d-none')
+            $('#update-signature').signature()
+            $(this).toggleClass('d-none')
+        })
+
+        $('#update-signature-btn-clear').click(function() {
+            $('#update-signature').signature('clear')
+        })
+
+        $('#update-signature-btn-save').click(async function() {
+            let invalidSignate = $('#update-signature').signature('isEmpty')
+
+            if (invalidSignate) {
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: 'Tanda tangan tidak boleh kosong',
+                    icon: 'warning',
+                    timer: 2000,
+                    showConfirmButton: false,
+                })
+
+                return
+            }
+
+            let base64 = $('#update-signature').signature('toDataURL', 'image/png');
+            let resImg = await fetch(base64)
+            let blobImg = await resImg.blob()
+            @this.upload('signature', blobImg)
+            $('#update-signature-btn').toggleClass('d-none')
+            $('#update-signature').toggleClass('d-none')
+            $('#update-signature-action').toggleClass('d-none')
+        })
+
 
         $('#test-container').on('click', '#save-rekomendasi', function() {
 

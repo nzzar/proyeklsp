@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -36,8 +37,10 @@ class AsesmentMandiri extends Component
     {
         try {
 
-
+            
             $skemaAsesi = SkemaAsesi::findOrFail($id);
+            $this->signature = $skemaAsesi->ttd_asesor; 
+
             $this->document = PersyaratanSkema::with([
                 'asesi' => function ($query) use ($skemaAsesi) {
                     $query->where([
@@ -109,7 +112,12 @@ class AsesmentMandiri extends Component
             }
             $skemaAsesi->asesor_id = Auth::user()->asesor->id;
 
-            if(!$skemaAsesi->asesor) {
+            if(!is_null($this->signature) && !is_string($this->signature)) {
+                
+                if(!$skemaAsesi->ttd_asesor) {
+                    Storage::delete($skemaAsesi->tdd_asesor);
+                }
+                
                 $file_name = 'signature_asesor' . time() . '_' . Auth::user()->asesor->id . '.' . $this->signature->getClientOriginalExtension();
                 $file_path = $this->signature->storeAs("public/event/" . $this->skemaAsesi->event_id . "/asesi" . "/" . $skemaAsesi->asesi_id . "/", $file_name);
                 
@@ -117,27 +125,31 @@ class AsesmentMandiri extends Component
                 $skemaAsesi->save();
             }
 
+            if(!$skemaAsesi->asesor) {
+                
+                $units = [
+                    [
+                        'skema_asesi_id' => $skemaAsesi->id,
+                        'unit_kompetensi' => 'Merencanakan Aktifitas dan proses asesmen',
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesi->id,
+                        'unit_kompetensi' => 'Melaksanakan Asesmen',
+                    ],
+                    [
+                        'skema_asesi_id' => $skemaAsesi->id,
+                        'unit_kompetensi' => 'Memberikan kontribusi dalam validasi asesmen',
+                    ],
+                ];
+    
+                CeklisObservasiResult::insert($units);
+            }
+
             $asesmenResult = AsesmentMandiriResult::findOrFail($skemaAsesi->asesmentMandiri->id);
             $asesmenResult->continue = $this->continue;
             $asesmenResult->tgl_ttd_asesor = Carbon::now()->format('Y-m-d');
             $asesmenResult->save();
 
-            $units = [
-                [
-                    'skema_asesi_id' => $skemaAsesi->id,
-                    'unit_kompetensi' => 'Merencanakan Aktifitas dan proses asesmen',
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesi->id,
-                    'unit_kompetensi' => 'Melaksanakan Asesmen',
-                ],
-                [
-                    'skema_asesi_id' => $skemaAsesi->id,
-                    'unit_kompetensi' => 'Memberikan kontribusi dalam validasi asesmen',
-                ],
-            ];
-
-            CeklisObservasiResult::insert($units);
 
             DB::commit();
 
