@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>LSP Sertifikasi Politeknik Negeri Indramayu</title>
+  <title>LSP POLINDRA</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="landing-page/img/favicon.png" rel="icon">
+  <link href="landing-page/img/POLINDRA.png" rel="icon">
   <link href="landing-page/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -53,7 +53,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="landing-page/img/POLINDRA.png" alt="">
+        <img src="landing-page/img/POLINDRA.png" alt=""> <h1>LSP POLINDRA</h1>
         {{-- <h1>LSP<span>.</span></h1> --}}
       </a>
 
@@ -61,10 +61,10 @@
       <nav id="navbar" class="navbar">
         <ul>
 
-          <li><a class="nav-link scrollto" href="/">Beranda</a></li>
+          {{-- <li><a class="nav-link scrollto" href="/">Beranda</a></li>
           {{-- <li><a class="nav-link scrollto" href="index.html#services">Skema Sertifikasi</a></li>
           <li><a class="nav-link scrollto" href="index.html#portfolio">Kontak</a></li>
-          <li><a class="nav-link scrollto" href="index.html#team">Team</a></li> --}}
+          <li><a class="nav-link scrollto" href="index.html#team">Team</a></li> --}} 
           
         </ul>
         <i class="bi bi-list mobile-nav-toggle d-none"></i>
@@ -77,17 +77,18 @@
 
   <section id="hero-animated" class="hero-animated d-flex align-items-center">
     <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
-      <img src="landing-page/img/hero-carousel/hero-carousel-3.svg" class="img-fluid animated">
-      <h2>Welcome to <span>HeroBiz</span></h2>
-      <p>Et voluptate esse accusantium accusamus natus reiciendis quidem voluptates similique aut.</p>
+      <img src="landing-page/img/gedung.jpg">
+      {{-- <img src="landing-page/img/gedung.jpg" class="img-fluid animated"> --}} 
+      {{-- <h2>Welcome to <span>HeroBiz</span></h2> --}}
+      {{-- <p>Et voluptate esse accusantium accusamus natus reiciendis quidem voluptates similique aut.</p>
       <div class="d-flex">
         <a href="#about" class="btn-get-started scrollto">Get Started</a>
         <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
       </div>
-    </div>
+    </div> --}}
   </section>
 
-  <main id="main">
+  {{-- <main id="main">
 
     <!-- ======= Featured Services Section ======= -->
     <section id="featured-services" class="featured-services">
@@ -102,7 +103,7 @@
     </section><!-- End Featured Services Section -->
 
     <!-- ======= Call To Action Section ======= -->
-    <section id="cta" class="cta">
+    {{-- <section id="cta" class="cta">
       <div class="container" data-aos="zoom-out">
 
         <div class="row g-5">
@@ -122,12 +123,12 @@
         </div>
 
       </div>
-    </section><!-- End Call To Action Section -->
+    </section><!-- End Call To Action Section --> --}}
 
     <!-- ======= On Focus Section ======= -->
 
     <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
+    {{-- <section id="features" class="features">
       <div class="container" data-aos="fade-up">
 
         <ul class="nav nav-tabs row gy-4 d-flex">
@@ -332,10 +333,10 @@
         </div>
 
       </div>
-    </section><!-- End Features Section -->
+    </section><!-- End Features Section --> --}}
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
+    {{-- <section id="services" class="services">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
@@ -409,13 +410,13 @@
           </div><!-- End Service Item -->
         </div>
       </div>
-    </section><!-- End Services Section -->
+    </section><!-- End Services Section --> --}}
 
  
    
 
     <!-- ======= F.A.Q Section ======= -->
-    <section id="faq" class="faq">
+    {{-- <section id="faq" class="faq">
       <div class="container-fluid" data-aos="fade-up">
 
         <div class="row gy-4">
@@ -510,11 +511,11 @@
         </div>
 
       </div>
-    </section><!-- End F.A.Q Section -->
-  </main><!-- End #main -->
+    </section><!-- End F.A.Q Section --> --}}
+  </main><!-- End #main --> 
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  {{-- <footer id="footer" class="footer">
 
     <div class="footer-content">
       <div class="container">
@@ -594,7 +595,7 @@
       </div>
     </div>
 
-  </footer><!-- End Footer -->
+  </footer><!-- End Footer --> --}}
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
