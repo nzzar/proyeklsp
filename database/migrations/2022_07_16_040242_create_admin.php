@@ -15,13 +15,13 @@ class CreateAdmin extends Migration
     public function up()
     {
         Schema::create('admin', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('user_id')->index();
+            $table->increments("id");
+            $table->unsignedInteger('user_id')->index();
             $table->string('name');
             $table->string('signature');
             $table->string('no_reg');
             $table->timestamps();
-            
+
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

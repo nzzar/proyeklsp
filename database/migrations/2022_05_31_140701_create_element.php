@@ -15,8 +15,8 @@ class CreateElement extends Migration
     public function up()
     {
         Schema::create('element', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('unit_kompetensi_id')->index();
+            $table->increments("id");
+            $table->unsignedInteger('unit_kompetensi_id')->index();
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();

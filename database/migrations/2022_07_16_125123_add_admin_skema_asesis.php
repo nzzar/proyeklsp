@@ -14,7 +14,7 @@ class AddAdminSkemaAsesis extends Migration
     public function up()
     {
         Schema::table('skema_asesis', function($table){
-            $table->uuid('admin_id')->index()->nullable();
+            $table->unsignedInteger('admin_id')->index()->nullable();
 
             $table->foreign('admin_id')->references('id')->on('admin');
         });

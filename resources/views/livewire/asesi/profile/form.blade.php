@@ -82,15 +82,15 @@
                 <div class="card-body">
                     <h5>Pendidikan</h5>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">NIM</label>
+                        <label for="exampleInputEmail1">NISN</label>
                         <input wire:model="nim" name="nim" type="text" class="form-control @error('nim') is-invalid @enderror" placeholder="Masukan NIM">
                         @error('nim') <span class=" text-danger">{{ $message }}</span>@enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Prodi</label>
+                        <label for="exampleInputEmail1">Jurusan</label>
                         <select name="prodi" class="custom-select @error('prodi') is-invalid @enderror">
-                            <option disabled class="text-secondary">Pilih prodi</option>
+                            <option disabled class="text-secondary">Pilih jurusan</option>
                             @foreach($prodis as $prodi)
                             <option value="{{$prodi->id}}" @if($prodi->id == $prodi_id) selected @endif>{{$prodi->name}}</option>
                             @endforeach

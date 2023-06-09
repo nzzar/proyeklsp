@@ -15,12 +15,12 @@ class CreateAsesmentMandiri extends Migration
     public function up()
     {
         Schema::create('asesment_mandiri', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('asesi_id')->index();
-            $table->uuid('event_id')->index();
-            $table->uuid('skema_id')->index();
-            $table->uuid('unit_kompetensi_id')->index();
-            $table->uuid('element_id')->index();
+            $table->increments("id");
+            $table->unsignedInteger('asesi_id')->index();
+            $table->unsignedInteger('event_id')->index();
+            $table->unsignedInteger('skema_id')->index();
+            $table->unsignedInteger('unit_kompetensi_id')->index();
+            $table->unsignedInteger('element_id')->index();
             $table->boolean('kompeten')->default(false);
             $table->timestamps();
             $table->softDeletes();

@@ -15,8 +15,8 @@ class CreateMeninjauInstrument extends Migration
     public function up()
     {
         Schema::create('meninjau_instrument', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('skema_asesi_id')->index();
+            $table->increments("id");
+            $table->unsignedInteger('skema_asesi_id')->index();
             $table->string('kegiatan_asesmen');
             $table->boolean('result')->default(false);
             $table->string('komentar')->nullable();

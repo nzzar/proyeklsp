@@ -15,8 +15,8 @@ class CreateAsesor extends Migration
     public function up()
     {
         Schema::create('asesors', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'))->index();
-            $table->uuid('user_id')->index();
+            $table->increments('id');
+            $table->unsignedInteger('user_id')->index();
             $table->string('nik')->unique()->index();
             $table->string('name')->index();
             $table->date('birth_date');
@@ -45,7 +45,7 @@ class CreateAsesor extends Migration
      */
     public function down()
     {
-        
+
         Schema::dropIfExists('asesors');
     }
 }

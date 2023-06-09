@@ -1,7 +1,7 @@
 <div class="table-responsive p-2 p-md-5">
     <div class="row mb-2">
         <div class="col">
-            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#create-prodi"> + Tambah Prodi</button>
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#create-prodi"> + Tambah Jurusan</button>
         </div>
         <div class="col-12 col-md-3">
             <div class="d-flex align-items-center small">
@@ -13,7 +13,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th style="width: 10px">#</th>
+                <th style="width: 10px">No</th>
                 <th>Name</th>
                 <th style="width: 300px">Action</th>
             </tr>

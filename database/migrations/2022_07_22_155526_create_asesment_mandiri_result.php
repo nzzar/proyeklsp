@@ -15,8 +15,8 @@ class CreateAsesmentMandiriResult extends Migration
     public function up()
     {
         Schema::create('asesment_mandiri_result', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('skema_asesi_id')->index();
+            $table->increments("id");
+            $table->unsignedInteger('skema_asesi_id')->index();
             $table->date('tgl_ttd_asesi');
             $table->date('tgl_ttd_asesor')->nullable();
             $table->boolean('continue')->nullable();

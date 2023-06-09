@@ -15,8 +15,8 @@ class CreateUnitKompetensi extends Migration
     public function up()
     {
         Schema::create('unit_kompetensi', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('skema_id')->index();
+            $table->increments('id');
+            $table->unsignedInteger('skema_id')->index();
             $table->string('kode');
             $table->string('judul');
             $table->timestamps();

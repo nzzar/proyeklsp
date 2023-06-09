@@ -15,8 +15,8 @@ class CreateUmpanBalikNotes extends Migration
     public function up()
     {
         Schema::create('umpan_balik_notes', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('skema_asesi_id')->index();
+            $table->increments("id");
+            $table->unsignedInteger('skema_asesi_id')->index();
             $table->dateTime('datetime');
             $table->string('notes')->nullable();
             $table->timestamps();

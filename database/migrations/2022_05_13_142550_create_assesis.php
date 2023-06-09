@@ -16,9 +16,9 @@ class CreateAssesis extends Migration
     {
 
         Schema::create('asesis', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('user_id')->index();
-            $table->uuid('prodi_id')->index();
+            $table->increments('id');
+            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('prodi_id')->index();
             $table->string('nim')->index();
             $table->string('name')->index();
             $table->string('nik')->unique()->nullable();

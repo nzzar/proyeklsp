@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>LSP POLINDRA</title>
+  <title>LSP SMK Negeri Indramayu</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -53,7 +53,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="landing-page/img/POLINDRA.png" alt=""> <h1>LSP POLINDRA</h1>
+        <img src="landing-page/img/logo_pelayaran.png" alt=""> <h1>LSP SMKN 2 Indramayu</h1>
         {{-- <h1>LSP<span>.</span></h1> --}}
       </a>
 
@@ -75,9 +75,9 @@
     </div>
   </header><!-- End Header -->
 
-  <section id="hero-animated" class="hero-animated d-flex align-items-center">
+  <section id="hero-animated" class="hero-animated d-flex align-items-center w-100% p-20%">
     <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
-      <img src="landing-page/img/gedung.jpg">
+      <img src="landing-page/img/smkn2.jpg">
       {{-- <img src="landing-page/img/gedung.jpg" class="img-fluid animated"> --}} 
       {{-- <h2>Welcome to <span>HeroBiz</span></h2> --}}
       {{-- <p>Et voluptate esse accusantium accusamus natus reiciendis quidem voluptates similique aut.</p>

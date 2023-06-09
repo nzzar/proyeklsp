@@ -15,8 +15,8 @@ class CreatePersyaratanSkema extends Migration
     public function up()
     {
         Schema::create('persyaratan_skema', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('skema_id')->index();
+            $table->increments("id");
+            $table->unsignedInteger('skema_id')->index();
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();

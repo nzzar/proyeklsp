@@ -127,7 +127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- AdminLTE App -->
   <script src="{{asset('assets/dashboard/js/adminlte.min.js')}}"></script>
   @livewireScripts
-  
+
   @include('sweetalert::alert')
   <script>
     var Toast = Swal.mixin({

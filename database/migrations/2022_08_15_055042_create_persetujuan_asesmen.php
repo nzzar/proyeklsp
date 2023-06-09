@@ -15,8 +15,8 @@ class CreatePersetujuanAsesmen extends Migration
     public function up()
     {
         Schema::create('persetujuan_asesmen', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('skema_asesi_id')->index();
+            $table->increments("id");
+            $table->unsignedInteger('skema_asesi_id')->index();
             $table->boolean('portofolio')->default(false);
             $table->boolean('observasi_langsung')->default(false);
             $table->boolean('tes_tulis')->default(false);

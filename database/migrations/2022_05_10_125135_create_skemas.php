@@ -15,7 +15,7 @@ class CreateSkemas extends Migration
     public function up()
     {
         Schema::create('skemas', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
+            $table->increments('id');
             $table->string('name');
             $table->string('nomor')->unique();
             $table->boolean('active')->default(true);

@@ -15,9 +15,9 @@ class CreateSkemaAsesor extends Migration
     public function up()
     {
         Schema::create('skema_asesor', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('event_id')->index();
-            $table->uuid('asesor_id');
+            $table->increments('id');
+            $table->unsignedInteger('event_id')->index();
+            $table->unsignedInteger('asesor_id');
             $table->string('surat_tugas')->nullable();
             $table->timestamps();
             $table->softDeletes();

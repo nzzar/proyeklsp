@@ -15,8 +15,8 @@ class CreateSertifikatAsesi extends Migration
     public function up()
     {
         Schema::create('sertifikat_asesi', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('skema_asesi_id')->index();
+            $table->increments("id");
+            $table->unsignedInteger('skema_asesi_id')->index();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('sertifikat');

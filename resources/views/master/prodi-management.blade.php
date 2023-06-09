@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('page-title')
-Data Prodi
+Data Jurusan
 @endsection
 
 @section('main-content')
@@ -39,7 +39,7 @@ Data Prodi
     window.livewire.on('failedGetProdiById', () => {
         Toast.fire({
             icon: 'error',
-            title: `Data prodi tidak ditemukan`
+            title: `Data jurusan tidak ditemukan`
         })
     })
 
@@ -48,7 +48,7 @@ Data Prodi
         $('#update-prodi').modal('hide')
         Toast.fire({
             icon: 'success',
-            title: `Data prodi berhasil diperbarui`
+            title: `Data jurusan berhasil diperbarui`
         })
 
     })
@@ -57,7 +57,7 @@ Data Prodi
     window.livewire.on('failedUpdateProdiById', () => {
         Toast.fire({
             icon: 'error',
-            title: `Gagal memperbarui data prodi`
+            title: `Gagal memperbarui data jurusan`
         })
 
     })
@@ -67,7 +67,7 @@ Data Prodi
         $('#create-prodi').modal('hide')
         Toast.fire({
             icon: 'success',
-            title: `Data prodi berhasil disimpan`
+            title: `Data jurusan berhasil disimpan`
         })
 
     })

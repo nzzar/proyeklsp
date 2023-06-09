@@ -15,11 +15,11 @@ class CreatePersyaratanAsesi extends Migration
     public function up()
     {
         Schema::create('persyaratan_asesi', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('event_id')->index();
-            $table->uuid('skema_id')->index();
-            $table->uuid('asesi_id')->index();
-            $table->uuid('persyaratan_id')->index();
+            $table->increments("id");
+            $table->unsignedInteger('event_id')->index();
+            $table->unsignedInteger('skema_id')->index();
+            $table->unsignedInteger('asesi_id')->index();
+            $table->unsignedInteger('persyaratan_id')->index();
             $table->string('file');
             $table->enum('status', ['Sedang diperiksa', 'Memenuhi Syarat', 'Tidak Memenuhi Syarat'])->default('Sedang diperiksa');
             $table->string('desc')->nullable();

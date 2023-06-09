@@ -15,7 +15,7 @@ class CreateProdi extends Migration
     public function up()
     {
         Schema::create('prodis', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'))->index();
+            $table->increments('id');
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();

@@ -111,7 +111,7 @@
             <li class="nav-item">
               <a href="{{url('/prodi-management')}}" class="nav-link">
                 <i class="far fa-file-alt nav-icon"></i>
-                <p>Prodi</p>
+                <p>Jurusan</p>
               </a>
             </li>
         </li>

@@ -15,8 +15,8 @@ class CreateUnjukKerja extends Migration
     public function up()
     {
         Schema::create('unjuk_kerja', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('element_id')->index();
+            $table->increments("id");
+            $table->unsignedInteger('element_id')->index();
             $table->string('description');
             $table->timestamps();
             $table->softDeletes();

@@ -14,7 +14,7 @@ class AddPersyaratanAsesi extends Migration
     public function up()
     {
         Schema::table('asesment_mandiri', function($table){
-            $table->uuid('persyaratan_asesi_id')->index()->nullable();
+            $table->unsignedInteger('persyaratan_asesi_id')->index()->nullable();
 
             $table->foreign('persyaratan_asesi_id')->references('id')->on('persyaratan_asesi');
         });

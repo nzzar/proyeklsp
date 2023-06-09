@@ -15,10 +15,10 @@ class CreateSkemaAsesis extends Migration
     public function up()
     {
         Schema::create('skema_asesis', function (Blueprint $table) {
-            $table->uuid('id')->primary()->index()->default(DB::raw('uuid_generate_v4()'));
-            $table->uuid('event_id')->index();
-            $table->uuid('asesi_id')->index();
-            $table->uuid('asesor_id')->index()->nullable();
+            $table->increments('id');
+            $table->unsignedInteger('event_id')->index();
+            $table->unsignedInteger('asesi_id')->index();
+            $table->unsignedInteger('asesor_id')->index()->nullable();
             $table->string('ttd_asesor')->nullable();
             $table->string('tujuan_asesmen');
             $table->string('ttd_asesi');
